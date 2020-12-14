@@ -1,0 +1,38 @@
+﻿@page "/signup"
+
+<div class="sign-form">
+    <p class="welcome-text">Create a new account</p>
+    <input type="text" class="sign-input form-control" placeholder="Username" @bind="NewUser" />
+    <input type="password" class="sign-input form-control" placeholder="Password" @bind="Password"/>
+    <input type="password" class="sign-input form-control" placeholder="Confirm Password" @bind="Confirm" />
+
+    <button class="sign-button btn-primary btn" type="submit" @onclick="Check">Confirm</button>
+
+    <p>@ValidPW.ToString()</p>
+
+   
+</div>
+
+@code {
+    private string NewUser { get; set; }
+    private string Password { get; set; }
+    private string Confirm { get; set; }
+    private bool ValidPW { get; set; }
+
+    public void Check()
+    {
+        if (Password == Confirm)
+        {
+            ValidPW = true;
+        }
+        else
+        {
+            ValidPW = false;
+        }
+        if (ValidPW)
+        {
+            
+        }
+    }
+
+}

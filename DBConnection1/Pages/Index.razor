@@ -1,8 +1,12 @@
 ﻿@page "/"
+@using DBConnection1.DataCRUD
+@using DBConnection1.Data
+@using DBConnection1.Models
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.<br />
+Welcome to your new app.
+<br />
 
 <TelerikButton OnClick="@SayHelloHandler" Primary="true">Say Hello</TelerikButton>
 
@@ -11,11 +15,182 @@ Welcome to your new app.<br />
 @helloString
 
 @code {
+
     MarkupString helloString;
+
+    [Inject]
+    public AppDataContext AppDataContext { get; set; }
+
 
     void SayHelloHandler()
     {
         string msg = string.Format("Hello from <strong>Telerik Blazor</strong> at {0}.<br /> Now you can use C# to write front-end!", DateTime.Now);
         helloString = new MarkupString(msg);
+        WriteData();
+    }
+
+
+    public void WriteData()
+    {
+        var album1 = new Album
+        {
+            Name = "The Joy of Motion",
+            ImageUrl = "./Images/jom.jpg",
+            ReleaseDate = new DateTime(2014, 03, 03)
+        };
+
+        AppDataContext.Album.Add(album1);
+
+        var album2 = new Album
+        {
+            Name = "Endgame",
+            ImageUrl = "./Images/endgame.jpg",
+            ReleaseDate = new DateTime(2011, 03, 11)
+        };
+
+        AppDataContext.Album.Add(album2);
+
+        var album3 = new Album
+        {
+            Name = "Geräusche",
+            ImageUrl = "./Images/grsch.jpg",
+            ReleaseDate = new DateTime(2003, 09, 29)
+        };
+
+        AppDataContext.Album.Add(album3);
+
+        var album4 = new Album
+        {
+            Name = "Master of Puppetsssss",
+            ImageUrl = "./Images/mop.jpg",
+            ReleaseDate = new DateTime(1986, 03, 03)
+        };
+
+        AppDataContext.Album.Add(album4);
+
+
+        var song1 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/0JGuSgtmWyfuxLGBs2wX0C",
+            LinkYT = "https://www.youtube.com/embed/0jpOBd949O4",
+            Name = "Physical Education"
+        };
+        AppDataContext.Song.Add(song1);
+
+        var song2 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/7hY2Kc7Hvu0BudOoQwu8Ez",
+            LinkYT = "https://www.youtube.com/embed/lbA3jxab4A0",
+            Name = "Kascade"
+        };
+        AppDataContext.Song.Add(song2);
+
+        var song3 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/4j6ascTxs21rACPdPpqFQN",
+            LinkYT = "https://www.youtube.com/embed/g68hQ4zJ3t0",
+            Name = "The Woven Web"
+        };
+
+        AppDataContext.Song.Add(song3);
+
+        var song4 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/1O7oz3f9EuSeeX0J7t5z6J",
+            LinkYT = "https://www.youtube.com/embed/NR3xVQy8ccM",
+            Name = "Architects"
+        };
+
+        AppDataContext.Song.Add(song4);
+
+        var song5 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/5sG3G54H21hNfd5etlheoe",
+            LinkYT = "https://www.youtube.com/embed/6nQCxwneUwA",
+            Name = "Satellite"
+        };
+        AppDataContext.Song.Add(song5);
+
+        var song6 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/3nlnq3U8VrxOyp2mjXQAPA",
+            LinkYT = "https://www.youtube.com/embed/eT-QlZjVmgI",
+            Name = "Wait For Me"
+        };
+        AppDataContext.Song.Add(song6);
+
+        var song7 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/45m4ag7gCHx3uKnSpOYFSO",
+            LinkYT = "https://www.youtube.com/embed/gi4H5gQDuug",
+            Name = "Midnight Hands"
+        };
+        AppDataContext.Song.Add(song7);
+
+        var song8 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/2xbPgQOfICgLYs8P4lkEtx",
+            LinkYT = "https://www.youtube.com/embed/8gX2kDsaYg0",
+            Name = "Endgame"
+        };
+        AppDataContext.Song.Add(song8);
+
+        var song9 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/0wHNrrefyaeVewm4NxjxrX",
+            LinkYT = "https://www.youtube.com/embed/eT-QlZjVmgI",
+            Name = "Wait For Me"
+        };
+        AppDataContext.Song.Add(song9);
+
+        var song10 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/7KUaVteaQI4YrhV3Gp6px6",
+            LinkYT = "https://www.youtube.com/embed/qhj9yQ3QyRo",
+            Name = "Unrockbar"
+        };
+        AppDataContext.Song.Add(song10);
+
+        var song11 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/0GT9OI4Fot0TKzsUsO7SVA",
+            LinkYT = "https://www.youtube.com/embed/kRrP-bZvD2s",
+            Name = "Deine Schuld"
+        };
+        AppDataContext.Song.Add(song11);
+
+        var song12 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/2Fgmf2jZzNhCNHbZZLoXur",
+            LinkYT = "https://www.youtube.com/embed/8zXuhykupwU",
+            Name = "Geisterhaus"
+        };
+        AppDataContext.Song.Add(song12);
+
+        var song13 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/2J96ewIQ9O95cs5sNY3c1q",
+            LinkYT = "https://www.youtube.com/embed/hhMbgu8nYEQ",
+            Name = "Ruhig angehn"
+        };
+        AppDataContext.Song.Add(song13);
+
+        var song14 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/6UB9mShVLbMm0W4e6vud4C",
+            LinkYT = "https://www.youtube.com/embed/uzlOcupu5UE",
+            Name = "Battery"
+        };
+        AppDataContext.Song.Add(song14);
+
+        var song15 = new Song
+        {
+            LinkSptfy = "https://open.spotify.com/embed/track/2HD5BWFthrNf2uFyEhi53d",
+            LinkYT = "https://www.youtube.com/embed/z7bUJPj_8v0",
+            Name = "Orion"
+        };
+        AppDataContext.Song.Add(song15);
+
+        AppDataContext.SaveChanges();
     }
 }

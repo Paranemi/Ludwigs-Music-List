@@ -16,8 +16,6 @@ namespace DBConnection1
     {
         public static void Main(string[] args)
         {
-            //AppDataContext cn = new AppDataContext();
-            //cn.addtest();
             CreateHostBuilder(args).Build().Run();
         }
 

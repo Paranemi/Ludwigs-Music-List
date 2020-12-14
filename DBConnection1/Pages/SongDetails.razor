@@ -1,0 +1,20 @@
+﻿@page "/songdetails"
+
+
+    <div class="bg-img"></div>
+
+    <div class="mlist-form">
+        <h2>@SongName</h2>
+        <h5>@AlbumName</h5>
+        <iframe src="https://www.youtube.com/embed/0jpOBd949O4" allowfullscreen="allowfullscreen" allowtransparency="true" width="500" height="300" frameborder="0"></iframe>
+        <iframe src="https://open.spotify.com/embed/track/0JGuSgtmWyfuxLGBs2wX0C" width="500" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        <p>by @ArtistName</p>
+    </div>
+
+
+    @code {
+        private string SongName { get; set; } = "Physical Education";
+        private string AlbumName { get; set; } = "The Joy of Motion";
+        public string ArtistName { get; set; } = "Animals als Leader";
+        public string Cover { get; set; } = "./Images/jom.jpg";
+    }

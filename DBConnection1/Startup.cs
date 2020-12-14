@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using DBConnection1.DataCRUD;
 
 namespace DBConnection1
 {
@@ -32,7 +33,7 @@ namespace DBConnection1
             services.AddServerSideBlazor();
             services.AddTelerikBlazor();
             services.AddSingleton<WeatherForecastService>();
-            
+            services.AddScoped<Create, Create>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

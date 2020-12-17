@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBConnection1.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20201211112023_Initial")]
+    [Migration("20201216151908_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -128,9 +128,6 @@ namespace DBConnection1.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LinkSptfy")
                         .HasColumnType("nvarchar(max)");

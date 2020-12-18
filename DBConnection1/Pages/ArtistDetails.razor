@@ -1,0 +1,25 @@
+﻿@page "/artistdetails"
+
+
+<div class="alist-form">
+    <img src="@ArtistImageUrl" alt="Alternate Text" />
+    <p>@Name was founded (@Founded).</p>
+    <br />
+    <h6>Members:</h6>
+    <img src="@ImageUrl" alt="Alternate Text" />
+    <p>@FirstName @LastName</p>
+</div>
+
+@code {
+    public string Name { get; set; } = "Animals as Leaders";
+    public string ArtistImageUrl { get; set; } = "./Images/aal.jpg";
+    public DateTime Founded { get; set; } = new DateTime(2007);
+    public string FirstName { get; set; } = "Tosin";
+    public string LastName { get; set; } = "Abasi";
+    public string ImageUrl { get; set; } = "./Images/TosinAbasi.jpg";
+    public DateTime Born { get; set; }
+    public DateTime Died { get; set; }
+    public DateTime From { get; set; }
+    public DateTime To { get; set; }
+
+}

@@ -13,6 +13,7 @@ namespace DBConnection1.Models
         [Key]
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string ArtistImageUrl { get; set; }
         public DateTime Founded { get; set; }
     }
 }

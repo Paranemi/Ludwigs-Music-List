@@ -195,6 +195,7 @@ Welcome to your new app.
         {
             Founded = new DateTime(2007),
             Id = new Guid(),
+            ArtistImageUrl = "./Images/aal.jpg",
             Name = "Animals as Leaders"
         };
         AppDataContext.Artist.Add(artist);
@@ -203,6 +204,7 @@ Welcome to your new app.
         {
             Founded = new DateTime(1999),
             Id = new Guid(),
+            ArtistImageUrl = "./Images/RiseAgainst.jpg",
             Name = "Rise Against"
         };
         AppDataContext.Artist.Add(artist1);
@@ -211,6 +213,7 @@ Welcome to your new app.
         {
             Founded = new DateTime(1982),
             Id = new Guid(),
+            ArtistImageUrl = "./Images/DieAerzte.jpg",
             Name = "Die Ärzte"
         };
         AppDataContext.Artist.Add(artist2);
@@ -219,16 +222,17 @@ Welcome to your new app.
         {
             Founded = new DateTime(1981),
             Id = new Guid(),
+            ArtistImageUrl = "./Images/Metallica.jpg",
             Name = "Metallica"
         };
         AppDataContext.Artist.Add(artist3);
 
-        var larsullrich = new Member
+        var larsulrich = new Member
         {
             Id = new Guid(),
             From = new DateTime(1981),
         };
-        AppDataContext.Member.Add(larsullrich);
+        AppDataContext.Member.Add(larsulrich);
 
         var kirkhammett = new Member
         {
@@ -288,14 +292,6 @@ Welcome to your new app.
         };
         AppDataContext.Member.Add(zachblair);
 
-        var kevinwhite = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(1999),
-            To = new DateTime(2002)
-        };
-        AppDataContext.Member.Add(kevinwhite);
-
         var tosinabasi = new Member
         {
             Id = new Guid(),
@@ -345,6 +341,124 @@ Welcome to your new app.
             ImageUrl = "./Images/TosinAbasi.jpg",
         };
         AppDataContext.Person.Add(person2);
+
+        var person3 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Tosin",
+            LastName = "Abasi",
+            Born = new DateTime(1983, 01, 07),
+            ImageUrl = "./Images/TosinAbasi.jpg",
+        };
+        AppDataContext.Person.Add(person3);
+
+        var person4 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Zach",
+            LastName = "Blair",
+            Born = new DateTime(1974, 12, 26),
+            ImageUrl = "./Images/ZachBlair.jpg",
+        };
+        AppDataContext.Person.Add(person4);
+
+        var person5 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Brandon",
+            LastName = "Barnes",
+            Born = new DateTime(1974, 12, 26),
+            ImageUrl = "./Images/BrandonBarnes.jpg",
+        };
+        AppDataContext.Person.Add(person5);
+
+        var person6 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Chris",
+            LastName = "Chasse",
+            ImageUrl = "./Images/Unknown.jpg",
+        };
+        AppDataContext.Person.Add(person6);
+
+        var person7 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Rodrigo",
+            LastName = "Gonzalez",
+            ImageUrl = "./Images/RodGonzalez.jpg",
+            Born = new DateTime(1968, 05, 19)
+        };
+        AppDataContext.Person.Add(person7);
+
+        var person8 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Rodrigo",
+            LastName = "Gonzalez",
+            ImageUrl = "./Images/RodGonzalez.jpg",
+            Born = new DateTime(1968, 05, 19)
+        };
+        AppDataContext.Person.Add(person8);
+
+        var person9 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Bela",
+            LastName = "B",
+            ImageUrl = "./Images/BelaB.jpg",
+            Born = new DateTime(1962, 12, 14)
+        };
+        AppDataContext.Person.Add(person9);
+
+        var person10 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Farin",
+            LastName = "Urlaub",
+            ImageUrl = "./Images/FarinUrlaub.jpg",
+            Born = new DateTime(1963, 10, 27)
+        };
+        AppDataContext.Person.Add(person10);
+
+        var person11 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Clifford",
+            LastName = "Burton",
+            ImageUrl = "./Images/CliffBurton.jpg",
+            Born = new DateTime(1962, 02, 10),
+            Died = new DateTime(1968, 09, 27)
+        };
+        AppDataContext.Person.Add(person11);
+
+        var person12 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Kirk",
+            LastName = "Hammett",
+            ImageUrl = "./Images/KirkHammett.jpg",
+            Born = new DateTime(1962, 11, 18),
+        };
+        AppDataContext.Person.Add(person12);
+
+        var person13 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Lars",
+            LastName = "Ulrich",
+            ImageUrl = "./Images/LarsUlrich.jpg",
+            Born = new DateTime(1963, 12, 26),
+        };
+        AppDataContext.Person.Add(person13);
+
+        var useradm = new User
+        {
+            Id = new Guid(),
+            Email = "adm",
+            Password = "adm123"
+        };
+        AppDataContext.User.Add(useradm);
 
         AppDataContext.SaveChanges();
     }

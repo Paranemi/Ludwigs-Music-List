@@ -191,6 +191,161 @@ Welcome to your new app.
         };
         AppDataContext.Song.Add(song15);
 
+        var artist = new Artist
+        {
+            Founded = new DateTime(2007),
+            Id = new Guid(),
+            Name = "Animals as Leaders"
+        };
+        AppDataContext.Artist.Add(artist);
+
+        var artist1 = new Artist
+        {
+            Founded = new DateTime(1999),
+            Id = new Guid(),
+            Name = "Rise Against"
+        };
+        AppDataContext.Artist.Add(artist1);
+
+        var artist2 = new Artist
+        {
+            Founded = new DateTime(1982),
+            Id = new Guid(),
+            Name = "Die Ärzte"
+        };
+        AppDataContext.Artist.Add(artist2);
+
+        var artist3 = new Artist
+        {
+            Founded = new DateTime(1981),
+            Id = new Guid(),
+            Name = "Metallica"
+        };
+        AppDataContext.Artist.Add(artist3);
+
+        var larsullrich = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(1981),
+        };
+        AppDataContext.Member.Add(larsullrich);
+
+        var kirkhammett = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(1983),
+        };
+        AppDataContext.Member.Add(kirkhammett);
+
+        var cliffburton = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(1982),
+            To  = new DateTime(1986)
+        };
+        AppDataContext.Member.Add(cliffburton);
+
+        var farinurlaub = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(1982),
+        };
+        AppDataContext.Member.Add(farinurlaub);
+
+        var belab = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(1982),
+        };
+        AppDataContext.Member.Add(belab);
+
+        var rodrigogonzalez = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(1993),
+        };
+        AppDataContext.Member.Add(rodrigogonzalez);
+
+        var chrischasse = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(2003),
+            To = new DateTime(2007)
+        };
+        AppDataContext.Member.Add(chrischasse);
+
+        var brandonbarnes = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(2000),
+        };
+        AppDataContext.Member.Add(brandonbarnes);
+
+        var zachblair = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(2007),
+        };
+        AppDataContext.Member.Add(zachblair);
+
+        var kevinwhite = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(1999),
+            To = new DateTime(2002)
+        };
+        AppDataContext.Member.Add(kevinwhite);
+
+        var tosinabasi = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(2007),
+        };
+        AppDataContext.Member.Add(tosinabasi);
+
+        var javierreyes = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(2007),
+        };
+        AppDataContext.Member.Add(javierreyes);
+
+        var mattgarstka = new Member
+        {
+            Id = new Guid(),
+            From = new DateTime(2007),
+        };
+        AppDataContext.Member.Add(mattgarstka);
+
+        var person = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Matt",
+            LastName = "Garstka",
+            Born = new DateTime(1989, 04, 27),
+            ImageUrl = "./Images/MattGarstka.jpg",
+        };
+        AppDataContext.Person.Add(person);
+
+        var person1 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Javier",
+            LastName = "Reyes",
+            ImageUrl = "./Images/JavierReyes.jpg",
+        };
+        AppDataContext.Person.Add(person1);
+
+        var person2 = new Person
+        {
+            Id = new Guid(),
+            FirstName = "Tosin",
+            LastName = "Abasi",
+            Born = new DateTime(1989, 04, 27),
+            ImageUrl = "./Images/TosinAbasi.jpg",
+        };
+        AppDataContext.Person.Add(person2);
+
         AppDataContext.SaveChanges();
     }
 }

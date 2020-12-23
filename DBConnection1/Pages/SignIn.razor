@@ -1,24 +1,20 @@
 ﻿@page "/signin"
+@inherits SignInBase
+@using DBConnection1.Controls
 <div class="sign-form">
     <p class="welcome-text">Hello @(string.IsNullOrEmpty(User) ? "User" : User) - Today is @Day</p>
-    <input type="text" class="sign-input form-control" placeholder="Username" @onchange="UserNameChange"/>
-    <input type="password" class="sign-input form-control" placeholder="Password" />
+    @*<input type="text" class="sign-input form-control" placeholder="Username" @bind-value="User" @bind-value:event="oninput"/>*@
 
-    <form action="/">
-        <button class="sign-button" type="submit">Sign in</button>
-    </form>
+
+    <ValidationInput placeholder="Username" ValueChangedCallback="UserNameValueChanged" Value="@User"></ValidationInput>
+    @*<input type="password" class="sign-input form-control" placeholder="Password" />*@
+    <ValidationInput placeholder="Password" type="password" Value="@Password"></ValidationInput>
+
+    <button class="sign-button" type="submit">Sign in</button>
+
 
     <div class="sign-form">
         <a href="/signup">Sign up</a>
     </div>
 </div>
 
-@code {
-    private string Day { get; set; } = DateTime.Now.DayOfWeek.ToString();
-    private string User { get; set; }
-
-    private void UserNameChange(ChangeEventArgs eventArgs)
-    {
-        User = eventArgs.Value.ToString();
-    }
-}

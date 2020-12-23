@@ -6,6 +6,42 @@ html, body {
     background-color:#2a2a2a
 }
 
+.validation-container {
+    display: flex;
+    flex-flow: row;
+    margin-top: 32px;
+}
+
+.validation-input{
+    flex-grow:1;
+    flex-shrink:1;
+    flex-basis:auto;
+    /*flex:1 1 auto;*/
+}
+
+.val-tooltip {
+    position: relative;
+    display: flex;
+    flex: 0 0 20px;
+    background-color: #f00;
+}
+    .val-tooltip p{
+        color:white;
+        margin:auto;
+        font-size:large;
+    }
+
+    .val-tooltip .val-tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: orange;
+        color: white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position:absolute;
+    }
+
 .mlist-form {
     width: 100%;
     max-width: 530px;

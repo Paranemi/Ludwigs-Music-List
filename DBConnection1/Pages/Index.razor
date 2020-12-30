@@ -8,7 +8,7 @@
 Welcome to your new app.
 <br />
 
-<TelerikButton OnClick="@SayHelloHandler" Primary="true">Say Hello</TelerikButton>
+<TelerikButton OnClick="@SayHelloHandler" Primary="true">@Test halselfhsfe</TelerikButton>
 
 <br />
 
@@ -22,13 +22,18 @@ Welcome to your new app.
     public AppDataContext AppDataContext { get; set; }
 
 
+    public string Test { get; set; }
+
     void SayHelloHandler()
     {
         string msg = string.Format("Hello from <strong>Telerik Blazor</strong> at {0}.<br /> Now you can use C# to write front-end!", DateTime.Now);
         helloString = new MarkupString(msg);
         WriteData();
-    }
 
+        var data = AppDataContext.Album;
+        Test = data+"";
+
+    }
 
     public void WriteData()
     {

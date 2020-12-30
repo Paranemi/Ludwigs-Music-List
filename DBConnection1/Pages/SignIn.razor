@@ -2,11 +2,11 @@
 @inherits SignInBase
 @using DBConnection1.Controls
 <div class="sign-form">
-    <p class="welcome-text">Hello @(string.IsNullOrEmpty(User) ? "User" : User) - Today is @Day</p>
+    <p class="welcome-text">Hello @(string.IsNullOrEmpty(Username) ? "User" : Username) - Today is @Day</p>
     @*<input type="text" class="sign-input form-control" placeholder="Username" @bind-value="User" @bind-value:event="oninput"/>*@
 
 
-    <ValidationInput placeholder="Username" ValueChangedCallback="UserNameValueChanged" Value="@User"></ValidationInput>
+    <ValidationInput placeholder="Username" ValueChangedCallback="UserNameValueChanged" Value="@Username"></ValidationInput>
     @*<input type="password" class="sign-input form-control" placeholder="Password" />*@
     <ValidationInput placeholder="Password" type="password" Value="@Password"></ValidationInput>
 

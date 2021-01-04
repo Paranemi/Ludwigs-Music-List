@@ -6,6 +6,11 @@ html, body {
     background-color:#2a2a2a
 }
 
+.test{
+    width:50px;
+    height:45px;
+}
+
 .validation-container {
     display: flex;
     flex-flow: row;
@@ -189,7 +194,8 @@ a, .btn-link {
     }
 
     .sidebar .navbar-brand {
-        font-size: 1.1rem;
+        font-size: 1.7rem;
+        padding-right:50px;
     }
 
     .sidebar .oi {

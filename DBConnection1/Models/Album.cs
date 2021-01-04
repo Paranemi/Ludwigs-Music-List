@@ -11,9 +11,13 @@ namespace DBConnection1.Models
     public class Album
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid AlbumId { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public DateTime ReleaseDate { get; set; }
+
+
+        public virtual ICollection<Song> Songs { get; set; }
+        public virtual ICollection<LikedAlbum> LikedAlbums { get; set; }
     }
 }

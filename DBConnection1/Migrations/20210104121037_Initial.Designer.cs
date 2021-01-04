@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBConnection1.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20201218122246_AddImageUrlToArtist")]
-    partial class AddImageUrlToArtist
+    [Migration("20210104121037_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace DBConnection1.Migrations
 
             modelBuilder.Entity("DBConnection1.Models.Album", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("AlbumId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -36,14 +36,14 @@ namespace DBConnection1.Migrations
                     b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("AlbumId");
 
                     b.ToTable("Albums");
                 });
 
             modelBuilder.Entity("DBConnection1.Models.Artist", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("ArtistId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -56,54 +56,50 @@ namespace DBConnection1.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ArtistId");
 
                     b.ToTable("Artists");
                 });
 
             modelBuilder.Entity("DBConnection1.Models.LikedAlbum", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("LikedAlbumId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("LikedAlbumId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("LikedAlbum");
                 });
 
             modelBuilder.Entity("DBConnection1.Models.LikedSong", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("LikedSongId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("LikedSongId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("LikedSong");
                 });
 
-            modelBuilder.Entity("DBConnection1.Models.Member", b =>
+            modelBuilder.Entity("DBConnection1.Models.Person", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("PersonId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("From")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("To")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Members");
-                });
-
-            modelBuilder.Entity("DBConnection1.Models.Person", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("ArtistId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Born")
@@ -115,21 +111,35 @@ namespace DBConnection1.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("From")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<DateTime>("To")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("PersonId");
+
+                    b.HasIndex("ArtistId");
 
                     b.ToTable("Persons");
                 });
 
             modelBuilder.Entity("DBConnection1.Models.Song", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("SongId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AlbumId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ArtistId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LinkSptfy")
@@ -141,28 +151,103 @@ namespace DBConnection1.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("SongId");
+
+                    b.HasIndex("AlbumId");
+
+                    b.HasIndex("ArtistId");
 
                     b.ToTable("Songs");
                 });
 
             modelBuilder.Entity("DBConnection1.Models.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("DBConnection1.Models.LikedAlbum", b =>
+                {
+                    b.HasOne("DBConnection1.Models.User", "User")
+                        .WithMany("LikedAlbums")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DBConnection1.Models.LikedSong", b =>
+                {
+                    b.HasOne("DBConnection1.Models.User", "User")
+                        .WithMany("LikedSongs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DBConnection1.Models.Person", b =>
+                {
+                    b.HasOne("DBConnection1.Models.Artist", "Artist")
+                        .WithMany("Persons")
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Artist");
+                });
+
+            modelBuilder.Entity("DBConnection1.Models.Song", b =>
+                {
+                    b.HasOne("DBConnection1.Models.Album", "Album")
+                        .WithMany("Songs")
+                        .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DBConnection1.Models.Artist", "Artist")
+                        .WithMany("Songs")
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Album");
+
+                    b.Navigation("Artist");
+                });
+
+            modelBuilder.Entity("DBConnection1.Models.Album", b =>
+                {
+                    b.Navigation("Songs");
+                });
+
+            modelBuilder.Entity("DBConnection1.Models.Artist", b =>
+                {
+                    b.Navigation("Persons");
+
+                    b.Navigation("Songs");
+                });
+
+            modelBuilder.Entity("DBConnection1.Models.User", b =>
+                {
+                    b.Navigation("LikedAlbums");
+
+                    b.Navigation("LikedSongs");
                 });
 #pragma warning restore 612, 618
         }

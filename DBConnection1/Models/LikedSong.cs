@@ -11,7 +11,12 @@ namespace DBConnection1.Models
     public class LikedSong
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid LikedSongId { get; set; }
 
+        public virtual Guid UserId { get; set; }
+        public virtual User User { get; set; }
+
+        public virtual Guid SongId { get; set; }
+        public virtual Song Songs { get; set; }
     }
 }

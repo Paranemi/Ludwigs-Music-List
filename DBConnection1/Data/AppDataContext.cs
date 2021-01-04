@@ -17,7 +17,6 @@ namespace DBConnection1.Data
         public virtual DbSet<Artist> Artist { get; set; }
         public virtual DbSet<LikedAlbum> LikedAlbum { get; set; }
         public virtual DbSet<LikedSong> LikedSong { get; set; }
-        public virtual DbSet<Member> Member { get; set; }
         public virtual DbSet<Person> Person { get; set; }
         public virtual DbSet<Song> Song { get; set; }
         public virtual DbSet<User> User { get; set; }

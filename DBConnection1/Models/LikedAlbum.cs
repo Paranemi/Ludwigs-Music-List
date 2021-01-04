@@ -11,6 +11,12 @@ namespace DBConnection1.Models
     public class LikedAlbum
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid LikedAlbumId { get; set; }
+
+        public virtual Guid UserId { get; set; }
+        public virtual User User { get; set; }
+
+        public virtual Guid AlbumId { get; set; }
+        public virtual Album Album { get; set; }
     }
 }

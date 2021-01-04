@@ -11,9 +11,17 @@ namespace DBConnection1.Models
     public class Song
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid SongId { get; set; }
         public string Name { get; set; }
         public string LinkSptfy { get; set; }
         public string LinkYT { get; set; }
+
+        public virtual Guid AlbumId { get; set; }
+        public virtual Album Album { get; set; }
+
+        public virtual Guid ArtistId { get; set; }
+        public virtual Artist Artist { get; set; }
+
+        public virtual ICollection<LikedSong> LikedSongs { get; set; }
     }
 }

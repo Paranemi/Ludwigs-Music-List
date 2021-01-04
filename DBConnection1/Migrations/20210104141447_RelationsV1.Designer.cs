@@ -4,14 +4,16 @@ using DBConnection1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DBConnection1.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    partial class AppDataContextModelSnapshot : ModelSnapshot
+    [Migration("20210104141447_RelationsV1")]
+    partial class RelationsV1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,15 +88,10 @@ namespace DBConnection1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("SongId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LikedSongId");
-
-                    b.HasIndex("SongId");
 
                     b.HasIndex("UserId");
 
@@ -208,19 +205,11 @@ namespace DBConnection1.Migrations
 
             modelBuilder.Entity("DBConnection1.Models.LikedSong", b =>
                 {
-                    b.HasOne("DBConnection1.Models.Song", "Songs")
-                        .WithMany("LikedSongs")
-                        .HasForeignKey("SongId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DBConnection1.Models.User", "User")
                         .WithMany("LikedSongs")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Songs");
 
                     b.Navigation("User");
                 });
@@ -267,11 +256,6 @@ namespace DBConnection1.Migrations
                     b.Navigation("Persons");
 
                     b.Navigation("Songs");
-                });
-
-            modelBuilder.Entity("DBConnection1.Models.Song", b =>
-                {
-                    b.Navigation("LikedSongs");
                 });
 
             modelBuilder.Entity("DBConnection1.Models.User", b =>

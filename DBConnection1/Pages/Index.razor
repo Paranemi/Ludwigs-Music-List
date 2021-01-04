@@ -30,8 +30,7 @@ Welcome to your new app.
         helloString = new MarkupString(msg);
         WriteData();
 
-        var data = AppDataContext.Album;
-        Test = data+"";
+
 
     }
 
@@ -73,9 +72,46 @@ Welcome to your new app.
 
         AppDataContext.Album.Add(album4);
 
+        var animalsasleaders = new Artist
+        {
+            Founded = new DateTime(2007),
+            ArtistId = new Guid(),
+            ArtistImageUrl = "./Images/aal.jpg",
+            Name = "Animals as Leaders"
+        };
+        AppDataContext.Artist.Add(animalsasleaders);
+
+        var riseagainst = new Artist
+        {
+            Founded = new DateTime(1999),
+            ArtistId = new Guid(),
+            ArtistImageUrl = "./Images/RiseAgainst.jpg",
+            Name = "Rise Against"
+        };
+        AppDataContext.Artist.Add(riseagainst);
+
+        var dieaerzte = new Artist
+        {
+            Founded = new DateTime(1982),
+            ArtistId = new Guid(),
+            ArtistImageUrl = "./Images/DieAerzte.jpg",
+            Name = "Die Ärzte"
+        };
+        AppDataContext.Artist.Add(dieaerzte);
+
+        var metallica = new Artist
+        {
+            Founded = new DateTime(1981),
+            ArtistId = new Guid(),
+            ArtistImageUrl = "./Images/Metallica.jpg",
+            Name = "Metallica"
+        };
+        AppDataContext.Artist.Add(metallica);
 
         var song1 = new Song
         {
+            Artist = animalsasleaders,
+            Album = album1,
             LinkSptfy = "https://open.spotify.com/embed/track/0JGuSgtmWyfuxLGBs2wX0C",
             LinkYT = "https://www.youtube.com/embed/0jpOBd949O4",
             Name = "Physical Education"
@@ -84,6 +120,8 @@ Welcome to your new app.
 
         var song2 = new Song
         {
+            Artist = animalsasleaders,
+            Album = album1,
             LinkSptfy = "https://open.spotify.com/embed/track/7hY2Kc7Hvu0BudOoQwu8Ez",
             LinkYT = "https://www.youtube.com/embed/lbA3jxab4A0",
             Name = "Kascade"
@@ -92,6 +130,8 @@ Welcome to your new app.
 
         var song3 = new Song
         {
+            Artist = animalsasleaders,
+            Album = album1,
             LinkSptfy = "https://open.spotify.com/embed/track/4j6ascTxs21rACPdPpqFQN",
             LinkYT = "https://www.youtube.com/embed/g68hQ4zJ3t0",
             Name = "The Woven Web"
@@ -101,6 +141,8 @@ Welcome to your new app.
 
         var song4 = new Song
         {
+            Artist = riseagainst,
+            Album = album2,
             LinkSptfy = "https://open.spotify.com/embed/track/1O7oz3f9EuSeeX0J7t5z6J",
             LinkYT = "https://www.youtube.com/embed/NR3xVQy8ccM",
             Name = "Architects"
@@ -110,6 +152,8 @@ Welcome to your new app.
 
         var song5 = new Song
         {
+            Artist = riseagainst,
+            Album = album2,
             LinkSptfy = "https://open.spotify.com/embed/track/5sG3G54H21hNfd5etlheoe",
             LinkYT = "https://www.youtube.com/embed/6nQCxwneUwA",
             Name = "Satellite"
@@ -118,6 +162,8 @@ Welcome to your new app.
 
         var song6 = new Song
         {
+            Artist = riseagainst,
+            Album = album2,
             LinkSptfy = "https://open.spotify.com/embed/track/3nlnq3U8VrxOyp2mjXQAPA",
             LinkYT = "https://www.youtube.com/embed/eT-QlZjVmgI",
             Name = "Wait For Me"
@@ -126,6 +172,8 @@ Welcome to your new app.
 
         var song7 = new Song
         {
+            Artist = riseagainst,
+            Album = album2,
             LinkSptfy = "https://open.spotify.com/embed/track/45m4ag7gCHx3uKnSpOYFSO",
             LinkYT = "https://www.youtube.com/embed/gi4H5gQDuug",
             Name = "Midnight Hands"
@@ -134,22 +182,18 @@ Welcome to your new app.
 
         var song8 = new Song
         {
+            Artist = riseagainst,
+            Album = album2,
             LinkSptfy = "https://open.spotify.com/embed/track/2xbPgQOfICgLYs8P4lkEtx",
             LinkYT = "https://www.youtube.com/embed/8gX2kDsaYg0",
             Name = "Endgame"
         };
         AppDataContext.Song.Add(song8);
 
-        var song9 = new Song
-        {
-            LinkSptfy = "https://open.spotify.com/embed/track/0wHNrrefyaeVewm4NxjxrX",
-            LinkYT = "https://www.youtube.com/embed/eT-QlZjVmgI",
-            Name = "Wait For Me"
-        };
-        AppDataContext.Song.Add(song9);
-
         var song10 = new Song
         {
+            Artist = dieaerzte,
+            Album = album2,
             LinkSptfy = "https://open.spotify.com/embed/track/7KUaVteaQI4YrhV3Gp6px6",
             LinkYT = "https://www.youtube.com/embed/qhj9yQ3QyRo",
             Name = "Unrockbar"
@@ -158,6 +202,8 @@ Welcome to your new app.
 
         var song11 = new Song
         {
+            Artist = dieaerzte,
+            Album = album3,
             LinkSptfy = "https://open.spotify.com/embed/track/0GT9OI4Fot0TKzsUsO7SVA",
             LinkYT = "https://www.youtube.com/embed/kRrP-bZvD2s",
             Name = "Deine Schuld"
@@ -166,6 +212,8 @@ Welcome to your new app.
 
         var song12 = new Song
         {
+            Artist = dieaerzte,
+            Album = album3,
             LinkSptfy = "https://open.spotify.com/embed/track/2Fgmf2jZzNhCNHbZZLoXur",
             LinkYT = "https://www.youtube.com/embed/8zXuhykupwU",
             Name = "Geisterhaus"
@@ -174,6 +222,8 @@ Welcome to your new app.
 
         var song13 = new Song
         {
+            Artist = dieaerzte,
+            Album = album3,
             LinkSptfy = "https://open.spotify.com/embed/track/2J96ewIQ9O95cs5sNY3c1q",
             LinkYT = "https://www.youtube.com/embed/hhMbgu8nYEQ",
             Name = "Ruhig angehn"
@@ -182,6 +232,8 @@ Welcome to your new app.
 
         var song14 = new Song
         {
+            Artist = metallica,
+            Album = album4,
             LinkSptfy = "https://open.spotify.com/embed/track/6UB9mShVLbMm0W4e6vud4C",
             LinkYT = "https://www.youtube.com/embed/uzlOcupu5UE",
             Name = "Battery"
@@ -190,137 +242,19 @@ Welcome to your new app.
 
         var song15 = new Song
         {
+            Artist = metallica,
+            Album = album4,
             LinkSptfy = "https://open.spotify.com/embed/track/2HD5BWFthrNf2uFyEhi53d",
             LinkYT = "https://www.youtube.com/embed/z7bUJPj_8v0",
             Name = "Orion"
         };
         AppDataContext.Song.Add(song15);
 
-        var artist = new Artist
-        {
-            Founded = new DateTime(2007),
-            Id = new Guid(),
-            ArtistImageUrl = "./Images/aal.jpg",
-            Name = "Animals as Leaders"
-        };
-        AppDataContext.Artist.Add(artist);
-
-        var artist1 = new Artist
-        {
-            Founded = new DateTime(1999),
-            Id = new Guid(),
-            ArtistImageUrl = "./Images/RiseAgainst.jpg",
-            Name = "Rise Against"
-        };
-        AppDataContext.Artist.Add(artist1);
-
-        var artist2 = new Artist
-        {
-            Founded = new DateTime(1982),
-            Id = new Guid(),
-            ArtistImageUrl = "./Images/DieAerzte.jpg",
-            Name = "Die Ärzte"
-        };
-        AppDataContext.Artist.Add(artist2);
-
-        var artist3 = new Artist
-        {
-            Founded = new DateTime(1981),
-            Id = new Guid(),
-            ArtistImageUrl = "./Images/Metallica.jpg",
-            Name = "Metallica"
-        };
-        AppDataContext.Artist.Add(artist3);
-
-        var larsulrich = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(1981),
-        };
-        AppDataContext.Member.Add(larsulrich);
-
-        var kirkhammett = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(1983),
-        };
-        AppDataContext.Member.Add(kirkhammett);
-
-        var cliffburton = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(1982),
-            To  = new DateTime(1986)
-        };
-        AppDataContext.Member.Add(cliffburton);
-
-        var farinurlaub = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(1982),
-        };
-        AppDataContext.Member.Add(farinurlaub);
-
-        var belab = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(1982),
-        };
-        AppDataContext.Member.Add(belab);
-
-        var rodrigogonzalez = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(1993),
-        };
-        AppDataContext.Member.Add(rodrigogonzalez);
-
-        var chrischasse = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(2003),
-            To = new DateTime(2007)
-        };
-        AppDataContext.Member.Add(chrischasse);
-
-        var brandonbarnes = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(2000),
-        };
-        AppDataContext.Member.Add(brandonbarnes);
-
-        var zachblair = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(2007),
-        };
-        AppDataContext.Member.Add(zachblair);
-
-        var tosinabasi = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(2007),
-        };
-        AppDataContext.Member.Add(tosinabasi);
-
-        var javierreyes = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(2007),
-        };
-        AppDataContext.Member.Add(javierreyes);
-
-        var mattgarstka = new Member
-        {
-            Id = new Guid(),
-            From = new DateTime(2007),
-        };
-        AppDataContext.Member.Add(mattgarstka);
-
         var person = new Person
         {
-            Id = new Guid(),
+            Artist = animalsasleaders,
+            PersonId = new Guid(),
+            From = new DateTime(2007),
             FirstName = "Matt",
             LastName = "Garstka",
             Born = new DateTime(1989, 04, 27),
@@ -330,26 +264,20 @@ Welcome to your new app.
 
         var person1 = new Person
         {
-            Id = new Guid(),
+            Artist = animalsasleaders,
+            PersonId = new Guid(),
+            From = new DateTime(2007),
             FirstName = "Javier",
             LastName = "Reyes",
             ImageUrl = "./Images/JavierReyes.jpg",
         };
         AppDataContext.Person.Add(person1);
 
-        var person2 = new Person
-        {
-            Id = new Guid(),
-            FirstName = "Tosin",
-            LastName = "Abasi",
-            Born = new DateTime(1989, 04, 27),
-            ImageUrl = "./Images/TosinAbasi.jpg",
-        };
-        AppDataContext.Person.Add(person2);
-
         var person3 = new Person
         {
-            Id = new Guid(),
+            Artist = animalsasleaders,
+            PersonId = new Guid(),
+            From = new DateTime(2007),
             FirstName = "Tosin",
             LastName = "Abasi",
             Born = new DateTime(1983, 01, 07),
@@ -359,7 +287,9 @@ Welcome to your new app.
 
         var person4 = new Person
         {
-            Id = new Guid(),
+            Artist = riseagainst,
+            PersonId = new Guid(),
+            From = new DateTime(2007),
             FirstName = "Zach",
             LastName = "Blair",
             Born = new DateTime(1974, 12, 26),
@@ -369,7 +299,9 @@ Welcome to your new app.
 
         var person5 = new Person
         {
-            Id = new Guid(),
+            Artist = riseagainst,
+            PersonId = new Guid(),
+            From = new DateTime(2000),
             FirstName = "Brandon",
             LastName = "Barnes",
             Born = new DateTime(1974, 12, 26),
@@ -379,26 +311,22 @@ Welcome to your new app.
 
         var person6 = new Person
         {
-            Id = new Guid(),
+            Artist = riseagainst,
+            PersonId = new Guid(),
+            From = new DateTime(2003),
+            To = new DateTime(2007),
             FirstName = "Chris",
             LastName = "Chasse",
             ImageUrl = "./Images/Unknown.jpg",
         };
         AppDataContext.Person.Add(person6);
 
-        var person7 = new Person
-        {
-            Id = new Guid(),
-            FirstName = "Rodrigo",
-            LastName = "Gonzalez",
-            ImageUrl = "./Images/RodGonzalez.jpg",
-            Born = new DateTime(1968, 05, 19)
-        };
-        AppDataContext.Person.Add(person7);
 
         var person8 = new Person
         {
-            Id = new Guid(),
+            Artist = dieaerzte,
+            PersonId = new Guid(),
+            From = new DateTime(1993),
             FirstName = "Rodrigo",
             LastName = "Gonzalez",
             ImageUrl = "./Images/RodGonzalez.jpg",
@@ -408,7 +336,9 @@ Welcome to your new app.
 
         var person9 = new Person
         {
-            Id = new Guid(),
+            Artist = dieaerzte,
+            PersonId = new Guid(),
+            From = new DateTime(1982),
             FirstName = "Bela",
             LastName = "B",
             ImageUrl = "./Images/BelaB.jpg",
@@ -418,7 +348,9 @@ Welcome to your new app.
 
         var person10 = new Person
         {
-            Id = new Guid(),
+            Artist = dieaerzte,
+            PersonId = new Guid(),
+            From = new DateTime(1982),
             FirstName = "Farin",
             LastName = "Urlaub",
             ImageUrl = "./Images/FarinUrlaub.jpg",
@@ -428,7 +360,10 @@ Welcome to your new app.
 
         var person11 = new Person
         {
-            Id = new Guid(),
+            Artist = metallica,
+            PersonId = new Guid(),
+            From = new DateTime(1982),
+            To = new DateTime(1986),
             FirstName = "Clifford",
             LastName = "Burton",
             ImageUrl = "./Images/CliffBurton.jpg",
@@ -439,7 +374,9 @@ Welcome to your new app.
 
         var person12 = new Person
         {
-            Id = new Guid(),
+            Artist = metallica,
+            PersonId = new Guid(),
+            From = new DateTime(1983),
             FirstName = "Kirk",
             LastName = "Hammett",
             ImageUrl = "./Images/KirkHammett.jpg",
@@ -449,7 +386,9 @@ Welcome to your new app.
 
         var person13 = new Person
         {
-            Id = new Guid(),
+            Artist = metallica,
+            PersonId = new Guid(),
+            From = new DateTime(1981),
             FirstName = "Lars",
             LastName = "Ulrich",
             ImageUrl = "./Images/LarsUlrich.jpg",
@@ -459,7 +398,7 @@ Welcome to your new app.
 
         var useradm = new User
         {
-            Id = new Guid(),
+            UserId = new Guid(),
             UserName = "adm",
             Password = "adm123"
         };

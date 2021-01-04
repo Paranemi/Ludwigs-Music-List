@@ -11,7 +11,7 @@ namespace DBConnection1.Models
     public class User
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
 
         [Required]
         public string UserName { get; set; }
@@ -19,5 +19,7 @@ namespace DBConnection1.Models
         [Required]
         public string Password { get; set; }
 
+        public virtual ICollection<LikedSong> LikedSongs { get; set; }
+        public virtual ICollection<LikedAlbum> LikedAlbums { get; set; }
     }
 }

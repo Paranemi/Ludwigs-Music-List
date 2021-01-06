@@ -6,10 +6,6 @@ html, body {
     background-color:#2a2a2a
 }
 
-.test{
-    width:50px;
-    height:45px;
-}
 
 .validation-container {
     display: flex;
@@ -197,6 +193,15 @@ a, .btn-link {
         font-size: 1.7rem;
         padding-right:50px;
     }
+
+    .sidebar .logo {
+        background-image: url(../Images/homelogo.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 50px;
+        width: 300px;
+    }
+
 
     .sidebar .oi {
         width: 2rem;

@@ -1,0 +1,35 @@
+﻿@page "/songlist"
+@using DBConnection1.Data
+@using Telerik.Blazor.Components
+@using DBConnection1.Models
+@inject WeatherForecastService ForecastService
+
+<TelerikGrid Resizable="true"
+             Data="@songlist"
+             Reorderable="true"
+             Sortable="true">
+    <GridColumns>
+        <GridColumn Field="@nameof(Song.Name)"></GridColumn>
+        <GridColumn Field="@nameof(Song.Album.ImageUrl)"></GridColumn>
+        <GridColumn Field="@nameof(Song.Album.ReleaseDate)"></GridColumn>
+        <GridColumn Field="@nameof(Song.Album.Name)"></GridColumn>
+        <GridColumn Field="@nameof(Song.Album)"></GridColumn>
+        <GridColumn Field="@nameof(Song.Artist.Name)"></GridColumn>
+    </GridColumns>
+</TelerikGrid>
+
+
+
+@code {
+    [Inject]
+    public AppDataContext AppDataContext { get; set; }
+    private List<Song> songlist;
+
+    WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        songlist = AppDataContext.Song.ToList();
+    }
+}

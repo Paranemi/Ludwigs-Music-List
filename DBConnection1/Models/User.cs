@@ -14,9 +14,11 @@ namespace DBConnection1.Models
         public Guid UserId { get; set; }
 
         [Required]
+        [MaxLength(40)]
         public string UserName { get; set; }
 
         [Required]
+        [MaxLength(40)]
         public string Password { get; set; }
 
         public virtual ICollection<LikedSong> LikedSongs { get; set; }

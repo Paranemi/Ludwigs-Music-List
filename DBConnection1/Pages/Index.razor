@@ -28,10 +28,13 @@ Welcome to your new app.
     {
         string msg = string.Format("Hello from <strong>Telerik Blazor</strong> at {0}.<br /> Now you can use C# to write front-end!", DateTime.Now);
         helloString = new MarkupString(msg);
-        WriteData();
+        if (AppDataContext.Album.Count() == 0)
+        {
+            WriteData();
+        }
 
-
-
+        var songs = AppDataContext.Song.ToList();
+        
     }
 
     public void WriteData()
@@ -65,7 +68,7 @@ Welcome to your new app.
 
         var album4 = new Album
         {
-            Name = "Master of Puppetsssss",
+            Name = "Master of Puppets",
             ImageUrl = "./Images/mop.jpg",
             ReleaseDate = new DateTime(1986, 03, 03)
         };

@@ -23,5 +23,7 @@ namespace DBConnection1.Models
         public virtual Artist Artist { get; set; }
 
         public virtual ICollection<LikedSong> LikedSongs { get; set; }
+
+        //public List<Album> Albums { get; set; } = new List<Album>();
     }
 }

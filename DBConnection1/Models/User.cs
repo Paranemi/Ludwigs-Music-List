@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DBConnection1.Models
 {
@@ -14,7 +12,7 @@ namespace DBConnection1.Models
         public Guid UserId { get; set; }
 
         [Required]
-        [MaxLength(40)]
+        [MaxLength(25)]
         public string UserName { get; set; }
 
         [Required]

@@ -1,25 +1,50 @@
-﻿@page "/artistdetails"
-
+﻿@page "/artistdetails/{ArtistName}/{Founded}/{PersonImageUrl}/{ArtistImageUrl}/{FirstName}/{LastName}"
+@using DBConnection1.Data
+@using DBConnection1.Models
 
 <div class="alist-form">
-    <img src="@ArtistImageUrl" alt="Alternate Text" />
-    <p>@Name was founded (@Founded).</p>
+    <img src="./Images/@(ArtistImageUrl).jpg" alt="Alternate Text" />
+    <p>@ArtistName was founded (@Founded).</p>
     <br />
     <h6>Members:</h6>
-    <img src="@ImageUrl" alt="Alternate Text" />
+    @*@for (int i = 0; i < artist.Count; i++)
+    {
+        <img src="@(PersonImageUrl).jpg" alt="Alternate Text" />
+      }*@
+    <img src="./Images/@(PersonImageUrl).jpg" alt="Alternate Text" />
     <p>@FirstName @LastName</p>
 </div>
 
 @code {
-    public string Name { get; set; } = "Animals as Leaders";
-    public string ArtistImageUrl { get; set; } = "./Images/aal.jpg";
-    public DateTime Founded { get; set; } = new DateTime(2007);
-    public string FirstName { get; set; } = "Tosin";
-    public string LastName { get; set; } = "Abasi";
-    public string ImageUrl { get; set; } = "./Images/TosinAbasi.jpg";
-    public DateTime Born { get; set; }
-    public DateTime Died { get; set; }
-    public DateTime From { get; set; }
-    public DateTime To { get; set; }
+
+    [Parameter]
+    public string ArtistName { get; set; }
+    [Parameter]
+    public string Founded { get; set; }
+    [Parameter]
+    public string PersonImageUrl { get; set; }
+    [Parameter]
+    public string ArtistImageUrl { get; set; }
+    [Parameter]
+    public string FirstName { get; set; }
+    [Parameter]
+    public string LastName { get; set; }
+
+
+    [Parameter]
+    public int PersonCount { get; set; } = 0;
+
+
+    [Inject]
+    public AppDataContext AppDataContext { get; set; }
+    private List<Artist> artist;
+
+    protected override void OnInitialized()
+    {
+        artist = AppDataContext.Artist.ToList();
+
+    }
+
+    
 
 }

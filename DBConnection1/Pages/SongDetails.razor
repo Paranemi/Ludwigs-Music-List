@@ -1,4 +1,6 @@
-﻿@page "/songdetails"
+﻿@page "/songdetails/{SongName}/{AlbumName}/{ArtistName}/{LinkYT}/{LinkSP}/{Cover}"
+@using DBConnection1.Data
+@using DBConnection1.Models
 
 <style>
     img {
@@ -11,21 +13,31 @@
 </style>
 
 <div class="bg-img">
-    <img src="./Images/jom.jpg" alt="Alternate Text" />
+    <img src="./Images/@(Cover).jpg" alt="Alternate Text" />
 </div>
     
 
 <div class="mlist-form">
     <h2>@SongName</h2>
     <h5>@AlbumName</h5>
-    <iframe src="https://www.youtube.com/embed/0jpOBd949O4" allowfullscreen="allowfullscreen" allowtransparency="true" width="500" height="300" frameborder="0"></iframe>
-    <iframe src="https://open.spotify.com/embed/track/0JGuSgtmWyfuxLGBs2wX0C" width="500" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <iframe src="https://www.youtube.com/embed/@LinkYT" allowfullscreen="allowfullscreen" allowtransparency="true" width="500" height="300" frameborder="0"></iframe>
+    <iframe src="https://open.spotify.com/embed/track/@LinkSP" width="500" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     <p>by @ArtistName</p>
 </div>
 
     @code {
-        private string SongName { get; set; } = "Physical Education";
-        private string AlbumName { get; set; } = "The Joy of Motion";
-        public string ArtistName { get; set; } = "Animals als Leader";
-        public string Cover { get; set; } = "./Images/jom.jpg";
+        [Parameter]
+        public string SongName { get; set; }
+        [Parameter]
+        public string AlbumName { get; set; }
+        [Parameter]
+        public string ArtistName { get; set; }
+        [Parameter]
+        public string LinkYT { get; set; }
+        [Parameter]
+        public string LinkSP { get; set; }
+        [Parameter]
+        public string Cover { get; set; }
+
+
     }

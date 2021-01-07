@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DBConnection1.Models
 {
@@ -12,8 +10,10 @@ namespace DBConnection1.Models
     {
         [Key]
         public Guid ArtistId { get; set; }
+        [MaxLength(50)]
         public string Name { get; set; }
-        public string ArtistImageUrl { get; set; }
+        [MaxLength(50)]
+        public string ArtistImageUrl { get; set; }    
         public DateTime Founded { get; set; }
 
 

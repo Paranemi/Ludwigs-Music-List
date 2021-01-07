@@ -1,7 +1,5 @@
 ﻿using DBConnection1.Data;
-using DBConnection1.Models;
 using Microsoft.AspNetCore.Components;
-using System;
 
 namespace DBConnection1.DataCRUD
 {

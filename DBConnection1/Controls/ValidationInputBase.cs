@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DBConnection1.Controls
@@ -17,7 +16,7 @@ namespace DBConnection1.Controls
         [Parameter(CaptureUnmatchedValues = true)]
         public Dictionary<string, object> InputAttributes { get; set; }
 
-        protected async void HandleInoutChanged(ChangeEventArgs eventArgs)
+        protected async Task HandleInoutChanged(ChangeEventArgs eventArgs)
         {
            await ValueChangedCallback.InvokeAsync(eventArgs.Value.ToString());
         }

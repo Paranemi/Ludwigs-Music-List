@@ -10,26 +10,44 @@
              Sortable="true">
     <GridColumns>
         <GridColumn Field="@nameof(Song.Name)"></GridColumn>
-        <GridColumn Field="@nameof(Song.Album.ImageUrl)"></GridColumn>
-        <GridColumn Field="@nameof(Song.Album.ReleaseDate)"></GridColumn>
         <GridColumn Field="@nameof(Song.Album.Name)"></GridColumn>
-        <GridColumn Field="@nameof(Song.Album)"></GridColumn>
+        <GridColumn Field="@nameof(Song.Album.Name)"></GridColumn>
+        <GridColumn Field="@nameof(Artist.Name)"></GridColumn>
         <GridColumn Field="@nameof(Song.Artist.Name)"></GridColumn>
+        <GridColumn Field="@nameof(Song.LinkSptfy)"></GridColumn>
     </GridColumns>
 </TelerikGrid>
 
-
+<table class="welcome-text">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Album</th>
+            <th>Artist</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var song in songlist)
+        {
+            <tr>
+                <td><a href="/songdetails/@song.Name/@song.Album.Name/@song.Artist.Name/@song.LinkYT/@song.LinkSptfy/@song.Album.ImageUrl">
+                    @song.Name</a></td>
+                <td>@song.Album.Name</td>
+                <td><a href="/artistdetails/@song.Artist.Name/@song.Artist.Founded/BelaB/DieAerzte/Bela/B">@song.Artist.Name</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @code {
     [Inject]
     public AppDataContext AppDataContext { get; set; }
     private List<Song> songlist;
+    private List<Artist> artist;
 
-    WeatherForecast[] forecasts;
-
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
         songlist = AppDataContext.Song.ToList();
+        artist = AppDataContext.Artist.ToList();
     }
 }

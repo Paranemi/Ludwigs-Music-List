@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DBConnection1.Models
 {
@@ -14,7 +11,9 @@ namespace DBConnection1.Models
         public Guid PersonId { get; set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }
+        [MaxLength(50)]
         public string FirstName { get; set; }
+        [MaxLength(50)]
         public string LastName { get; set; }
         public string ImageUrl { get; set; }
         public DateTime Born { get; set; }

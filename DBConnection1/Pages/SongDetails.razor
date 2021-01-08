@@ -1,7 +1,7 @@
 ﻿@page "/songdetails/{SongName}/{AlbumName}/{ArtistName}/{LinkYT}/{LinkSP}/{Cover}"
 @using DBConnection1.Data
 @using DBConnection1.Models
-@inherits SongDetailsBase
+@*@inherits SongDetailsBase*@
 
 <style>
     img {
@@ -26,7 +26,7 @@
     <p>by <a href="/artistdetails/@ArtistName">@ArtistName</a></p>
 </div>
 
-    @*@code {
+    @code {
         [Parameter]
         public string SongName { get; set; }
         [Parameter]
@@ -41,4 +41,4 @@
         public string Cover { get; set; }
 
 
-    }*@
+    }

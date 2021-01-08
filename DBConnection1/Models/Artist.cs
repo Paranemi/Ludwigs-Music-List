@@ -14,7 +14,7 @@ namespace DBConnection1.Models
         public string Name { get; set; }
         [MaxLength(50)]
         public string ArtistImageUrl { get; set; }    
-        public DateTime Founded { get; set; }
+        public int Founded { get; set; }
 
 
         public virtual ICollection<Person> Persons { get; set; }

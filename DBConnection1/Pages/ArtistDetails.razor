@@ -1,50 +1,27 @@
-﻿@page "/artistdetails/{ArtistName}/{Founded}/{PersonImageUrl}/{ArtistImageUrl}/{FirstName}/{LastName}"
+﻿@page "/artistdetails/{ArtistName}"
 @using DBConnection1.Data
 @using DBConnection1.Models
+@inherits ArtistDetailsBase
 
 <div class="alist-form">
     <img src="./Images/@(ArtistImageUrl).jpg" alt="Alternate Text" />
-    <p>@ArtistName was founded (@Founded).</p>
+    <p>@ArtistName was founded in @Founded.</p>
     <br />
     <h6>Members:</h6>
-    @*@for (int i = 0; i < artist.Count; i++)
+ 
+    @foreach (var item in persons)
     {
-        <img src="@(PersonImageUrl).jpg" alt="Alternate Text" />
-      }*@
-    <img src="./Images/@(PersonImageUrl).jpg" alt="Alternate Text" />
-    <p>@FirstName @LastName</p>
+        <img src="./Images/@(PersonImageUrl=item.ImageUrl).jpg" alt="Alternate Text" />
+        if (item.To == 0)
+        {
+            <p>@(FirstName = item.FirstName) @(LastName = item.LastName) since @(From = item.From).</p>
+        }
+        else
+        {
+            <p>@(FirstName = item.FirstName) @(LastName = item.LastName) from @(From = item.From) to @(To = item.To).</p>
+        }
+        
+    }
+    
 </div>
 
-@code {
-
-    [Parameter]
-    public string ArtistName { get; set; }
-    [Parameter]
-    public string Founded { get; set; }
-    [Parameter]
-    public string PersonImageUrl { get; set; }
-    [Parameter]
-    public string ArtistImageUrl { get; set; }
-    [Parameter]
-    public string FirstName { get; set; }
-    [Parameter]
-    public string LastName { get; set; }
-
-
-    [Parameter]
-    public int PersonCount { get; set; } = 0;
-
-
-    [Inject]
-    public AppDataContext AppDataContext { get; set; }
-    private List<Artist> artist;
-
-    protected override void OnInitialized()
-    {
-        artist = AppDataContext.Artist.ToList();
-
-    }
-
-    
-
-}

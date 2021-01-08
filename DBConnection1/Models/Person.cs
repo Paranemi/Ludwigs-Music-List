@@ -9,8 +9,9 @@ namespace DBConnection1.Models
     {
         [Key]
         public Guid PersonId { get; set; }
-        public DateTime From { get; set; }
-        public DateTime To { get; set; }
+        public int From { get; set; }
+        public int To { get; set; }
+
         [MaxLength(50)]
         public string FirstName { get; set; }
         [MaxLength(50)]

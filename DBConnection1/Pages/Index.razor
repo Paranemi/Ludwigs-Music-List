@@ -16,10 +16,10 @@ Welcome to your new app.
 
 @code {
 
-    MarkupString helloString;
+        MarkupString helloString;
 
-    [Inject]
-    public AppDataContext AppDataContext { get; set; }
+        [Inject]
+        public AppDataContext AppDataContext { get; set; }
 
 
     public string Test { get; set; }
@@ -33,12 +33,13 @@ Welcome to your new app.
             WriteData();
         }
 
-        var songs = AppDataContext.Song.ToList();
-        
+        //  var songs = AppDataContext.Song.ToList();
+
     }
 
     public void WriteData()
     {
+        
         var album1 = new Album
         {
             Name = "The Joy of Motion",
@@ -77,8 +78,7 @@ Welcome to your new app.
 
         var animalsasleaders = new Artist
         {
-            Founded = new DateTime(2007),
-            ArtistId = new Guid(),
+            Founded = 2007,
             ArtistImageUrl = "aal",
             Name = "Animals as Leaders"
         };
@@ -86,8 +86,7 @@ Welcome to your new app.
 
         var riseagainst = new Artist
         {
-            Founded = new DateTime(1999),
-            ArtistId = new Guid(),
+            Founded = 1999,
             ArtistImageUrl = "RiseAgainst",
             Name = "Rise Against"
         };
@@ -95,8 +94,7 @@ Welcome to your new app.
 
         var dieaerzte = new Artist
         {
-            Founded = new DateTime(1982),
-            ArtistId = new Guid(),
+            Founded = 1982,
             ArtistImageUrl = "DieAerzte",
             Name = "Die Ärzte"
         };
@@ -104,8 +102,7 @@ Welcome to your new app.
 
         var metallica = new Artist
         {
-            Founded = new DateTime(1981),
-            ArtistId = new Guid(),
+            Founded = 1981,
             ArtistImageUrl = "Metallica",
             Name = "Metallica"
         };
@@ -196,7 +193,7 @@ Welcome to your new app.
         var song10 = new Song
         {
             Artist = dieaerzte,
-            Album = album2,
+            Album = album3,
             LinkSptfy = "7KUaVteaQI4YrhV3Gp6px6",
             LinkYT = "qhj9yQ3QyRo",
             Name = "Unrockbar"
@@ -256,8 +253,7 @@ Welcome to your new app.
         var person = new Person
         {
             Artist = animalsasleaders,
-            PersonId = new Guid(),
-            From = new DateTime(2007),
+            From = 2007,
             FirstName = "Matt",
             LastName = "Garstka",
             Born = new DateTime(1989, 04, 27),
@@ -268,8 +264,7 @@ Welcome to your new app.
         var person1 = new Person
         {
             Artist = animalsasleaders,
-            PersonId = new Guid(),
-            From = new DateTime(2007),
+            From = 2007,
             FirstName = "Javier",
             LastName = "Reyes",
             ImageUrl = "JavierReyes",
@@ -279,8 +274,7 @@ Welcome to your new app.
         var person3 = new Person
         {
             Artist = animalsasleaders,
-            PersonId = new Guid(),
-            From = new DateTime(2007),
+            From = 2007,
             FirstName = "Tosin",
             LastName = "Abasi",
             Born = new DateTime(1983, 01, 07),
@@ -291,8 +285,7 @@ Welcome to your new app.
         var person4 = new Person
         {
             Artist = riseagainst,
-            PersonId = new Guid(),
-            From = new DateTime(2007),
+            From = 2007,
             FirstName = "Zach",
             LastName = "Blair",
             Born = new DateTime(1974, 12, 26),
@@ -303,8 +296,7 @@ Welcome to your new app.
         var person5 = new Person
         {
             Artist = riseagainst,
-            PersonId = new Guid(),
-            From = new DateTime(2000),
+            From = 2000,
             FirstName = "Brandon",
             LastName = "Barnes",
             Born = new DateTime(1974, 12, 26),
@@ -315,9 +307,8 @@ Welcome to your new app.
         var person6 = new Person
         {
             Artist = riseagainst,
-            PersonId = new Guid(),
-            From = new DateTime(2003),
-            To = new DateTime(2007),
+            From = 2003,
+            To = 2007,
             FirstName = "Chris",
             LastName = "Chasse",
             ImageUrl = "Unknown",
@@ -328,8 +319,7 @@ Welcome to your new app.
         var person8 = new Person
         {
             Artist = dieaerzte,
-            PersonId = new Guid(),
-            From = new DateTime(1993),
+            From = 1993,
             FirstName = "Rodrigo",
             LastName = "Gonzalez",
             ImageUrl = "RodGonzalez",
@@ -340,8 +330,7 @@ Welcome to your new app.
         var person9 = new Person
         {
             Artist = dieaerzte,
-            PersonId = new Guid(),
-            From = new DateTime(1982),
+            From = 1982,
             FirstName = "Bela",
             LastName = "B",
             ImageUrl = "BelaB",
@@ -352,8 +341,7 @@ Welcome to your new app.
         var person10 = new Person
         {
             Artist = dieaerzte,
-            PersonId = new Guid(),
-            From = new DateTime(1982),
+            From = 1982,
             FirstName = "Farin",
             LastName = "Urlaub",
             ImageUrl = "FarinUrlaub",
@@ -364,9 +352,8 @@ Welcome to your new app.
         var person11 = new Person
         {
             Artist = metallica,
-            PersonId = new Guid(),
-            From = new DateTime(1982),
-            To = new DateTime(1986),
+            From = 1982,
+            To = 1986,
             FirstName = "Clifford",
             LastName = "Burton",
             ImageUrl = "CliffBurton",
@@ -378,8 +365,7 @@ Welcome to your new app.
         var person12 = new Person
         {
             Artist = metallica,
-            PersonId = new Guid(),
-            From = new DateTime(1983),
+            From = 1983,
             FirstName = "Kirk",
             LastName = "Hammett",
             ImageUrl = "KirkHammett",
@@ -390,8 +376,7 @@ Welcome to your new app.
         var person13 = new Person
         {
             Artist = metallica,
-            PersonId = new Guid(),
-            From = new DateTime(1981),
+            From = 1981,
             FirstName = "Lars",
             LastName = "Ulrich",
             ImageUrl = "LarsUlrich",
@@ -401,12 +386,11 @@ Welcome to your new app.
 
         var useradm = new User
         {
-            UserId = new Guid(),
             UserName = "adm",
             Password = "adm123"
         };
         AppDataContext.User.Add(useradm);
 
         AppDataContext.SaveChanges();
+        }
     }
-}

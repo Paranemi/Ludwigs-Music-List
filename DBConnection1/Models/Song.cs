@@ -25,6 +25,5 @@ namespace DBConnection1.Models
 
         public virtual ICollection<LikedSong> LikedSongs { get; set; }
 
-        //public List<Album> Albums { get; set; } = new List<Album>();
     }
 }

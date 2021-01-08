@@ -12,8 +12,8 @@ namespace DBConnection1.Migrations
                 columns: table => new
                 {
                     AlbumId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -26,9 +26,9 @@ namespace DBConnection1.Migrations
                 columns: table => new
                 {
                     ArtistId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ArtistImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Founded = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ArtistImageUrl = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Founded = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,8 +40,8 @@ namespace DBConnection1.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    UserName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,10 +53,10 @@ namespace DBConnection1.Migrations
                 columns: table => new
                 {
                     PersonId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    From = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    To = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    From = table.Column<int>(type: "int", nullable: false),
+                    To = table.Column<int>(type: "int", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Born = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Died = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -78,9 +78,9 @@ namespace DBConnection1.Migrations
                 columns: table => new
                 {
                     SongId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LinkSptfy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LinkYT = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    LinkSptfy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    LinkYT = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     AlbumId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ArtistId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -106,11 +106,18 @@ namespace DBConnection1.Migrations
                 columns: table => new
                 {
                     LikedAlbumId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AlbumId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LikedAlbum", x => x.LikedAlbumId);
+                    table.ForeignKey(
+                        name: "FK_LikedAlbum_Albums_AlbumId",
+                        column: x => x.AlbumId,
+                        principalTable: "Albums",
+                        principalColumn: "AlbumId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_LikedAlbum_Users_UserId",
                         column: x => x.UserId,
@@ -124,11 +131,18 @@ namespace DBConnection1.Migrations
                 columns: table => new
                 {
                     LikedSongId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SongId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LikedSong", x => x.LikedSongId);
+                    table.ForeignKey(
+                        name: "FK_LikedSong_Songs_SongId",
+                        column: x => x.SongId,
+                        principalTable: "Songs",
+                        principalColumn: "SongId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_LikedSong_Users_UserId",
                         column: x => x.UserId,
@@ -138,9 +152,19 @@ namespace DBConnection1.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_LikedAlbum_AlbumId",
+                table: "LikedAlbum",
+                column: "AlbumId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LikedAlbum_UserId",
                 table: "LikedAlbum",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LikedSong_SongId",
+                table: "LikedSong",
+                column: "SongId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LikedSong_UserId",

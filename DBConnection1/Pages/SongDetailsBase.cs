@@ -2,13 +2,19 @@
 
 namespace DBConnection1.Pages
 {
-    public class SongDetailsBase /*: ComponentBase*/
+    public class SongDetailsBase : ComponentBase
     {
-        //public string SongName { get; set; }
-        //public string AlbumName { get; set; }      
-        //public string ArtistName { get; set; }       
-        //public string LinkYT { get; set; }       
-        //public string LinkSP { get; set; }        
-        //public string Cover { get; set; }
+        [Parameter]
+        public string SongName { get; set; }
+        [Parameter] 
+        public string AlbumName { get; set; }
+        [Parameter] 
+        public string ArtistName { get; set; }
+        [Parameter] 
+        public string LinkYT { get; set; }
+        [Parameter]
+        public string LinkSP { get; set; }
+        [Parameter] 
+        public string Cover { get; set; }
     }
 }

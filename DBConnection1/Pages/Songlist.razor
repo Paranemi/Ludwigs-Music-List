@@ -2,7 +2,7 @@
 @using DBConnection1.Data
 @using Telerik.Blazor.Components
 @using DBConnection1.Models
-@*@inherits SonglistBase*@
+@inherits SonglistBase
 
 <TelerikGrid Resizable="true"
              Data="@songlist"
@@ -37,18 +37,3 @@
         }
     </tbody>
 </table>
-
-@code{
-    [Inject]
-    public AppDataContext AppDataContext { get; set; }
-    public List<Song> songlist;
-
-    //public SonglistBase()
-    //{
-    //    songlist = AppDataContext.Song.ToList();
-    //}
-    protected override void OnInitialized()
-    {
-        songlist = AppDataContext.Song.ToList();
-    }
-}

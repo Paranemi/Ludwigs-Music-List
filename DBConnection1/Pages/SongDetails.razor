@@ -1,7 +1,7 @@
 ﻿@page "/songdetails/{SongName}/{AlbumName}/{ArtistName}/{LinkYT}/{LinkSP}/{Cover}"
 @using DBConnection1.Data
 @using DBConnection1.Models
-@*@inherits SongDetailsBase*@
+@inherits SongDetailsBase
 
 <style>
     img {
@@ -25,20 +25,3 @@
     <iframe src="https://open.spotify.com/embed/track/@LinkSP" width="500" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
     <p>by <a href="/artistdetails/@ArtistName">@ArtistName</a></p>
 </div>
-
-    @code {
-        [Parameter]
-        public string SongName { get; set; }
-        [Parameter]
-        public string AlbumName { get; set; }
-        [Parameter]
-        public string ArtistName { get; set; }
-        [Parameter]
-        public string LinkYT { get; set; }
-        [Parameter]
-        public string LinkSP { get; set; }
-        [Parameter]
-        public string Cover { get; set; }
-
-
-    }

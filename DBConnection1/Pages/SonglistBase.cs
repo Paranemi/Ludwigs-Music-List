@@ -8,21 +8,16 @@ using System.Linq;
 
 namespace DBConnection1.Pages
 {
-    public class SonglistBase /*: ComponentBase*/
+    public class SonglistBase : ComponentBase
     {
-        //[Inject]
-        //public AppDataContext AppDataContext { get; set; }
-        //protected List<Song> songlist;
+        [Inject]
+        public AppDataContext AppDataContext { get; set; }
+        protected List<Song> songlist;
 
-        //public SonglistBase()
-        //{
-        //    songlist = new List<Song>();
-        //    songlist = AppDataContext.Song.ToList();
-        //}
-        ////protected override void OnInitialized()
-        ////{
-        ////    songlist = AppDataContext.Song.ToList();
-        ////}
+        protected override void OnInitialized()
+        {
+            songlist = AppDataContext.Song.ToList();
+        }
     }
 }
 

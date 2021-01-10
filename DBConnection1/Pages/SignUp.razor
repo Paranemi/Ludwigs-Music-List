@@ -16,28 +16,28 @@
 </div>
 
 @code {
-    private string NewUser { get; set; }
-    private string Password { get; set; }
-    private string Confirm { get; set; }
-    public string msg { get; set; }
+            private string NewUser { get; set; }
+            private string Password { get; set; }
+            private string Confirm { get; set; }
+            public string msg { get; set; }
 
-    [Inject]
-    public AppDataContext Db { get; set; }
+            [Inject]
+            public AppDataContext Db { get; set; }
 
-    public void CreateNewUser()
-    {
-        if (Check())
-        {
-            var user = new User
+            public void CreateNewUser()
             {
-                UserName = "adm",
-                Password = "adm123"
-            };
-            Db.User.Add(user);
+                if (Check())
+                {
+                    var user = new User
+                    {
+                        UserName = NewUser,
+                        Password = this.Password
+                };
+                Db.User.Add(user);
 
-            Db.SaveChanges();
-            msg = "user wurde angelegt";
-        }
+                Db.SaveChanges();
+                msg = "user wurde angelegt";
+            }
         else
         {
             msg = "user wurde nicht angelegt";

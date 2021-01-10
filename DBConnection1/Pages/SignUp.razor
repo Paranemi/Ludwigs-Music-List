@@ -1,4 +1,6 @@
 ﻿@page "/signup"
+@using DBConnection1.Models
+@using DBConnection1.Data
 
 <div class="sign-form">
     <p class="welcome-text">Create a new account</p>
@@ -6,9 +8,9 @@
     <input type="password" class="sign-input form-control" placeholder="Password" @bind="Password"/>
     <input type="password" class="sign-input form-control" placeholder="Confirm Password" @bind="Confirm" />
 
-    <button class="sign-button" type="submit" @onclick="Check">Confirm</button>
+    <button class="sign-button" type="submit" @onclick="CreateNewUser">Confirm</button>
 
-    <p>@ValidPW.ToString()</p>
+    <p style="color:whitesmoke" >@msg</p>
 
    
 </div>
@@ -17,21 +19,40 @@
     private string NewUser { get; set; }
     private string Password { get; set; }
     private string Confirm { get; set; }
-    private bool ValidPW { get; set; }
+    public string msg { get; set; }
 
-    public void Check()
+    [Inject]
+    public AppDataContext Db { get; set; }
+
+    public void CreateNewUser()
     {
-        if (Password == Confirm)
+        if (Check())
         {
-            ValidPW = true;
+            var user = new User
+            {
+                UserName = "adm",
+                Password = "adm123"
+            };
+            Db.User.Add(user);
+
+            Db.SaveChanges();
+            msg = "user wurde angelegt";
         }
         else
         {
-            ValidPW = false;
+            msg = "user wurde nicht angelegt";
         }
-        if (ValidPW)
+    }
+
+    public bool Check()
+    {
+        if (Password == Confirm)
         {
-            
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

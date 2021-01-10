@@ -8,11 +8,11 @@ namespace DBConnection1.Data
     public class LoadData
     {
         [Inject]
-        public AppDataContext AppDataContext { get; set; }
+        public AppDataContext Db { get; set; }
 
         public void LoadSampleData()
         {
-            if (AppDataContext.Album.Count() == 0)
+            if (Db.Album.Count() == 0)
             {
                 SampleData();
             }
@@ -27,7 +27,7 @@ namespace DBConnection1.Data
                 ReleaseDate = new DateTime(2014, 03, 03)
             };
 
-            AppDataContext.Album.Add(album1);
+            Db.Album.Add(album1);
 
             var album2 = new Album
             {
@@ -36,7 +36,7 @@ namespace DBConnection1.Data
                 ReleaseDate = new DateTime(2011, 03, 11)
             };
 
-            AppDataContext.Album.Add(album2);
+            Db.Album.Add(album2);
 
             var album3 = new Album
             {
@@ -45,7 +45,7 @@ namespace DBConnection1.Data
                 ReleaseDate = new DateTime(2003, 09, 29)
             };
 
-            AppDataContext.Album.Add(album3);
+            Db.Album.Add(album3);
 
             var album4 = new Album
             {
@@ -54,7 +54,7 @@ namespace DBConnection1.Data
                 ReleaseDate = new DateTime(1986, 03, 03)
             };
 
-            AppDataContext.Album.Add(album4);
+            Db.Album.Add(album4);
 
             var animalsasleaders = new Artist
             {
@@ -62,7 +62,7 @@ namespace DBConnection1.Data
                 ArtistImageUrl = "aal",
                 Name = "Animals as Leaders"
             };
-            AppDataContext.Artist.Add(animalsasleaders);
+            Db.Artist.Add(animalsasleaders);
 
             var riseagainst = new Artist
             {
@@ -70,7 +70,7 @@ namespace DBConnection1.Data
                 ArtistImageUrl = "RiseAgainst",
                 Name = "Rise Against"
             };
-            AppDataContext.Artist.Add(riseagainst);
+            Db.Artist.Add(riseagainst);
 
             var dieaerzte = new Artist
             {
@@ -78,7 +78,7 @@ namespace DBConnection1.Data
                 ArtistImageUrl = "DieAerzte",
                 Name = "Die Ärzte"
             };
-            AppDataContext.Artist.Add(dieaerzte);
+            Db.Artist.Add(dieaerzte);
 
             var metallica = new Artist
             {
@@ -86,7 +86,7 @@ namespace DBConnection1.Data
                 ArtistImageUrl = "Metallica",
                 Name = "Metallica"
             };
-            AppDataContext.Artist.Add(metallica);
+            Db.Artist.Add(metallica);
 
             var song1 = new Song
             {
@@ -96,7 +96,7 @@ namespace DBConnection1.Data
                 LinkYT = "0jpOBd949O4",
                 Name = "Physical Education"
             };
-            AppDataContext.Song.Add(song1);
+            Db.Song.Add(song1);
 
             var song2 = new Song
             {
@@ -106,7 +106,7 @@ namespace DBConnection1.Data
                 LinkYT = "lbA3jxab4A0",
                 Name = "Kascade"
             };
-            AppDataContext.Song.Add(song2);
+            Db.Song.Add(song2);
 
             var song3 = new Song
             {
@@ -117,7 +117,7 @@ namespace DBConnection1.Data
                 Name = "The Woven Web"
             };
 
-            AppDataContext.Song.Add(song3);
+            Db.Song.Add(song3);
 
             var song4 = new Song
             {
@@ -128,7 +128,7 @@ namespace DBConnection1.Data
                 Name = "Architects"
             };
 
-            AppDataContext.Song.Add(song4);
+            Db.Song.Add(song4);
 
             var song5 = new Song
             {
@@ -138,7 +138,7 @@ namespace DBConnection1.Data
                 LinkYT = "6nQCxwneUwA",
                 Name = "Satellite"
             };
-            AppDataContext.Song.Add(song5);
+            Db.Song.Add(song5);
 
             var song6 = new Song
             {
@@ -148,7 +148,7 @@ namespace DBConnection1.Data
                 LinkYT = "eT-QlZjVmgI",
                 Name = "Wait For Me"
             };
-            AppDataContext.Song.Add(song6);
+            Db.Song.Add(song6);
 
             var song7 = new Song
             {
@@ -158,7 +158,7 @@ namespace DBConnection1.Data
                 LinkYT = "gi4H5gQDuug",
                 Name = "Midnight Hands"
             };
-            AppDataContext.Song.Add(song7);
+            Db.Song.Add(song7);
 
             var song8 = new Song
             {
@@ -168,7 +168,7 @@ namespace DBConnection1.Data
                 LinkYT = "8gX2kDsaYg0",
                 Name = "Endgame"
             };
-            AppDataContext.Song.Add(song8);
+            Db.Song.Add(song8);
 
             var song10 = new Song
             {
@@ -178,7 +178,7 @@ namespace DBConnection1.Data
                 LinkYT = "qhj9yQ3QyRo",
                 Name = "Unrockbar"
             };
-            AppDataContext.Song.Add(song10);
+            Db.Song.Add(song10);
 
             var song11 = new Song
             {
@@ -188,7 +188,7 @@ namespace DBConnection1.Data
                 LinkYT = "kRrP-bZvD2s",
                 Name = "Deine Schuld"
             };
-            AppDataContext.Song.Add(song11);
+            Db.Song.Add(song11);
 
             var song12 = new Song
             {
@@ -198,7 +198,7 @@ namespace DBConnection1.Data
                 LinkYT = "8zXuhykupwU",
                 Name = "Geisterhaus"
             };
-            AppDataContext.Song.Add(song12);
+            Db.Song.Add(song12);
 
             var song13 = new Song
             {
@@ -208,7 +208,7 @@ namespace DBConnection1.Data
                 LinkYT = "hhMbgu8nYEQ",
                 Name = "Ruhig angehn"
             };
-            AppDataContext.Song.Add(song13);
+            Db.Song.Add(song13);
 
             var song14 = new Song
             {
@@ -218,7 +218,7 @@ namespace DBConnection1.Data
                 LinkYT = "uzlOcupu5UE",
                 Name = "Battery"
             };
-            AppDataContext.Song.Add(song14);
+            Db.Song.Add(song14);
 
             var song15 = new Song
             {
@@ -228,7 +228,7 @@ namespace DBConnection1.Data
                 LinkYT = "z7bUJPj_8v0",
                 Name = "Orion"
             };
-            AppDataContext.Song.Add(song15);
+            Db.Song.Add(song15);
 
             var person = new Person
             {
@@ -239,7 +239,7 @@ namespace DBConnection1.Data
                 Born = new DateTime(1989, 04, 27),
                 ImageUrl = "MattGarstka",
             };
-            AppDataContext.Person.Add(person);
+            Db.Person.Add(person);
 
             var person1 = new Person
             {
@@ -249,7 +249,7 @@ namespace DBConnection1.Data
                 LastName = "Reyes",
                 ImageUrl = "JavierReyes",
             };
-            AppDataContext.Person.Add(person1);
+            Db.Person.Add(person1);
 
             var person3 = new Person
             {
@@ -260,7 +260,7 @@ namespace DBConnection1.Data
                 Born = new DateTime(1983, 01, 07),
                 ImageUrl = "TosinAbasi",
             };
-            AppDataContext.Person.Add(person3);
+            Db.Person.Add(person3);
 
             var person4 = new Person
             {
@@ -271,7 +271,7 @@ namespace DBConnection1.Data
                 Born = new DateTime(1974, 12, 26),
                 ImageUrl = "ZachBlair",
             };
-            AppDataContext.Person.Add(person4);
+            Db.Person.Add(person4);
 
             var person5 = new Person
             {
@@ -282,7 +282,7 @@ namespace DBConnection1.Data
                 Born = new DateTime(1974, 12, 26),
                 ImageUrl = "BrandonBarnes",
             };
-            AppDataContext.Person.Add(person5);
+            Db.Person.Add(person5);
 
             var person6 = new Person
             {
@@ -293,7 +293,7 @@ namespace DBConnection1.Data
                 LastName = "Chasse",
                 ImageUrl = "Unknown",
             };
-            AppDataContext.Person.Add(person6);
+            Db.Person.Add(person6);
 
 
             var person8 = new Person
@@ -305,7 +305,7 @@ namespace DBConnection1.Data
                 ImageUrl = "RodGonzalez",
                 Born = new DateTime(1968, 05, 19)
             };
-            AppDataContext.Person.Add(person8);
+            Db.Person.Add(person8);
 
             var person9 = new Person
             {
@@ -316,7 +316,7 @@ namespace DBConnection1.Data
                 ImageUrl = "BelaB",
                 Born = new DateTime(1962, 12, 14)
             };
-            AppDataContext.Person.Add(person9);
+            Db.Person.Add(person9);
 
             var person10 = new Person
             {
@@ -327,7 +327,7 @@ namespace DBConnection1.Data
                 ImageUrl = "FarinUrlaub",
                 Born = new DateTime(1963, 10, 27)
             };
-            AppDataContext.Person.Add(person10);
+            Db.Person.Add(person10);
 
             var person11 = new Person
             {
@@ -340,7 +340,7 @@ namespace DBConnection1.Data
                 Born = new DateTime(1962, 02, 10),
                 Died = new DateTime(1968, 09, 27)
             };
-            AppDataContext.Person.Add(person11);
+            Db.Person.Add(person11);
 
             var person12 = new Person
             {
@@ -351,7 +351,7 @@ namespace DBConnection1.Data
                 ImageUrl = "KirkHammett",
                 Born = new DateTime(1962, 11, 18),
             };
-            AppDataContext.Person.Add(person12);
+            Db.Person.Add(person12);
 
             var person13 = new Person
             {
@@ -362,16 +362,16 @@ namespace DBConnection1.Data
                 ImageUrl = "LarsUlrich",
                 Born = new DateTime(1963, 12, 26),
             };
-            AppDataContext.Person.Add(person13);
+            Db.Person.Add(person13);
 
             var useradm = new User
             {
                 UserName = "adm",
                 Password = "adm123"
             };
-            AppDataContext.User.Add(useradm);
+            Db.User.Add(useradm);
 
-            AppDataContext.SaveChanges();
+            Db.SaveChanges();
         }
     }
 }

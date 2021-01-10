@@ -6,7 +6,7 @@ namespace DBConnection1.DataCRUD
     public class Create
     {
         [Inject]
-        public AppDataContext AppDatacontext { get; set; }
+        public AppDataContext Db { get; set; }
 
         //public Create(AppDataContext appDatacontext)
         //{

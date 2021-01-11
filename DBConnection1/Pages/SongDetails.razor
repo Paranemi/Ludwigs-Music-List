@@ -1,6 +1,4 @@
-﻿@page "/songdetails/{SongName}/{AlbumName}/{ArtistName}/{LinkYT}/{LinkSP}/{Cover}"
-@using DBConnection1.Data
-@using DBConnection1.Models
+﻿@page "/songdetails/{AlbumName}/{SongName}"
 @inherits SongDetailsBase
 
 <style>
@@ -16,7 +14,6 @@
 <div class="bg-img">
     <img src="./Images/@(Cover).jpg" alt="Alternate Text" />
 </div>
-    
 
 <div class="mlist-form">
     <h2>@SongName</h2>

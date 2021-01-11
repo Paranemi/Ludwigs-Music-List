@@ -1,5 +1,6 @@
 ﻿@inherits ValidationInputBase
 <div class="validation-container">
+
     <input class="validation-input form-control" @attributes="InputAttributes" @onchange="HandleInoutChanged" value="@Value">
 
     @if (string.IsNullOrEmpty(Value))

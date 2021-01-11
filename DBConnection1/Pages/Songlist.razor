@@ -8,12 +8,32 @@
              Data="@songlist"
              Reorderable="true"
              Sortable="true">
+ 
     <GridColumns>
-        <GridColumn Field="@nameof(Song.Name)"></GridColumn>
-        <GridColumn Field="@nameof(Song.AlbumId)"></GridColumn>
-        <GridColumn Field="@nameof(Song.Artist.Name)"></GridColumn>
-        <GridColumn Field="@nameof(Song.Artist.Name)"></GridColumn>
-        <GridColumn Field="@nameof(Song.LinkSptfy)"></GridColumn>
+        <GridColumn Field="@nameof(Song.Name)" Title="Song Name">
+            <Template>
+                @{
+                    var song = context as Song;
+                    <a href="/songdetails/@song.Album.Name/@song.Name">@song.Name</a>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Field="@nameof(Song.Album.Name)" Title="Album Name">
+            <Template>
+                @{
+                    var album = context as Song;
+                    <span>@album.Album.Name</span>
+                }
+            </Template>
+        </GridColumn>
+        <GridColumn Field="@nameof(Artist.Name)" Title="Artist Name">
+            <Template>
+                @{
+                    var artist = context as Song;
+                    <a href="/artistdetails/@artist.Artist.ArtistId">@artist.Artist.Name</a>
+                }
+            </Template>
+        </GridColumn>
     </GridColumns>
 </TelerikGrid>
 

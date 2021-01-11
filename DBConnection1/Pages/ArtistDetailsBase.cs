@@ -29,13 +29,14 @@ namespace DBConnection1.Pages
 
 
         [Inject]
-        public AppDataContext AppDataContext { get; set; }
+        public AppDataContext Db { get; set; }
         protected List<Artist> artist;
         protected List<Person> persons;
 
         protected override void OnInitialized()
         {
-            artist = AppDataContext.Artist.Where(b => b.Name.Contains(ArtistName)).ToList();
+            artist = Db.Artist.Where(b => b.Name.Contains(ArtistName)).ToList();
+
             SetElements();
         }
         

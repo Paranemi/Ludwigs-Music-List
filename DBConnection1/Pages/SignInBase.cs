@@ -10,7 +10,14 @@ namespace DBConnection1.Pages
 
         [Required(ErrorMessage = "user name is required")]
         protected string Username { get; set; }
+        //[Required(ErrorMessage = "password is required")]
         protected string Password{ get; set; }
+        protected string Hallo { get; set; }
+
+        protected void Test()
+        {
+            Hallo = Username + Password+"hihi";
+        }
         protected void UserNameChange(ChangeEventArgs eventArgs)
         {
             Username = eventArgs.Value.ToString();
@@ -19,6 +26,10 @@ namespace DBConnection1.Pages
         protected void UserNameValueChanged(string Value)
         {
             Username = Value;
+        }
+        protected void PasswordValueChanged(string Value)
+        {
+            Password = Value;
         }
 
     }

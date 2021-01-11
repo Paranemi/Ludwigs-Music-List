@@ -1,59 +1,19 @@
 ﻿@page "/signup"
 @using DBConnection1.Models
 @using DBConnection1.Data
+@using DBConnection1.Controls
+@inherits SignUpBase
 
 <div class="sign-form">
     <p class="welcome-text">Create a new account</p>
-    <input type="text" class="sign-input form-control" placeholder="Username" @bind="NewUser" />
-    <input type="password" class="sign-input form-control" placeholder="Password" @bind="Password"/>
-    <input type="password" class="sign-input form-control" placeholder="Confirm Password" @bind="Confirm" />
+
+    <ValidationInput placeholder="Username" ValueChangedCallback="UserNameValueChanged" Value="@NewUser"></ValidationInput>
+    <ValidationInput placeholder="Password" ValueChangedCallback="PasswordValueChanged" type="password" Value="@Password"></ValidationInput>
+    <ValidationInput placeholder="Confirm Password" ValueChangedCallback="ConfirmValueChanged" type="password" Value="@Confirm"></ValidationInput>
 
     <button class="sign-button" type="submit" @onclick="CreateNewUser">Confirm</button>
 
-    <p style="color:whitesmoke" >@msg</p>
+    <p style="color:whitesmoke" >@Test</p>
 
    
 </div>
-
-@code {
-            private string NewUser { get; set; }
-            private string Password { get; set; }
-            private string Confirm { get; set; }
-            private string msg { get; set; }
-
-            [Inject]
-            public AppDataContext Db { get; set; }
-
-            public void CreateNewUser()
-            {
-                if (Check())
-                {
-                    var user = new User
-                    {
-                        UserName = NewUser,
-                        Password = this.Password
-                };
-                Db.User.Add(user);
-
-                Db.SaveChanges();
-                msg = "user wurde angelegt";
-            }
-        else
-        {
-            msg = "user wurde nicht angelegt";
-        }
-    }
-
-    public bool Check()
-    {
-        if (Password == Confirm)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-}

@@ -1,0 +1,29 @@
+﻿@inherits SongListDataInputBase
+
+<TelerikWindow Class="PopUpWindow"
+               Width="1000x"
+               Height="500px"
+               Top="20%"
+               Left="45%"
+               Visible="true">
+    <WindowTitle>
+        <strong>add new song</strong>
+    </WindowTitle>
+    <WindowActions>
+        <WindowAction Name="Minimize"></WindowAction>
+        <WindowAction Name="Maximize"></WindowAction>
+        <WindowAction Name="Close"></WindowAction>
+    </WindowActions>
+    <WindowContent>
+        <div class="sign-form">
+            <ValidationInput placeholder="Song Name" ValueChangedCallback="SongNameValueChanged" Value="@SongName"></ValidationInput>
+            <ValidationInput placeholder="Album Name" ValueChangedCallback="AlbumNameValueChanged" Value="@AlbumName"></ValidationInput>
+            <ValidationInput type="file" placeholder="Album Image" ValueChangedCallback="CoverValueChanged" Value="@Cover"></ValidationInput>
+            <ValidationInput placeholder="YYYY.MM.DD (Release Date)" ValueChangedCallback="ReleaseDateValueChanged" Value="@ReleaseDate"></ValidationInput>
+            <ValidationInput placeholder="Artist Name" ValueChangedCallback="ArtistNameValueChanged" Value="@ArtistName"></ValidationInput>
+            <ValidationInput placeholder="Youtube Link" ValueChangedCallback="LinkYTValueChanged" Value="@LinkYT"></ValidationInput>
+            <ValidationInput placeholder="Spotify Link" ValueChangedCallback="LinkSPValueChanged" Value="@LinkSP"></ValidationInput>
+            <button class="sign-button" type="submit" @onclick="AddSong">Confirm</button>
+        </div>
+    </WindowContent>
+</TelerikWindow>

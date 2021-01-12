@@ -3,20 +3,29 @@ using DBConnection1.Models;
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Linq;
-
+using Telerik.Blazor.Components;
 
 namespace DBConnection1.Pages
 {
     public class SonglistBase : ComponentBase
     {
         [Inject]
-        public AppDataContext AppDataContext { get; set; }
+        public AppDataContext Db { get; set; }
         protected List<Song> songlist;
+        public string test { get; set; }
 
         protected override void OnInitialized()
         {
-            songlist = AppDataContext.Song.ToList();
+            songlist = Db.Song.ToList();
         }
+
+        protected void CreateHandler(GridCommandEventArgs args)
+        {
+            var argsItem = (Song)args.Item;
+            Db.Song.Add(argsItem);
+            Db.SaveChanges();
+        }
+
     }
 }
 

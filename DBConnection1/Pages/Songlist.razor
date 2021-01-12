@@ -2,15 +2,22 @@
 @using DBConnection1.Data
 @using Telerik.Blazor.Components
 @using DBConnection1.Models
+@using DBConnection1.Controls
 @inherits SonglistBase
 
-<TelerikGrid Resizable="true"
+<TelerikGrid OnCreate="@CreateHandler"
+             Resizable="true"
              Data="@songlist"
              Reorderable="true"
-             Sortable="true">
- 
+             Sortable="true"
+             SortMode="@SortMode.Multiple"
+             EditMode="@GridEditMode.Popup">
+
+    <GridToolBar>
+        <GridCommandButton Command="Add" Icon="add">New Song</GridCommandButton>
+    </GridToolBar>
     <GridColumns>
-        <GridColumn Field="@nameof(Song.Name)" Title="Song Name">
+        <GridColumn Field="@nameof(Song.Name)" Title="Song Name" Editable="true">
             <Template>
                 @{
                     var song = context as Song;
@@ -26,34 +33,15 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Field="@nameof(Artist.Name)" Title="Artist Name">
+        <GridColumn Field="@nameof(Song.Artist.Name)" Title="Artist Name">
             <Template>
                 @{
                     var artist = context as Song;
-                    <a href="/artistdetails/@artist.Artist.ArtistId">@artist.Artist.Name</a>
+                    <a href="/artistdetails/@artist.Artist.Name">@artist.Artist.Name</a>
                 }
             </Template>
         </GridColumn>
     </GridColumns>
 </TelerikGrid>
 
-<table class="welcome-text">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Album</th>
-            <th>Artist</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var song in songlist)
-        {
-            <tr>
-                <td><a href="/songdetails/@song.Name/@song.Album.Name/@song.Artist.Name/@song.LinkYT/@song.LinkSptfy/@song.Album.ImageUrl">
-                    @song.Name</a></td>
-                <td>@song.Album.Name</td>
-                <td><a href="/artistdetails/@song.Artist.Name">@song.Artist.Name</a></td>
-            </tr>
-        }
-    </tbody>
-</table>
+<SongListDataInput></SongListDataInput>

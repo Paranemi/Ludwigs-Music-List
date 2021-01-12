@@ -4,23 +4,42 @@
 @inherits ArtistDetailsBase
 
 <div class="alist-form">
-    <img src="./Images/@(ArtistImageUrl).jpg" alt="Alternate Text" />
-    <p>@ArtistName was founded in @Founded.</p>
+    <img src="./Images/@(string.IsNullOrEmpty(ArtistImageUrl) ? "ArtistUnknown" : ArtistImageUrl).jpg"/>
+    @if (Founded==0)
+    {
+        <p><strong>@ArtistName</strong></p>
+    }
+    else
+    {
+        <p><strong style="font-size:large">@ArtistName</strong> was founded in @(Founded).</p>
+    }
+
     <br />
     <h6>Members:</h6>
- 
-    @foreach (var item in persons)
+
+    @if (persons.Count==0)
     {
-        <img src="./Images/@(PersonImageUrl=item.ImageUrl).jpg" alt="Alternate Text" />
-        if (item.To == 0)
-        {
-            <p>@(FirstName = item.FirstName) @(LastName = item.LastName) since @(From = item.From).</p>
-        }
-        else
-        {
-            <p>@(FirstName = item.FirstName) @(LastName = item.LastName) from @(From = item.From) to @(To = item.To).</p>
-        }
-        
+        <img src="./Images/Unknown.jpg"/>
     }
+    else
+    {
+        foreach (var item in persons)
+        {
+            <img src="./Images/@(PersonImageUrl=item.ImageUrl).jpg"/>
+            if (item.To == 0)
+            {
+                <p>@(FirstName = item.FirstName) @(LastName = item.LastName) since @(From = item.From).</p>
+            }
+            else
+            {
+                <p>@(FirstName = item.FirstName) @(LastName = item.LastName) from @(From = item.From) to @(To = item.To).</p>
+            }
+        }
+    }
+
+<div style="width:200px">
+    <button class="sign-button">Add Artist Information</button>
+</div>
     
+
 </div>

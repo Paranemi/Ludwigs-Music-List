@@ -6,16 +6,16 @@ namespace DBConnection1.Pages
 {
     public class SignUpBase : ComponentBase
     {
-        public string NewUser { get; set; }
-        public string Password { get; set; }
-        public string Confirm { get; set; }
-        public string Test { get; set; }
-        public string Output { get; set; }
+        protected string NewUser { get; set; }
+        protected string Password { get; set; }
+        protected string Confirm { get; set; }
+        protected string Test { get; set; }
+        protected string Output { get; set; }
 
         [Inject]
-        public AppDataContext Db { get; set; }
+        protected AppDataContext Db { get; set; }
 
-        public void CreateNewUser()
+        protected void CreateNewUser()
         {
             Output = NewUser + Password + Confirm + Test;
             if (Check())
@@ -23,7 +23,7 @@ namespace DBConnection1.Pages
                 var user = new User
                 {
                     UserName = NewUser,
-                    Password = this.Password
+                    Password = Password
                 };
                 Db.User.Add(user);
 
@@ -36,7 +36,7 @@ namespace DBConnection1.Pages
             }
         }
 
-        public bool Check()
+        protected bool Check()
         {
             if (Password == Confirm)
             {

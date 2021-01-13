@@ -5,3 +5,5 @@ sort data grid album / artist
 signin / signup page
 home seite
 ladekringel für songlist
+drop down song list song hinzufügen für genre
+spalte für genre

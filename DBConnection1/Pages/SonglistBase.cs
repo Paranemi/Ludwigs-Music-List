@@ -13,7 +13,6 @@ namespace DBConnection1.Pages
         [Inject]
         public AppDataContext Db { get; set; }
         protected List<Song> songlist;
-        public string test { get; set; }
 
         protected override void OnInitialized()
         {

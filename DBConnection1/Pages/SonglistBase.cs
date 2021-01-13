@@ -9,6 +9,7 @@ namespace DBConnection1.Pages
 {
     public class SonglistBase : ComponentBase
     {
+        protected bool SongListInput { get; set; } = false;
         [Inject]
         public AppDataContext Db { get; set; }
         protected List<Song> songlist;
@@ -25,6 +26,7 @@ namespace DBConnection1.Pages
             Db.Song.Add(argsItem);
             Db.SaveChanges();
         }
+
 
     }
 }

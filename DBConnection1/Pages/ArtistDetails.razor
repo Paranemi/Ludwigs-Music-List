@@ -1,11 +1,12 @@
 ﻿@page "/artistdetails/{ArtistName}"
 @using DBConnection1.Data
 @using DBConnection1.Models
+@using DBConnection1.Controls
 @inherits ArtistDetailsBase
 
 <div class="alist-form">
-    <img src="./Images/@(string.IsNullOrEmpty(ArtistImageUrl) ? "ArtistUnknown" : ArtistImageUrl).jpg"/>
-    @if (Founded==0)
+    <img src="./Images/@(string.IsNullOrEmpty(ArtistImageUrl) ? "ArtistUnknown" : ArtistImageUrl).jpg" />
+    @if (Founded == 0)
     {
         <p><strong>@ArtistName</strong></p>
     }
@@ -14,18 +15,32 @@
         <p><strong style="font-size:large">@ArtistName</strong> was founded in @(Founded).</p>
     }
 
+    @if (string.IsNullOrEmpty(ArtistImageUrl))
+    {
+
+        <ArtistDataInput ArtistName="@ArtistName"></ArtistDataInput>
+
+    }
+
     <br />
     <h6>Members:</h6>
 
-    @if (persons.Count==0)
+    @if (persons.Count == 0)
     {
-        <img src="./Images/Unknown.jpg"/>
+        <img src="./Images/Unknown.jpg" />
+
+
+
+        if (PersonInput)
+        {
+            PersonInput = false;
+        }
     }
     else
     {
         foreach (var item in persons)
         {
-            <img src="./Images/@(PersonImageUrl=item.ImageUrl).jpg"/>
+            <img src="./Images/@(PersonImageUrl=item.ImageUrl).jpg" />
             if (item.To == 0)
             {
                 <p>@(FirstName = item.FirstName) @(LastName = item.LastName) since @(From = item.From).</p>
@@ -36,10 +51,4 @@
             }
         }
     }
-
-<div style="width:200px">
-    <button class="sign-button">Add Artist Information</button>
-</div>
-    
-
 </div>

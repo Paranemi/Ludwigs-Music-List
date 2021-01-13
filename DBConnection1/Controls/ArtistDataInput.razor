@@ -1,0 +1,27 @@
+﻿@inherits ArtistDataInputBase
+
+<TelerikWindow Class="PopUpWindow"
+               Width="1000x"
+               Height="500px"
+               Top="20%"
+               Left="45%"
+               Visible="@Visible">
+    <WindowTitle>
+        <strong>@ArtistName</strong>
+    </WindowTitle>
+    <WindowActions>
+        <WindowAction Name="Maximize"></WindowAction>
+        <WindowAction @onclick="HideWindow" Name="Close"></WindowAction>
+    </WindowActions>
+    <WindowContent>
+        <div class="sign-form">
+            <ValidationInput placeholder="Album Image" ValueChangedCallback="CoverValueChanged" Value="@Cover"></ValidationInput>
+            <ValidationInput placeholder="YYYY (Founded)" ValueChangedCallback="ReleaseDateValueChanged" Value="@Founded"></ValidationInput>
+            <button class="sign-button" type="submit" @onclick="AddArtist">Confirm</button>
+        </div>
+    </WindowContent>
+</TelerikWindow>
+
+<div style="width:200px">
+    <button @onclick="(() => Visible = true)" class="sign-button">Add Artist Details</button>
+</div>

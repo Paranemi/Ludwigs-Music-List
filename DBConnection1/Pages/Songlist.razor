@@ -5,17 +5,12 @@
 @using DBConnection1.Controls
 @inherits SonglistBase
 
-<TelerikGrid OnCreate="@CreateHandler"
-             Resizable="true"
+<TelerikGrid Resizable="true"
              Data="@songlist"
              Reorderable="true"
              Sortable="true"
              SortMode="@SortMode.Multiple"
-             EditMode="@GridEditMode.Popup">
-
-    <GridToolBar>
-        <GridCommandButton Command="Add" Icon="add">New Song</GridCommandButton>
-    </GridToolBar>
+             FilterMode="Telerik.Blazor.GridFilterMode.FilterMenu">
     <GridColumns>
         <GridColumn Field="@nameof(Song.Name)" Title="Song Name" Editable="true">
             <Template>
@@ -25,7 +20,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Field="@nameof(Song.Album.Name)" Title="Album Name">
+        <GridColumn Field="" Title="Album Name">
             <Template>
                 @{
                     var album = context as Song;
@@ -33,7 +28,7 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn Field="@nameof(Song.Artist.Name)" Title="Artist Name">
+        <GridColumn Field="" Title="Artist Name">
             <Template>
                 @{
                     var artist = context as Song;
@@ -45,3 +40,5 @@
 </TelerikGrid>
 
 <SongListDataInput></SongListDataInput>
+
+

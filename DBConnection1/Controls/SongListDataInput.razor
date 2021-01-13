@@ -5,14 +5,13 @@
                Height="500px"
                Top="20%"
                Left="45%"
-               Visible="true">
+               Visible="@Visible">
     <WindowTitle>
-        <strong>add new song</strong>
+        <strong>New Song</strong>
     </WindowTitle>
     <WindowActions>
-        <WindowAction Name="Minimize"></WindowAction>
         <WindowAction Name="Maximize"></WindowAction>
-        <WindowAction Name="Close"></WindowAction>
+        <WindowAction Name="Close" OnClick="HideWindow"></WindowAction>
     </WindowActions>
     <WindowContent>
         <div class="sign-form">
@@ -27,3 +26,7 @@
         </div>
     </WindowContent>
 </TelerikWindow>
+
+<div style="width:200px">
+    <button @onclick="(() => Visible = true)" class="sign-button">Add New Song</button>
+</div>

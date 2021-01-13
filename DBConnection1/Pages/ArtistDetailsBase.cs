@@ -25,6 +25,8 @@ namespace DBConnection1.Pages
         public int From { get; set; }
         [Parameter] 
         public int To { get; set; }
+        protected bool ArtistInput { get; set; } = false;
+        protected bool PersonInput { get; set; } = false;
 
 
 

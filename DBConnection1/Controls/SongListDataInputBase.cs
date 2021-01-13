@@ -21,6 +21,14 @@ namespace DBConnection1.Controls
         [Inject]
         public AppDataContext Db { get; set; }
 
+        [Parameter]
+        public bool Visible { get; set; } = false;
+
+        public void HideWindow()
+        {
+            Visible = false;
+        }
+
         public void AddSong()
         {
             var album = new Album

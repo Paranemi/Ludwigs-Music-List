@@ -5,7 +5,7 @@
 @inherits ArtistDetailsBase
 
 <div class="alist-form">
-    <img src="./Images/@(string.IsNullOrEmpty(ArtistImageUrl) ? "ArtistUnknown" : ArtistImageUrl).jpg" />
+    <img class="artist-img" src="./Images/@(string.IsNullOrEmpty(ArtistImageUrl) ? "ArtistUnknown" : ArtistImageUrl).jpg" />
     @if (Founded == 0)
     {
         <p><strong>@ArtistName</strong></p>

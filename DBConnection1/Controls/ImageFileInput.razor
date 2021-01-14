@@ -1,0 +1,36 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="validation-container">
+
+    <TelerikUpload SaveUrl="@SaveUrl" RemoveUrl="@RemoveUrl"
+                    SaveField="file" RemoveField="fileToRemove"
+                    AllowedExtensions="@( new List<string>() { ".jpg"} )">
+    </TelerikUpload>
+
+    @if (string.IsNullOrEmpty(Value))
+    {
+        <div class="val-tooltip">
+            <p><strong>!</strong></p>
+            <span class="val-tooltiptext">@Value</span>
+        </div>
+    }
+
+</div>
+
+
+
+
+        @code {
+            [Parameter]
+            public string Value { get; set; }
+
+            // One way to define relative paths is to put the desired URL here.
+            // This can be a full URL such as https://mydomain/myendpoint/save
+            public string SaveUrl => ToAbsoluteUrl("api/upload/save");
+            public string RemoveUrl => ToAbsoluteUrl("api/upload/remove");
+
+            public string ToAbsoluteUrl(string url)
+            {
+                return $"{NavigationManager.BaseUri}{url}";
+            }
+        }

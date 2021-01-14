@@ -26,8 +26,11 @@ namespace DBConnection1.Controls
             Visible = false;
         }
 
+
+        //exception und rückmeldung dass erfolgreich!!
         public void AddArtist()
         {
+            Visible = false;
             var artist = Db.Artist.FirstOrDefault(item => item.Name == ArtistName);
 
             artist.ArtistImageUrl = Cover;

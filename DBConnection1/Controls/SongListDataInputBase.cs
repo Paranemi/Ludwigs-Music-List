@@ -31,6 +31,7 @@ namespace DBConnection1.Controls
 
         public void AddSong()
         {
+            Visible = false;
             var album = new Album
             {
                 Name = AlbumName,

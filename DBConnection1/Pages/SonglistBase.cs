@@ -19,14 +19,6 @@ namespace DBConnection1.Pages
             songlist = Db.Song.ToList();
         }
 
-        protected void CreateHandler(GridCommandEventArgs args)
-        {
-            var argsItem = (Song)args.Item;
-            Db.Song.Add(argsItem);
-            Db.SaveChanges();
-        }
-
-
     }
 }
 

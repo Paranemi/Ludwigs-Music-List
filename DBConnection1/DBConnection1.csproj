@@ -5,6 +5,7 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <PackageReference Include="BlazorInputFile" Version="0.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.1">
       <PrivateAssets>all</PrivateAssets>
@@ -24,6 +25,10 @@
     <None Include="wwwroot\Images\endgame.jpg" />
     <None Include="wwwroot\Images\grsch.jpg" />
     <None Include="wwwroot\Images\jom.jpg" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Uploads\" />
   </ItemGroup>
 
 </Project>

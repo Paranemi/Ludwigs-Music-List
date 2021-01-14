@@ -15,7 +15,7 @@
     </WindowActions>
     <WindowContent>
         <div class="sign-form">
-            <ValidationInput placeholder="Album Image" ValueChangedCallback="CoverValueChanged" Value="@Cover"></ValidationInput>
+            <ImageFileInput></ImageFileInput>
             <ValidationInput placeholder="YYYY (Founded)" ValueChangedCallback="ReleaseDateValueChanged" Value="@Founded"></ValidationInput>
             <button class="sign-button" type="submit" @onclick="AddArtist">Confirm</button>
         </div>

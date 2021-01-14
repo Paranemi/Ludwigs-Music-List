@@ -93,6 +93,10 @@ html, body {
     margin: auto;
 }
 
+.artist-img{
+    width:800px;
+    height:600px;
+}
 
 .sign-form {
     width: 100%;

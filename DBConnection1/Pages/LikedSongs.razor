@@ -1,38 +1,47 @@
-﻿@page "/songlist"
+﻿@*@page "/likedsongs/{ActiveUser}"*@
+@page "/likedsongs"
 @using DBConnection1.Data
 @using Telerik.Blazor.Components
 @using DBConnection1.Models
 @using DBConnection1.Controls
-@inherits SonglistBase
+@inherits LikedSongsBase
+
+<h3 class="welcome-text">Here are your favorite songs @ActiveUser</h3>
 
 <TelerikGrid Resizable="true"
-             Data="@songlist"
+             Data="@usersongs"
              Reorderable="true"
              Sortable="true"
              SortMode="@SortMode.Multiple"
              FilterMode="Telerik.Blazor.GridFilterMode.FilterMenu">
     <GridColumns>
-        <GridColumn Field="@nameof(Song.Name)" Title="Song Name" Editable="true">
+        <GridColumn Field="" Title="Song Name">
             <Template>
                 @{
-                    var song = context as Song;
-                    <a href="/songdetails/@song.Album.Name/@song.Name">@song.Name</a>
+                    foreach (var song in usersongs)
+                    {
+                        <a href="/songdetails/@song.Songs.Album.Name/@song.Songs.Name">@song.Songs.Name</a>
+                    }
                 }
             </Template>
         </GridColumn>
         <GridColumn Field="" Title="Album Name">
             <Template>
                 @{
-                    var album = context as Song;
-                    <span>@album.Album.Name</span>
+                    foreach (var album in usersongs)
+                    {
+                        <span>@album.Songs.Album.Name</span>
+                    }
                 }
             </Template>
         </GridColumn>
         <GridColumn Field="" Title="Artist Name">
             <Template>
                 @{
-                    var artist = context as Song;
-                    <a href="/artistdetails/@artist.Artist.Name">@artist.Artist.Name</a>
+                    foreach (var artist in usersongs)
+                    {
+                        <a href="/artistdetails/@artist.Songs.Artist.Name">@artist.Songs.Artist.Name</a>
+                    }
                 }
             </Template>
         </GridColumn>
@@ -40,7 +49,3 @@
         </GridCheckboxColumn>
     </GridColumns>
 </TelerikGrid>
-
-<SongListDataInput></SongListDataInput>
-
-

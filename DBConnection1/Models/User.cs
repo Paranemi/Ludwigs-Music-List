@@ -19,6 +19,10 @@ namespace DBConnection1.Models
         [MaxLength(40)]
         public string Password { get; set; }
 
+        [Required]
+        [MaxLength(40)]
+        public string SecurityAnswer { get; set; }
+
         public virtual ICollection<LikedSong> LikedSongs { get; set; }
         public virtual ICollection<LikedAlbum> LikedAlbums { get; set; }
     }

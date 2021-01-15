@@ -1,0 +1,42 @@
+﻿@using DBConnection1.Models
+@using DBConnection1.Data
+
+<button class="sign-button" type="submit" @onclick="Test">Sign in</button>
+
+<p style="color:white">@Hallo</p>
+
+@code {
+    [Parameter]
+    public string Username { get; set; }
+    [Parameter]
+    public string Password { get; set; }
+    [Parameter]
+    public string Hallo { get; set; }
+
+    [Inject]
+    public AppDataContext Db { get; set; }
+
+    protected void Test()
+    {
+        var user = Db.User.Where(b => b.UserName.Contains(Username)).ToList();
+        var pw = Db.User.Where(b => b.Password.Contains(Password)).ToList();
+        if (user.Count > 0)
+        {
+            Hallo = "User Existiert";
+            if (pw.Count > 0)
+            {
+                Hallo = "User Existiert und PW ist richtig";
+
+            }
+            else
+            {
+                Hallo = "User Existiert aber PW ist falsch";
+            }
+        }
+        else
+        {
+            Hallo = "User Existiert nicht";
+        }
+
+    }
+}

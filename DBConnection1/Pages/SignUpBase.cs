@@ -9,6 +9,7 @@ namespace DBConnection1.Pages
         protected string NewUser { get; set; }
         protected string Password { get; set; }
         protected string Confirm { get; set; }
+        protected string SecurityAnswer { get; set; }
         protected string Test { get; set; }
         protected string Output { get; set; }
 
@@ -23,7 +24,8 @@ namespace DBConnection1.Pages
                 var user = new User
                 {
                     UserName = NewUser,
-                    Password = Password
+                    Password = Password,
+                    SecurityAnswer = SecurityAnswer      
                 };
                 Db.User.Add(user);
 
@@ -59,6 +61,10 @@ namespace DBConnection1.Pages
         protected void ConfirmValueChanged(string Value)
         {
             Confirm = Value;
+        }
+        protected void SecurityAnswerValueChanged(string Value)
+        {
+            SecurityAnswer = Value;
         }
     }
 }

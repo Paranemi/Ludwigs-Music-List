@@ -26,9 +26,5 @@
     <None Include="wwwroot\Images\grsch.jpg" />
     <None Include="wwwroot\Images\jom.jpg" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Uploads\" />
-  </ItemGroup>
 
 </Project>

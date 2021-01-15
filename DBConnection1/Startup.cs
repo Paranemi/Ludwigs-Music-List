@@ -26,6 +26,7 @@ namespace DBConnection1
             services.AddServerSideBlazor();
             services.AddTelerikBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddScoped<GlobalVariables>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

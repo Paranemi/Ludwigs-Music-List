@@ -2,9 +2,11 @@
 
 <div class="validation-container">
 
-    <TelerikUpload SaveUrl="@SaveUrl" RemoveUrl="@RemoveUrl"
-                    SaveField="file" RemoveField="fileToRemove"
+    <TelerikUpload  SaveUrl="@SaveUrl"
+                    SaveField="file" 
+                    RemoveField="fileToRemove"
                     AllowedExtensions="@( new List<string>() { ".jpg"} )">
+        
     </TelerikUpload>
 
     @if (string.IsNullOrEmpty(Value))
@@ -20,17 +22,18 @@
 
 
 
-        @code {
-            [Parameter]
-            public string Value { get; set; }
+@code {
+    [Parameter]
+    public string Value { get; set; }
 
-            // One way to define relative paths is to put the desired URL here.
-            // This can be a full URL such as https://mydomain/myendpoint/save
-            public string SaveUrl => ToAbsoluteUrl("api/upload/save");
-            public string RemoveUrl => ToAbsoluteUrl("api/upload/remove");
+    // One way to define relative paths is to put the desired URL here.
+    // This can be a full URL such as https://mydomain/myendpoint/save
+    public string SaveUrl => ToAbsoluteUrl("api/upload/save");
+    public string RemoveUrl => ToAbsoluteUrl("api/upload/remove");
 
-            public string ToAbsoluteUrl(string url)
-            {
-                return $"{NavigationManager.BaseUri}{url}";
-            }
-        }
+    public string ToAbsoluteUrl(string url)
+    {
+        return $"{NavigationManager.BaseUri}{url}";
+    }
+
+}

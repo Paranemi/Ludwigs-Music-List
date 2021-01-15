@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using DBConnection1.Controls;
 
 namespace DBConnection1.Controllers
 {

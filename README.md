@@ -7,3 +7,6 @@ home seite
 ladekringel für songlist
 drop down song list song hinzufügen für genre
 spalte für genre
+Interface für appdata
+schichten
+backend frontend

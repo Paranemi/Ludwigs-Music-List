@@ -32,17 +32,17 @@ namespace DBConnection1.Pages
                 if(pw.Count > 0)
                 {
                     Hallo = "User Existiert und PW ist richtig";
-                    
+                    GlobalVariables.ActiveUser = Username.ToString();
                 }
                 else
                 {
                     Hallo = "User Existiert aber PW ist falsch";
-                    GlobalVariables = Username;
                 }
             }
             else{
                 Hallo = "User Existiert nicht";
             }
+            GlobalVariables.ActiveUser = "Ludwig";
 
         }
         protected void UserNameChange(ChangeEventArgs eventArgs)

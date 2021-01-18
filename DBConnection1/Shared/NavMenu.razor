@@ -23,6 +23,12 @@
             </NavLink>
         </li>
         <li class="nav-item px-3">
+            <button onclick="unsetUser">
+                <p>@GlobalVariables.ActiveUser</p>
+                <span class="oi oi-account-logout" aria-hidden="true"></span> Sign Out
+            </button> 
+        </li>
+        <li class="nav-item px-3">
             <NavLink class="nav-link" href="/signin" Match="NavLinkMatch.All">
                 <span class="oi oi-account-login" aria-hidden="true"></span> Log In
             </NavLink>
@@ -73,12 +79,18 @@
 
 
 @code {
-    [Parameter]
-    public string ActiveUser { get; set; } = "te4";
+    [Inject]
+    public GlobalVariables GlobalVariables { get; set; }
 
     bool collapseNavMenu = true;
 
     string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+
+    private void unsetUser()
+    {
+        GlobalVariables.ActiveUser = null;
+    }
 
     void ToggleNavMenu()
     {

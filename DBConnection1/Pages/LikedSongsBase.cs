@@ -10,18 +10,20 @@ namespace DBConnection1.Pages
 {
     public class LikedSongsBase : ComponentBase
     {
-        public bool isSelected { get; set; } = true;
-        [Parameter]
-        public string ActiveUser { get; set; } = "Ludwig";
         public Guid UserId { get; set; }
         [Inject]
         protected AppDataContext Db { get; set; }
+        [Inject]
+        protected GlobalVariables GlobalVariables { get; set; }
         protected List<LikedSong> usersongs;
-        protected List<Song> songlist;
         protected List<User> usr;
+
+        [Parameter]
+        public string ActiveUser { get; set; }
 
         protected override void OnInitialized()
         {
+            ActiveUser = GlobalVariables.ActiveUser.ToString();
             usr = Db.User.Where(e => e.UserName.Contains(ActiveUser)).ToList();
             foreach(var userdetails in usr)
             {
@@ -29,8 +31,6 @@ namespace DBConnection1.Pages
             }
             usersongs = Db.LikedSong.Where(a => a.UserId == UserId).ToList();
 
-
-            int bla;
         }
 
     

@@ -7,6 +7,6 @@ namespace DBConnection1
 {
     public class GlobalVariables
     {
-        public string ActiveUser { get; set; } = "Test";
+        public string ActiveUser { get; set; }
     }
 }

@@ -21,6 +21,8 @@ namespace DBConnection1.Pages
         public AppDataContext Db { get; set; }
         [Inject]
         public GlobalVariables GlobalVariables { get; set; }
+        [Inject]
+        public NavigationManager UriHelper { get; set; }
 
         protected void Test()
         {
@@ -28,22 +30,22 @@ namespace DBConnection1.Pages
             var pw = Db.User.Where(b => b.Password.Contains(Password)).ToList();
             if (user.Count > 0)
             {
-                Hallo = "User Existiert";
-                if(pw.Count > 0)
+                Hallo = "User existiert";
+                if (pw.Count > 0)
                 {
-                    Hallo = "User Existiert und PW ist richtig";
-                    GlobalVariables.ActiveUser = Username.ToString();
+                    Hallo = "User existiert und PW ist richtig";
+                    GlobalVariables.ActiveUser = Username;
+                    UriHelper.NavigateTo("/", true);
                 }
                 else
                 {
-                    Hallo = "User Existiert aber PW ist falsch";
+                    Hallo = "User existiert aber PW ist falsch";
                 }
             }
-            else{
-                Hallo = "User Existiert nicht";
+            else
+            {
+                Hallo = "User existiert nicht";
             }
-            GlobalVariables.ActiveUser = "Ludwig";
-
         }
         protected void UserNameChange(ChangeEventArgs eventArgs)
         {

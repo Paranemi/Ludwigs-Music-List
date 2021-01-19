@@ -12,7 +12,7 @@ namespace DBConnection1.Models
         public Guid UserId { get; set; }
 
         [Required]
-        [MaxLength(25)]
+        [MaxLength(15)]
         public string UserName { get; set; }
 
         [Required]

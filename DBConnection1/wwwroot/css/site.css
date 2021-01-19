@@ -259,6 +259,37 @@ a, .btn-link {
             .sidebar .nav-item a:hover {
                 background-color: #ffb123;
                 color: whitesmoke;
+                font-weight: bold;
+            }
+
+        .sidebar .nav-item button {
+            color: whitesmoke;
+            background-color: orange;
+            border-radius: 4px;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            line-height: 3rem;
+            border: none;
+            outline: none;
+        }
+
+            .sidebar .nav-item button.active {
+                color: whitesmoke;
+                background-color: #ffb123;
+                box-shadow: 0 5px #666;
+                transform: translateY(1px);
+                border: none;
+                outline: none;
+            }
+
+            .sidebar .nav-item button:hover {
+                background-color: #ffb123;
+                color: whitesmoke;
+                font-weight: bold;
+                transform: scale(1.05);
+                border: none;
+                outline: none;
             }
 
 .content {
@@ -320,7 +351,7 @@ a, .btn-link {
     }
 
     .sidebar {
-        width: 250px;
+        width: 270px;
         height: 100vh;
         position: sticky;
         top: 0;

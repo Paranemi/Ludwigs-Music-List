@@ -23,7 +23,7 @@ namespace DBConnection1.Pages
 
         protected override void OnInitialized()
         {
-            ActiveUser = GlobalVariables.ActiveUser.ToString();
+            ActiveUser = GlobalVariables.ActiveUser;
             usr = Db.User.Where(e => e.UserName.Contains(ActiveUser)).ToList();
             foreach(var userdetails in usr)
             {

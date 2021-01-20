@@ -10,3 +10,4 @@ spalte für genre
 Interface für appdata
 schichten
 backend frontend
+validierung

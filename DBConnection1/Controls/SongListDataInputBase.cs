@@ -74,11 +74,11 @@ namespace DBConnection1.Controls
         }
         protected void LinkYTValueChanged(string Value)
         {
-            LinkYT = Value;
+            LinkYT = Value.Substring(Value.IndexOf('=') + 1);
         }
         protected void LinkSPValueChanged(string Value)
         {
-            LinkSP = Value;
+            LinkSP = Value.Substring(Value.IndexOf("track/") + 6);
         }
         protected void CoverValueChanged(string Value)
         {

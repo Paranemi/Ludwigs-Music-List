@@ -2,11 +2,11 @@
 
 <div class="validation-container">
 
-    <TelerikUpload  SaveUrl="@SaveUrl"
-                    SaveField="file" 
-                    RemoveField="fileToRemove"
-                    AllowedExtensions="@( new List<string>() { ".jpg"} )">
-        
+    <TelerikUpload SaveUrl="@SaveUrl"
+                   SaveField="file"
+                   RemoveField="fileToRemove"
+                   AllowedExtensions="@( new List<string>() { ".jpg"} )">
+
     </TelerikUpload>
 
     @if (string.IsNullOrEmpty(Value))
@@ -35,5 +35,56 @@
     {
         return $"{NavigationManager.BaseUri}{url}";
     }
+    int bla = 1;
+    int bla1;
+
+
+
+
 
 }
+
+
+@*@page "/"
+    @using System.IO
+
+    <p>
+        <InputFile OnChange="LoadImage" />
+        @Value
+    </p>
+
+    <img src="@imageUri" />
+
+    @code {
+        public string Value { get; set; }
+        public string imageUri { get; set; }
+        long maxFileSize = 1024 * 1024 * 15;
+        async Task LoadImage(InputFileChangeEventArgs e)
+        {
+            //client side
+            Value = e.File.Name;
+            var imageFile = await e.File.RequestImageFileAsync("image/jpeg", 1920, 1080);
+            using Stream fileStream = imageFile.OpenReadStream(maxFileSize);
+            using MemoryStream ms = new();
+
+            await fileStream.CopyToAsync(ms);
+
+            //standard data uri
+            imageUri = $"data:image/jpeg;base64,{Convert.ToBase64String(ms.ToArray())}";
+
+            //server
+            var content = new MultipartFormDataContent
+            {
+                {
+                    //file muss bei controller auch file heißen
+                    new ByteArrayContent(ms.ToArray()),
+                                "\"file\"",
+                                e.File.Name
+                }
+            };
+
+            var respone = await HTTP.PostAsync("/Filesave", content);
+
+        }
+
+    }*@

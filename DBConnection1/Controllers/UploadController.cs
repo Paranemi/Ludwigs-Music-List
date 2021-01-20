@@ -32,7 +32,7 @@ namespace DBConnection1.Controllers
 
                     // Some browsers send file names with full path.
                     // We are only interested in the file name.
-                    var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
+                 //   var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
                     var physicalPath = Path.Combine("C:\\Users\\ludwi\\source\\repos\\Paranemi\\DBConnection1\\DBConnection1\\wwwroot\\Images", fileName);
                     
                     // Implement security mechanisms here - prevent path traversals,
@@ -43,6 +43,7 @@ namespace DBConnection1.Controllers
                     {
                         await file.CopyToAsync(fileStream);
                     }
+                    
                 }
                 catch
                 {

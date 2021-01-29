@@ -1,5 +1,4 @@
-﻿@*@page "/likedsongs/{ActiveUser}"*@
-@page "/likedsongs"
+﻿@page "/likedsongs"
 @using Telerik.Blazor.Components
 @using BlazorServerSide.Controls
 @inherits LikedSongsBase
@@ -18,7 +17,7 @@
                 @{
                     foreach (var song in usersongs)
                     {
-                        <a href="/songdetails/@song.Songs.Album.Name/@song.Songs.Name">@song.Songs.Name</a>
+                        <a href="/songdetails/@song.Song.Album.Name/@song.Song.Name">@song.Song.Name</a>
                     }
                 }
             </Template>
@@ -28,7 +27,7 @@
                 @{
                     foreach (var album in usersongs)
                     {
-                        <span>@album.Songs.Album.Name</span>
+                        <span>@album.Song.Album.Name</span>
                     }
                 }
             </Template>
@@ -38,7 +37,7 @@
                 @{
                     foreach (var artist in usersongs)
                     {
-                        <a href="/artistdetails/@artist.Songs.Artist.Name">@artist.Songs.Artist.Name</a>
+                        <a href="/artistdetails/@artist.Song.Artist.Name">@artist.Song.Artist.Name</a>
                     }
                 }
             </Template>

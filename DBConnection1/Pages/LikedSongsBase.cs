@@ -21,7 +21,7 @@ namespace BlazorServerSide.Pages
         protected override void OnInitialized()
         {
             ActiveUser = GlobalVariables.ActiveUser;
-   //         usersongs = Db.LikedSong.Where(a => a.UserId == UserId).ToList();
+            usersongs = Db.LikedSong.Where(a => a.UserId == UserId).ToList();
         }
 
     }

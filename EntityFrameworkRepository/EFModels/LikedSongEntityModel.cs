@@ -10,7 +10,7 @@ namespace EntityFrameworkRepository.EFModels
         [Key]
         public Guid LikedSongId { get; set; }
         public virtual Guid SongId { get; set; }
-        public virtual SongEntityModel Songs { get; set; }
+        public virtual SongEntityModel Song { get; set; }
         public virtual Guid UserId { get; set; }
         public virtual UserEntityModel User { get; set; }
 

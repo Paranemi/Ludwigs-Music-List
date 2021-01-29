@@ -24,7 +24,7 @@ namespace EntityFrameworkRepository.Mapper
             var domainModel = new LikedSongDomainModel();
             domainModel.LikedSongId = entityModel.LikedSongId;
             domainModel.SongId = entityModel.SongId;
-            domainModel.Songs = _songDataMapper.ToDomainModel(entityModel.Songs);
+            domainModel.Song = _songDataMapper.ToDomainModel(entityModel.Song);
             domainModel.UserId = entityModel.UserId;
             domainModel.User = _userDataMapper.ToDomainModel(entityModel.User);
             return domainModel;
@@ -35,7 +35,7 @@ namespace EntityFrameworkRepository.Mapper
             var entityModel = new LikedSongEntityModel();
             entityModel.LikedSongId = domainModel.LikedSongId;
             entityModel.SongId = domainModel.SongId;
-            entityModel.Songs = _songDataMapper.ToEntityModel(domainModel.Songs);
+            entityModel.Song = _songDataMapper.ToEntityModel(domainModel.Song);
             entityModel.UserId = domainModel.UserId;
             entityModel.User = _userDataMapper.ToEntityModel(domainModel.User);
             return entityModel;

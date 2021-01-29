@@ -9,7 +9,7 @@ namespace ViewModels
     {
         public Guid LikedSongId { get; set; }
         public virtual Guid SongId { get; set; }
-        public virtual ISongViewModel Songs { get; set; }
+        public virtual ISongViewModel Song { get; set; }
         public virtual Guid UserId { get; set; }
         public virtual IUserViewModel User { get; set; }
       

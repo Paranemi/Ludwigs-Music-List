@@ -8,7 +8,7 @@ namespace DomainModels.Contracts
     {
         Guid LikedSongId { get; set; }
         Guid SongId { get; set; }
-        ISongDomainModel Songs { get; set; }
+        ISongDomainModel Song { get; set; }
         Guid UserId { get; set; }
         IUserDomainModel User { get; set; }
     }

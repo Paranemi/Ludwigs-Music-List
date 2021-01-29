@@ -5,6 +5,7 @@ using EntityFrameworkRepository.Mapper;
 using MusicListWorkflow.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace EntityFrameworkRepository
@@ -24,12 +25,16 @@ namespace EntityFrameworkRepository
         public void CreateLikedSong(ILikedSongDomainModel likedSongDomainModel)
         {
             var likedSongEntityModel = _likedSongDataMapper.ToEntityModel(likedSongDomainModel);
-            var likedSong = new LikedSongEntityModel
-            {
-                SongId = likedSongEntityModel.SongId,
-                UserId = likedSongEntityModel.UserId
-            };
-            _context.Add(likedSong);
+            var existingSongEntityModel = _context.Song.Single(s => s.SongId == likedSongEntityModel.Song.SongId);
+            likedSongEntityModel.Song = existingSongEntityModel;
+
+            var existingUserEntityModel = _context.User.Single(s => s.UserId == likedSongEntityModel.User.UserId);
+            likedSongEntityModel.User = existingUserEntityModel;
+
+
+
+            _context.Add(likedSongEntityModel);
+
             _context.SaveChanges();
         }
 
@@ -42,5 +47,7 @@ namespace EntityFrameworkRepository
             _context.Remove(likedSong);
             _context.SaveChanges();
         }
+
+
     }
 }

@@ -31,14 +31,12 @@ namespace BlazorServerSide.Pages
         protected void ChangeHandler(bool value, string songName)
         {
             if (value)
-            {
-                var user = UserWorkflow.GetUserByName(globalVariables.ActiveUser);
-                var song = SongWorkflow.GetSongByName(songName);
+            {          
 
                 var likedSong = new LikedSongViewModel()
                 {
-                    UserId = user.UserId,
-                    SongId = song.SongId    
+                    User = UserWorkflow.GetUserByName(globalVariables.ActiveUser),
+                    Song = SongWorkflow.GetSongByName(songName)
                 };
                 LikedSongWorkflow.CreateLikedSong(likedSong);
 

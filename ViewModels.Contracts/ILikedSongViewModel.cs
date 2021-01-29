@@ -8,7 +8,7 @@ namespace ViewModels.Contracts
     {
         Guid LikedSongId { get; set; }
         Guid SongId { get; set; }
-        ISongViewModel Songs { get; set; }
+        ISongViewModel Song { get; set; }
         Guid UserId { get; set; }
         IUserViewModel User { get; set; }
     }

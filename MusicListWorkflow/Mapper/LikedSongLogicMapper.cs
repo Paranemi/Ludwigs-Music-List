@@ -22,7 +22,7 @@ namespace MusicListWorkflow.Mapper
             var domainModel = new LikedSongDomainModel();
             domainModel.LikedSongId = viewModel.LikedSongId;
             domainModel.SongId = viewModel.SongId;
-            domainModel.Songs = _songLogicMapper.ToDomainModel(viewModel.Songs);
+            domainModel.Song = _songLogicMapper.ToDomainModel(viewModel.Song);
             domainModel.UserId = viewModel.UserId;
             domainModel.User = _userLogicMapper.ToDomainModel(viewModel.User);
             return domainModel;
@@ -33,7 +33,7 @@ namespace MusicListWorkflow.Mapper
             var viewModel = new LikedSongViewModel();
             viewModel.LikedSongId = domainModel.LikedSongId;
             viewModel.SongId = domainModel.SongId;
-            viewModel.Songs = _songLogicMapper.ToViewModel(domainModel.Songs);
+            viewModel.Song = _songLogicMapper.ToViewModel(domainModel.Song);
             viewModel.UserId = domainModel.UserId;
             viewModel.User = _userLogicMapper.ToViewModel(domainModel.User);
             return viewModel;

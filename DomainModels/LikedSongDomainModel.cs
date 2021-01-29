@@ -10,7 +10,7 @@ namespace DomainModels
     {
         public Guid LikedSongId { get; set; }
         public virtual Guid SongId { get; set; }
-        public virtual ISongDomainModel Songs { get; set; }
+        public virtual ISongDomainModel Song { get; set; }
         public virtual Guid UserId { get; set; }
         public virtual IUserDomainModel User { get; set; }
 

@@ -14,6 +14,8 @@ namespace MusicListWorkflow.Contracts
 
         IArtistViewModel GetArtistByName(string artistName);
 
+        Guid GetArtistIdByName(string artistName);
+
         void UpdateArtist(IArtistViewModel artistViewModel);
 
         void DeleteArtistById(Guid artistId);

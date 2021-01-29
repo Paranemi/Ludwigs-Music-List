@@ -8,14 +8,6 @@ namespace MusicListWorkflow.Mapper
 {
     public class ArtistLogicMapper : IArtistLogicMapper
     {
-        private readonly IPersonLogicMapper _personLogicMapper;
-        private readonly ISongLogicMapper _songLogicMapper;
-
-        public ArtistLogicMapper(IPersonLogicMapper personLogicMapper, ISongLogicMapper songLogicMapper)
-        {
-            _personLogicMapper = personLogicMapper;
-            _songLogicMapper = songLogicMapper;
-        }
 
         public IArtistDomainModel ToDomainModel(IArtistViewModel viewModel)
         {

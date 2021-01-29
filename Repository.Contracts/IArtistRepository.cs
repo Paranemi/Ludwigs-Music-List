@@ -15,6 +15,8 @@ namespace MusicListWorkflow.Contracts
 
         void UpdateArtist(IArtistDomainModel artistDomainModel);
 
+        Guid GetArtistIdByName(string artistName);
+
         void DeleteArtistById(Guid artistId);
     }
 }

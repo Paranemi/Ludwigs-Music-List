@@ -15,7 +15,7 @@ namespace BlazorServerSide.Controls
         protected string LinkYT { get; set; }
         protected string LinkSP { get; set; }
         protected string Cover { get; set; }
-        protected bool addArtistDetails { get; set; } = false;
+        protected bool AddArtistDetails { get; set; } = false;
 
         [Parameter]
         public bool Visible { get; set; } = false;
@@ -37,7 +37,7 @@ namespace BlazorServerSide.Controls
         {
             if (checkBoxValue)
             {
-                addArtistDetails = true;
+                AddArtistDetails = true;
             }
         }
 
@@ -62,20 +62,20 @@ namespace BlazorServerSide.Controls
 
             };
 
-            if (!addArtistDetails)
+            if (!AddArtistDetails)
             {
                 ArtistWorkflow.CreateArtist(artist);
             }
 
-            var song = new SongViewModel()
-            {
-                Name = SongName,
-                LinkYT = LinkYT,
-                LinkSptfy = LinkSP,
-                Album = AlbumWorkflow.GetAlbumByName(AlbumName),
-                Artist = ArtistWorkflow.GetArtistByName(ArtistName)
-            };
-            SongWorkflow.CreateSong(song, album.AlbumId, artist.ArtistId);
+            //var song = new SongViewModel()
+            //{
+            //    Name = SongName,
+            //    LinkYT = LinkYT,
+            //    LinkSptfy = LinkSP,
+            //    Album = AlbumWorkflow.GetAlbumByName(AlbumName),
+            //    Artist = ArtistWorkflow.GetArtistByName(ArtistName)
+            //};
+            //SongWorkflow.CreateSong(song, album, artist);
         }
 
 

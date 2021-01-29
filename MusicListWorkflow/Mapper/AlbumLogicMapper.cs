@@ -9,15 +9,6 @@ namespace MusicListWorkflow.Mapper
     public class AlbumLogicMapper : IAlbumLogicMapper
     {
 
-        private readonly ILikedAlbumLogicMapper _likedAlbumLogicMapper;
-        private readonly ISongLogicMapper _songLogicMapper;
-
-        public AlbumLogicMapper(ILikedAlbumLogicMapper likedAlbumLogicMapper, ISongLogicMapper songLogicMapper)
-        {
-            _likedAlbumLogicMapper = likedAlbumLogicMapper;
-            _songLogicMapper = songLogicMapper;
-        }
-
         public IAlbumDomainModel ToDomainModel(IAlbumViewModel viewModel)
         {
             var domainModel = new AlbumDomainModel();

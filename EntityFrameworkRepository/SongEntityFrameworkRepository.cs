@@ -63,7 +63,8 @@ namespace EntityFrameworkRepository
         public List<ISongDomainModel> GetAllSongs()
         {
             List<ISongDomainModel> listDomainModel = new List<ISongDomainModel>();
-            var allElementsEntityModel = _context.Song;
+            List<SongEntityModel> allElementsEntityModel = new List<SongEntityModel>();
+            allElementsEntityModel=  _context.Song.ToList();
 
             foreach (var item in allElementsEntityModel)
             {

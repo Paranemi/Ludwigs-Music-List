@@ -8,7 +8,7 @@
 Welcome to your new app.
 <br />
 
-<TelerikButton OnClick="@SayHelloHandler" Primary="true">@Test halselfhsfe</TelerikButton>
+<TelerikButton Enabled="false" OnClick="@SayHelloHandler" Primary="true">@Test halselfhsfe</TelerikButton>
 
 <ImageFileInput></ImageFileInput>
 
@@ -18,18 +18,18 @@ Welcome to your new app.
 
 @code {
 
-    MarkupString helloString;
+        MarkupString helloString;
 
-    [Inject]
-    public IAlbumWorkflow AlbumWorkflow { get; set; }
-    [Inject]
-    public IArtistWorkflow ArtistWorkflow { get; set; }
-    [Inject]
-    public IPersonWorkflow PersonWorkflow { get; set; }
-    [Inject]
-    public ISongWorkflow SongWorkflow { get; set; }
-    [Inject]
-    public IUserWorkflow UserWorkflow { get; set; }
+        [Inject]
+        public IAlbumWorkflow AlbumWorkflow { get; set; }
+        [Inject]
+        public IArtistWorkflow ArtistWorkflow { get; set; }
+        [Inject]
+        public IPersonWorkflow PersonWorkflow { get; set; }
+        [Inject]
+        public ISongWorkflow SongWorkflow { get; set; }
+        [Inject]
+        public IUserWorkflow UserWorkflow { get; set; }
 
 
     public string Test { get; set; }
@@ -52,7 +52,7 @@ Welcome to your new app.
             ImageUrl = "jom",
             ReleaseDate = new DateTime(2014, 03, 03)
         };
-    AlbumWorkflow.CreateAlbum(album1);
+        AlbumWorkflow.CreateAlbum(album1);
 
         var album2 = new AlbumViewModel
         {
@@ -61,7 +61,7 @@ Welcome to your new app.
             ReleaseDate = new DateTime(2011, 03, 11)
         };
 
-    AlbumWorkflow.CreateAlbum(album2);
+        AlbumWorkflow.CreateAlbum(album2);
 
         var album3 = new AlbumViewModel
         {
@@ -70,7 +70,7 @@ Welcome to your new app.
             ReleaseDate = new DateTime(2003, 09, 29)
         };
 
-    AlbumWorkflow.CreateAlbum(album3);
+        AlbumWorkflow.CreateAlbum(album3);
 
         var album4 = new AlbumViewModel
         {
@@ -79,7 +79,7 @@ Welcome to your new app.
             ReleaseDate = new DateTime(1986, 03, 03)
         };
 
-    AlbumWorkflow.CreateAlbum(album4);
+        AlbumWorkflow.CreateAlbum(album4);
 
         var animalsasleaders = new ArtistViewModel
         {
@@ -87,7 +87,7 @@ Welcome to your new app.
             ArtistImageUrl = "aal",
             Name = "Animals as Leaders"
         };
-    ArtistWorkflow.CreateArtist(animalsasleaders);
+        ArtistWorkflow.CreateArtist(animalsasleaders);
 
         var riseagainst = new ArtistViewModel
         {
@@ -95,7 +95,7 @@ Welcome to your new app.
             ArtistImageUrl = "RiseAgainst",
             Name = "Rise Against"
         };
-    ArtistWorkflow.CreateArtist(riseagainst);
+        ArtistWorkflow.CreateArtist(riseagainst);
 
         var dieaerzte = new ArtistViewModel
         {
@@ -103,7 +103,7 @@ Welcome to your new app.
             ArtistImageUrl = "DieAerzte",
             Name = "Die Ärzte"
         };
-    ArtistWorkflow.CreateArtist(dieaerzte);
+        ArtistWorkflow.CreateArtist(dieaerzte);
 
         var metallica = new ArtistViewModel
         {
@@ -111,280 +111,281 @@ Welcome to your new app.
             ArtistImageUrl = "Metallica",
             Name = "Metallica"
         };
-    ArtistWorkflow.CreateArtist(metallica);
+        ArtistWorkflow.CreateArtist(metallica);
 
         var song1 = new SongViewModel
         {
-            Artist = animalsasleaders,
-            Album = album1,
+            Album = AlbumWorkflow.GetAlbumByName("The Joy of Motion"),
+            Artist = ArtistWorkflow.GetArtistByName("Animals as Leaders"),
             LinkSptfy = "0JGuSgtmWyfuxLGBs2wX0C",
             LinkYT = "0jpOBd949O4",
             Name = "Physical Education"
         };
-    SongWorkflow.CreateSong(song1, album1.AlbumId, animalsasleaders.ArtistId);
+        SongWorkflow.CreateSong(song1, AlbumWorkflow.GetAlbumIdByName("The Joy of Motion"), ArtistWorkflow.GetArtistIdByName("Animals as Leaders"));
 
         var song2 = new SongViewModel
         {
-            Artist = animalsasleaders,
-            Album = album1,
+            Album = AlbumWorkflow.GetAlbumByName("The Joy of Motion"),
+            Artist = ArtistWorkflow.GetArtistByName("Animals as Leaders"),
             LinkSptfy = "7hY2Kc7Hvu0BudOoQwu8Ez",
             LinkYT = "lbA3jxab4A0",
             Name = "Kascade"
         };
-    SongWorkflow.CreateSong(song2, album1.AlbumId, animalsasleaders.ArtistId);
+        SongWorkflow.CreateSong(song2, AlbumWorkflow.GetAlbumIdByName("The Joy of Motion"), ArtistWorkflow.GetArtistIdByName("Animals as Leaders"));
 
         var song3 = new SongViewModel
         {
-            Artist = animalsasleaders,
-            Album = album1,
+            Album = AlbumWorkflow.GetAlbumByName("The Joy of Motion"),
+            Artist = ArtistWorkflow.GetArtistByName("Animals as Leaders"),
             LinkSptfy = "4j6ascTxs21rACPdPpqFQN",
             LinkYT = "g68hQ4zJ3t0",
             Name = "The Woven Web"
         };
-    SongWorkflow.CreateSong(song3, album1.AlbumId, animalsasleaders.ArtistId);
+        SongWorkflow.CreateSong(song3, AlbumWorkflow.GetAlbumIdByName("The Joy of Motion"), ArtistWorkflow.GetArtistIdByName("Animals as Leaders"));
 
         var song4 = new SongViewModel
         {
-            Artist = riseagainst,
-            Album = album2,
+            Album = AlbumWorkflow.GetAlbumByName("Endgame"),
+            Artist = ArtistWorkflow.GetArtistByName("Rise Against"),
             LinkSptfy = "1O7oz3f9EuSeeX0J7t5z6J",
             LinkYT = "NR3xVQy8ccM",
             Name = "Architects"
         };
-    SongWorkflow.CreateSong(song4, album2.AlbumId, riseagainst.ArtistId);
+        SongWorkflow.CreateSong(song4, AlbumWorkflow.GetAlbumIdByName("Endgame"), ArtistWorkflow.GetArtistIdByName("Rise Against"));
 
         var song5 = new SongViewModel
         {
-            Artist = riseagainst,
-            Album = album2,
+            Album = AlbumWorkflow.GetAlbumByName("Endgame"),
+            Artist = ArtistWorkflow.GetArtistByName("Rise Against"),
             LinkSptfy = "5sG3G54H21hNfd5etlheoe",
             LinkYT = "6nQCxwneUwA",
             Name = "Satellite"
         };
-    SongWorkflow.CreateSong(song5, album2.AlbumId, riseagainst.ArtistId);
+        SongWorkflow.CreateSong(song5, AlbumWorkflow.GetAlbumIdByName("Endgame"), ArtistWorkflow.GetArtistIdByName("Rise Against"));
 
         var song6 = new SongViewModel
         {
-            Artist = riseagainst,
-            Album = album2,
+            Album = AlbumWorkflow.GetAlbumByName("Endgame"),
+            Artist = ArtistWorkflow.GetArtistByName("Rise Against"),
             LinkSptfy = "3nlnq3U8VrxOyp2mjXQAPA",
             LinkYT = "eT-QlZjVmgI",
             Name = "Wait For Me"
         };
-    SongWorkflow.CreateSong(song6, album2.AlbumId, riseagainst.ArtistId);
+        SongWorkflow.CreateSong(song6, AlbumWorkflow.GetAlbumIdByName("Endgame"), ArtistWorkflow.GetArtistIdByName("Rise Against"));
 
         var song7 = new SongViewModel
         {
-            Artist = riseagainst,
-            Album = album2,
+            Album = AlbumWorkflow.GetAlbumByName("Endgame"),
+            Artist = ArtistWorkflow.GetArtistByName("Rise Against"),
             LinkSptfy = "45m4ag7gCHx3uKnSpOYFSO",
             LinkYT = "gi4H5gQDuug",
             Name = "Midnight Hands"
         };
-    SongWorkflow.CreateSong(song7, album2.AlbumId, riseagainst.ArtistId);
+        SongWorkflow.CreateSong(song7, AlbumWorkflow.GetAlbumIdByName("Endgame"), ArtistWorkflow.GetArtistIdByName("Rise Against"));
 
         var song8 = new SongViewModel
         {
-            Artist = riseagainst,
-            Album = album2,
+            Album = AlbumWorkflow.GetAlbumByName("Endgame"),
+            Artist = ArtistWorkflow.GetArtistByName("Rise Against"),
             LinkSptfy = "2xbPgQOfICgLYs8P4lkEtx",
             LinkYT = "8gX2kDsaYg0",
             Name = "Endgame"
         };
-    SongWorkflow.CreateSong(song8, album2.AlbumId, riseagainst.ArtistId);
+        SongWorkflow.CreateSong(song8, AlbumWorkflow.GetAlbumIdByName("Endgame"), ArtistWorkflow.GetArtistIdByName("Rise Against"));
 
         var song10 = new SongViewModel
         {
-            Artist = dieaerzte,
-            Album = album3,
+            Album = AlbumWorkflow.GetAlbumByName("Geräusche"),
+            Artist = ArtistWorkflow.GetArtistByName("Die Ärzte"),
             LinkSptfy = "7KUaVteaQI4YrhV3Gp6px6",
             LinkYT = "qhj9yQ3QyRo",
             Name = "Unrockbar"
         };
-    SongWorkflow.CreateSong(song10, album3.AlbumId, dieaerzte.ArtistId);
+        SongWorkflow.CreateSong(song10, AlbumWorkflow.GetAlbumIdByName("Geräusche"), ArtistWorkflow.GetArtistIdByName("Die Ärzte"));
 
         var song11 = new SongViewModel
         {
-            Artist = dieaerzte,
-            Album = album3,
+            Album = AlbumWorkflow.GetAlbumByName("Geräusche"),
+            Artist = ArtistWorkflow.GetArtistByName("Die Ärzte"),
             LinkSptfy = "0GT9OI4Fot0TKzsUsO7SVA",
             LinkYT = "kRrP-bZvD2s",
             Name = "Deine Schuld"
         };
-    SongWorkflow.CreateSong(song11, album3.AlbumId, dieaerzte.ArtistId);
+        SongWorkflow.CreateSong(song11, AlbumWorkflow.GetAlbumIdByName("Geräusche"), ArtistWorkflow.GetArtistIdByName("Die Ärzte"));
 
         var song12 = new SongViewModel
         {
-            Artist = dieaerzte,
-            Album = album3,
+            Album = AlbumWorkflow.GetAlbumByName("Geräusche"),
+            Artist = ArtistWorkflow.GetArtistByName("Die Ärzte"),
             LinkSptfy = "2Fgmf2jZzNhCNHbZZLoXur",
             LinkYT = "8zXuhykupwU",
             Name = "Geisterhaus"
         };
-    SongWorkflow.CreateSong(song12, album3.AlbumId, dieaerzte.ArtistId);
+        SongWorkflow.CreateSong(song12, AlbumWorkflow.GetAlbumIdByName("Geräusche"), ArtistWorkflow.GetArtistIdByName("Die Ärzte"));
 
         var song13 = new SongViewModel
         {
-            Artist = dieaerzte,
-            Album = album3,
+            Album = AlbumWorkflow.GetAlbumByName("Geräusche"),
+            Artist = ArtistWorkflow.GetArtistByName("Die Ärzte"),
             LinkSptfy = "2J96ewIQ9O95cs5sNY3c1q",
             LinkYT = "hhMbgu8nYEQ",
             Name = "Ruhig angehn"
         };
-    SongWorkflow.CreateSong(song13, album3.AlbumId, dieaerzte.ArtistId);
+        SongWorkflow.CreateSong(song13, AlbumWorkflow.GetAlbumIdByName("Geräusche"), ArtistWorkflow.GetArtistIdByName("Die Ärzte"));
 
         var song14 = new SongViewModel
         {
-            Artist = metallica,
-            Album = album4,
+            Album = AlbumWorkflow.GetAlbumByName("Master of Puppets"),
+            Artist = ArtistWorkflow.GetArtistByName("Metallica"),
             LinkSptfy = "6UB9mShVLbMm0W4e6vud4C",
             LinkYT = "uzlOcupu5UE",
             Name = "Battery"
         };
-    SongWorkflow.CreateSong(song14, album4.AlbumId, metallica.ArtistId);
+        SongWorkflow.CreateSong(song14, AlbumWorkflow.GetAlbumIdByName("Master of Puppets"), ArtistWorkflow.GetArtistIdByName("Metallica"));
 
         var song15 = new SongViewModel
         {
-            Artist = metallica,
-            Album = album4,
+            Album = AlbumWorkflow.GetAlbumByName("Master of Puppets"),
+            Artist = ArtistWorkflow.GetArtistByName("Metallica"),
             LinkSptfy = "2HD5BWFthrNf2uFyEhi53d",
             LinkYT = "z7bUJPj_8v0",
             Name = "Orion"
         };
-    SongWorkflow.CreateSong(song15, album4.AlbumId, metallica.ArtistId);
+        SongWorkflow.CreateSong(song15, AlbumWorkflow.GetAlbumIdByName("Master of Puppets"), ArtistWorkflow.GetArtistIdByName("Metallica"));
 
         var person = new PersonViewModel
         {
-            Artist = animalsasleaders,
+            Artist = ArtistWorkflow.GetArtistByName("Animals as Leaders"),
             From = 2007,
             FirstName = "Matt",
             LastName = "Garstka",
             Born = new DateTime(1989, 04, 27),
             ImageUrl = "MattGarstka",
         };
-    PersonWorkflow.CreatePerson(person, animalsasleaders.ArtistId);
+        PersonWorkflow.CreatePerson(person, ArtistWorkflow.GetArtistIdByName("Animals as Leaders"));
 
         var person1 = new PersonViewModel
         {
-            Artist = animalsasleaders,
+            Artist = ArtistWorkflow.GetArtistByName("Animals as Leaders"),
             From = 2007,
             FirstName = "Javier",
             LastName = "Reyes",
             ImageUrl = "JavierReyes",
         };
-    PersonWorkflow.CreatePerson(person1, animalsasleaders.ArtistId);
+        PersonWorkflow.CreatePerson(person1, ArtistWorkflow.GetArtistIdByName("Animals as Leaders"));
 
         var person3 = new PersonViewModel
         {
-            Artist = animalsasleaders,
+            Artist = ArtistWorkflow.GetArtistByName("Animals as Leaders"),
             From = 2007,
             FirstName = "Tosin",
             LastName = "Abasi",
             Born = new DateTime(1983, 01, 07),
             ImageUrl = "TosinAbasi",
         };
-    PersonWorkflow.CreatePerson(person3, animalsasleaders.ArtistId);
+        PersonWorkflow.CreatePerson(person3, ArtistWorkflow.GetArtistIdByName("Animals as Leaders"));
 
         var person4 = new PersonViewModel
         {
-            Artist = riseagainst,
+            Artist = ArtistWorkflow.GetArtistByName("Rise Against"),
             From = 2007,
             FirstName = "Zach",
             LastName = "Blair",
             Born = new DateTime(1974, 12, 26),
             ImageUrl = "ZachBlair",
         };
-    PersonWorkflow.CreatePerson(person4, riseagainst.ArtistId);
+        PersonWorkflow.CreatePerson(person4, ArtistWorkflow.GetArtistIdByName("Rise Against"));
 
         var person5 = new PersonViewModel
         {
-            Artist = riseagainst,
+            Artist = ArtistWorkflow.GetArtistByName("Rise Against"),
             From = 2000,
             FirstName = "Brandon",
             LastName = "Barnes",
             Born = new DateTime(1974, 12, 26),
             ImageUrl = "BrandonBarnes",
         };
-    PersonWorkflow.CreatePerson(person5, riseagainst.ArtistId);
+        PersonWorkflow.CreatePerson(person5, ArtistWorkflow.GetArtistIdByName("Rise Against"));
 
         var person6 = new PersonViewModel
         {
-            Artist = riseagainst,
+            Artist = ArtistWorkflow.GetArtistByName("Rise Against"),
             From = 2003,
             To = 2007,
             FirstName = "Chris",
             LastName = "Chasse",
             ImageUrl = "Unknown",
         };
-    PersonWorkflow.CreatePerson(person6, riseagainst.ArtistId);
+        PersonWorkflow.CreatePerson(person6, ArtistWorkflow.GetArtistIdByName("Rise Against"));
 
 
         var person8 = new PersonViewModel
         {
-            Artist = dieaerzte,
+            Artist = ArtistWorkflow.GetArtistByName("Die Ärzte"),
             From = 1993,
             FirstName = "Rodrigo",
             LastName = "Gonzalez",
             ImageUrl = "RodGonzalez",
             Born = new DateTime(1968, 05, 19)
         };
-    PersonWorkflow.CreatePerson(person8, dieaerzte.ArtistId);
+        PersonWorkflow.CreatePerson(person8, ArtistWorkflow.GetArtistIdByName("Die Ärzte"));
 
         var person9 = new PersonViewModel
         {
-            Artist = dieaerzte,
+            Artist = ArtistWorkflow.GetArtistByName("Die Ärzte"),
             From = 1982,
             FirstName = "Bela",
             LastName = "B",
             ImageUrl = "BelaB",
             Born = new DateTime(1962, 12, 14)
         };
-    PersonWorkflow.CreatePerson(person9, dieaerzte.ArtistId);
+        PersonWorkflow.CreatePerson(person9, ArtistWorkflow.GetArtistIdByName("Die Ärzte"));
 
         var person10 = new PersonViewModel
         {
-            Artist = dieaerzte,
+            Artist = ArtistWorkflow.GetArtistByName("Die Ärzte"),
             From = 1982,
             FirstName = "Farin",
             LastName = "Urlaub",
             ImageUrl = "FarinUrlaub",
             Born = new DateTime(1963, 10, 27)
         };
-    PersonWorkflow.CreatePerson(person10, dieaerzte.ArtistId);
+        PersonWorkflow.CreatePerson(person10, ArtistWorkflow.GetArtistIdByName("Die Ärzte"));
 
         var person11 = new PersonViewModel
         {
-            Artist = metallica,
+            Artist = ArtistWorkflow.GetArtistByName("Metallica"),
             From = 1982,
             To = 1986,
             FirstName = "Clifford",
             LastName = "Burton",
             ImageUrl = "CliffBurton",
             Born = new DateTime(1962, 02, 10),
-            Died = new DateTime(1968, 09, 27)
+            Died = new DateTime(1986, 09, 27)
         };
-    PersonWorkflow.CreatePerson(person11, metallica.ArtistId);
+        PersonWorkflow.CreatePerson(person11, ArtistWorkflow.GetArtistIdByName("Metallica"));
 
         var person12 = new PersonViewModel
         {
-            Artist = metallica,
+            Artist = ArtistWorkflow.GetArtistByName("Metallica"),
             From = 1983,
             FirstName = "Kirk",
             LastName = "Hammett",
             ImageUrl = "KirkHammett",
             Born = new DateTime(1962, 11, 18),
         };
-    PersonWorkflow.CreatePerson(person12, metallica.ArtistId);
+        PersonWorkflow.CreatePerson(person12, ArtistWorkflow.GetArtistIdByName("Metallica"));
 
         var person13 = new PersonViewModel
         {
-            Artist = metallica,
+            Artist = ArtistWorkflow.GetArtistByName("Metallica"),
             From = 1981,
             FirstName = "Lars",
             LastName = "Ulrich",
             ImageUrl = "LarsUlrich",
             Born = new DateTime(1963, 12, 26),
         };
-    PersonWorkflow.CreatePerson(person13, metallica.ArtistId);
+        PersonWorkflow.CreatePerson(person13, ArtistWorkflow.GetArtistIdByName("Metallica"));
+
     }
 }

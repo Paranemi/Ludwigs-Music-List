@@ -39,6 +39,11 @@ namespace MusicListWorkflow
             return _albumLogicMapper.ToViewModel(domainModel);
         }
 
+        public Guid GetAlbumIdByName(string albumName)
+        {
+            return _albumRepository.GetAlbumIdByName(albumName);
+        }
+
         public void UpdateAlbumById(Guid albumId)
         {
             throw new NotImplementedException();

@@ -10,13 +10,11 @@ namespace MusicListWorkflow.Mapper
     {
         private readonly IAlbumLogicMapper _albumLogicMapper;
         private readonly IArtistLogicMapper _artistLogicMapper;
-        private readonly ILikedSongLogicMapper _likedSongLogicMapper;
 
-        public SongLogicMapper(IAlbumLogicMapper albumLogicMapper, IArtistLogicMapper artistLogicMapper, ILikedSongLogicMapper likedSongLogicMapper)
+        public SongLogicMapper(IAlbumLogicMapper albumLogicMapper, IArtistLogicMapper artistLogicMapper)
         {
             _albumLogicMapper = albumLogicMapper;
             _artistLogicMapper = artistLogicMapper;
-            _likedSongLogicMapper = likedSongLogicMapper;
         }
 
         public ISongDomainModel ToDomainModel(ISongViewModel viewModel)

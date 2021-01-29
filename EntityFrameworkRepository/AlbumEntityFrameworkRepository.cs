@@ -55,6 +55,13 @@ namespace EntityFrameworkRepository
             return _albumDataMapper.ToDomainModel(_context.Album.Single(b => b.Name.Contains(albumName)));
         }
 
+        public Guid GetAlbumIdByName(string albumName)
+        {
+            var album = _context.Album.Single(b => b.Name.Contains(albumName));
+            Guid SelectedAlbumAlbumId = album.AlbumId;
+            return SelectedAlbumAlbumId;
+        }
+
         public void UpdateAlbumById(Guid albumId)
         {
             throw new NotImplementedException();

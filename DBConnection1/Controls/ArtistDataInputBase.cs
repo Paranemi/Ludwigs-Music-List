@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using DBConnection1.Data;
-using DBConnection1.Models;
-using System.Collections.Generic;
+using MusicListWorkflow.Contracts;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace DBConnection1.Controls
+namespace BlazorServerSide.Controls
 {
     public class ArtistDataInputBase : ComponentBase
     {
@@ -15,11 +11,11 @@ namespace DBConnection1.Controls
         protected string Founded { get; set; }
         protected string Cover { get; set; }
 
-        [Inject]
-        public AppDataContext Db { get; set; }
-
         [Parameter]
         public bool Visible { get; set; } = false;
+
+        [Inject]
+        public IArtistWorkflow ArtistWorkflow { get; set; }
 
         public void HideWindow()
         {
@@ -31,13 +27,14 @@ namespace DBConnection1.Controls
         public void AddArtist()
         {
             Visible = false;
-            var artist = Db.Artist.FirstOrDefault(item => item.Name == ArtistName);
 
+            var artist = ArtistWorkflow.GetArtistByName(ArtistName);
             artist.ArtistImageUrl = Cover;
-            artist.Founded = int.Parse(Founded);  
-            
-            Db.Artist.Update(artist);
-            Db.SaveChanges();
+            artist.Founded = int.Parse(Founded);
+
+            ArtistWorkflow.UpdateArtist(artist);
+
+           
         }
 
         protected void ArtistNameValueChanged(string Value)

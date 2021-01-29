@@ -1,8 +1,7 @@
 ﻿@page "/songlist"
-@using DBConnection1.Data
 @using Telerik.Blazor.Components
-@using DBConnection1.Models
-@using DBConnection1.Controls
+@using BlazorServerSide.Controls
+@using ViewModels.Contracts
 @inherits SonglistBase
 
 <TelerikGrid Resizable="true"
@@ -12,10 +11,11 @@
              SortMode="@SortMode.Multiple"
              FilterMode="Telerik.Blazor.GridFilterMode.FilterMenu">
     <GridColumns>
-        <GridColumn Field="@nameof(Song.Name)" Title="Song Name" Editable="true">
+        <GridColumn Field="@nameof(ISongViewModel.Name)" Title="Song Name" Editable="true">
             <Template>
                 @{
-                    var song = context as Song;
+                    var song = context as ISongViewModel;
+                    <TelerikCheckBox ValueChanged="@((bool value) => ChangeHandler(value, song.Name))"></TelerikCheckBox>
                     <a href="/songdetails/@song.Album.Name/@song.Name">@song.Name</a>
                 }
             </Template>
@@ -23,7 +23,7 @@
         <GridColumn Field="" Title="Album Name">
             <Template>
                 @{
-                    var album = context as Song;
+                    var album = context as ISongViewModel;
                     <span>@album.Album.Name</span>
                 }
             </Template>
@@ -31,16 +31,12 @@
         <GridColumn Field="" Title="Artist Name">
             <Template>
                 @{
-                    var artist = context as Song;
+                    var artist = context as ISongViewModel;
                     <a href="/artistdetails/@artist.Artist.Name">@artist.Artist.Name</a>
                 }
             </Template>
         </GridColumn>
-        <GridCheckboxColumn Title="add to favorites">
-        </GridCheckboxColumn>
     </GridColumns>
 </TelerikGrid>
-
 <SongListDataInput></SongListDataInput>
-
-
+<p class="welcome-text">@bindingvalue</p>

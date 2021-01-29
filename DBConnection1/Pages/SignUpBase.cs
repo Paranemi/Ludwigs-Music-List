@@ -1,8 +1,8 @@
-﻿using DBConnection1.Data;
-using DBConnection1.Models;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using MusicListWorkflow.Contracts;
+using ViewModels;
 
-namespace DBConnection1.Pages
+namespace BlazorServerSide.Pages
 {
     public class SignUpBase : ComponentBase
     {
@@ -14,22 +14,21 @@ namespace DBConnection1.Pages
         protected string Output { get; set; }
 
         [Inject]
-        protected AppDataContext Db { get; set; }
+        public IUserWorkflow UserWorkflow { get; set; }
 
         protected void CreateNewUser()
         {
-            Output = NewUser + Password + Confirm + Test;
             if (Check())
             {
-                var user = new User
+                
+
+                var user = new UserViewModel()
                 {
                     UserName = NewUser,
                     Password = Password,
-                    SecurityAnswer = SecurityAnswer      
+                    SecurityAnswer = SecurityAnswer
                 };
-                Db.User.Add(user);
-
-                Db.SaveChanges();
+                UserWorkflow.CreateUser(user);
                 Test = "user wurde angelegt";
             }
             else

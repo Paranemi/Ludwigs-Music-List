@@ -1,15 +1,11 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using DBConnection1.Controls;
 
-namespace DBConnection1.Controllers
+namespace BlazorServerSide.Controllers
 {
     [Route("api/[controller]/[action]")]
     public class UploadController : Controller
@@ -32,9 +28,9 @@ namespace DBConnection1.Controllers
 
                     // Some browsers send file names with full path.
                     // We are only interested in the file name.
-                 //   var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
+                    var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
                     var physicalPath = Path.Combine("C:\\Users\\ludwi\\source\\repos\\Paranemi\\DBConnection1\\DBConnection1\\wwwroot\\Images", fileName);
-                    
+
                     // Implement security mechanisms here - prevent path traversals,
                     // check for allowed extensions, types, size, content, viruses, etc.
                     // This sample always saves the file to the root and is not sufficient for a real application.
@@ -43,7 +39,7 @@ namespace DBConnection1.Controllers
                     {
                         await file.CopyToAsync(fileStream);
                     }
-                    
+
                 }
                 catch
                 {

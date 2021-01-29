@@ -1,12 +1,16 @@
-﻿using DBConnection1.Data;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using MusicListWorkflow.Contracts;
+using MusicListWorkflow;
+using MusicListWorkflow.Contracts.Mapper;
+using MusicListWorkflow.Mapper;
+using EntityFrameworkRepository;
 
-namespace DBConnection1
+namespace BlazorServerSide
 {
     public class Startup
     {
@@ -21,11 +25,18 @@ namespace DBConnection1
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDataContext>(ob => ob.UseLazyLoadingProxies().UseSqlServer("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=MusicDB;Integrated Security=SSPI;"));
+            services.RegisterEntityFrameworkRepositoryServices();
+            services.RegisterDataMapperServices();
+            services.RegisterWorkflowServices();
+            services.RegisterWorkflowMapperServices();
+
+            var repositoryOptions = Configuration.GetSection("Repository").Get<RepositoryOptions>();
+            services.AddDbContext<AppDataContext>(ob => ob.UseLazyLoadingProxies().UseSqlServer(repositoryOptions.ConnectionString));
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddTelerikBlazor();
-            services.AddSingleton<WeatherForecastService>();
+
+            //obacht
             services.AddSingleton<GlobalVariables>();
         }
 

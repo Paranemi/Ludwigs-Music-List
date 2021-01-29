@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="BlazorInputFile" Version="0.2.0" />
+    <PackageReference Include="Telerik.UI.for.Blazor.Trial" Version="2.20.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="wwwroot\Images\endgame.jpg" />
+    <None Include="wwwroot\Images\grsch.jpg" />
+    <None Include="wwwroot\Images\jom.jpg" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\MusicListWorkflow.Contracts\MusicListWorkflow.Contracts.csproj" />
+    <ProjectReference Include="..\MusicListWorkflow\MusicListWorkflow.csproj" />
+  </ItemGroup>
+
+</Project>

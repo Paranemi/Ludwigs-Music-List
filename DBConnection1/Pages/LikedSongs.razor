@@ -1,12 +1,10 @@
 ﻿@*@page "/likedsongs/{ActiveUser}"*@
 @page "/likedsongs"
-@using DBConnection1.Data
 @using Telerik.Blazor.Components
-@using DBConnection1.Models
-@using DBConnection1.Controls
+@using BlazorServerSide.Controls
 @inherits LikedSongsBase
 
-<h3 class="welcome-text">Here are your favorite songs @ActiveUser</h3>
+<h3 class="welcome-text">Here are your favorite songs @GlobalVariables.ActiveUser</h3>
 
 <TelerikGrid Resizable="true"
              Data="@usersongs"

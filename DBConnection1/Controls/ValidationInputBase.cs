@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DBConnection1.Controls
+namespace BlazorServerSide.Controls
 {
     public class ValidationInputBase : ComponentBase
     {
@@ -18,7 +17,7 @@ namespace DBConnection1.Controls
 
         protected async Task HandleInoutChanged(ChangeEventArgs eventArgs)
         {
-           await ValueChangedCallback.InvokeAsync(eventArgs.Value.ToString());
+            await ValueChangedCallback.InvokeAsync(eventArgs.Value.ToString());
         }
     }
 }

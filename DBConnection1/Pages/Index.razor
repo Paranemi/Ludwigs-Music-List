@@ -1,7 +1,7 @@
 ﻿@page "/"
-@using DBConnection1.Data
-@using DBConnection1.Models
-@using DBConnection1.Controls
+@using BlazorServerSide.Controls
+@using MusicListWorkflow.Contracts
+@using ViewModels
 
 <h1>Hello, world!</h1>
 
@@ -18,10 +18,18 @@ Welcome to your new app.
 
 @code {
 
-        MarkupString helloString;
+    MarkupString helloString;
 
-        [Inject]
-        public AppDataContext Db { get; set; }
+    [Inject]
+    public IAlbumWorkflow AlbumWorkflow { get; set; }
+    [Inject]
+    public IArtistWorkflow ArtistWorkflow { get; set; }
+    [Inject]
+    public IPersonWorkflow PersonWorkflow { get; set; }
+    [Inject]
+    public ISongWorkflow SongWorkflow { get; set; }
+    [Inject]
+    public IUserWorkflow UserWorkflow { get; set; }
 
 
     public string Test { get; set; }
@@ -30,87 +38,82 @@ Welcome to your new app.
     {
         string msg = string.Format("Hello from <strong>Telerik Blazor</strong> at {0}.<br /> Now you can use C# to write front-end!", DateTime.Now);
         helloString = new MarkupString(msg);
-        if (Db.Album.Count() == 0)
-        {
-            WriteData();
-        }
+        SampleData();
 
-        //  var songs = Db.Song.ToList();
 
     }
 
-    public void WriteData()
+    public void SampleData()
     {
-        
-        var album1 = new Album
+
+        var album1 = new AlbumViewModel
         {
             Name = "The Joy of Motion",
             ImageUrl = "jom",
             ReleaseDate = new DateTime(2014, 03, 03)
         };
+    AlbumWorkflow.CreateAlbum(album1);
 
-        Db.Album.Add(album1);
-
-        var album2 = new Album
+        var album2 = new AlbumViewModel
         {
             Name = "Endgame",
             ImageUrl = "endgame",
             ReleaseDate = new DateTime(2011, 03, 11)
         };
 
-        Db.Album.Add(album2);
+    AlbumWorkflow.CreateAlbum(album2);
 
-        var album3 = new Album
+        var album3 = new AlbumViewModel
         {
             Name = "Geräusche",
             ImageUrl = "grsch",
             ReleaseDate = new DateTime(2003, 09, 29)
         };
 
-        Db.Album.Add(album3);
+    AlbumWorkflow.CreateAlbum(album3);
 
-        var album4 = new Album
+        var album4 = new AlbumViewModel
         {
             Name = "Master of Puppets",
             ImageUrl = "mop",
             ReleaseDate = new DateTime(1986, 03, 03)
         };
 
-        Db.Album.Add(album4);
+    AlbumWorkflow.CreateAlbum(album4);
 
-        var animalsasleaders = new Artist
+        var animalsasleaders = new ArtistViewModel
         {
             Founded = 2007,
             ArtistImageUrl = "aal",
             Name = "Animals as Leaders"
         };
-        Db.Artist.Add(animalsasleaders);
+    ArtistWorkflow.CreateArtist(animalsasleaders);
 
-        var riseagainst = new Artist
+        var riseagainst = new ArtistViewModel
         {
             Founded = 1999,
             ArtistImageUrl = "RiseAgainst",
             Name = "Rise Against"
         };
-        Db.Artist.Add(riseagainst);
+    ArtistWorkflow.CreateArtist(riseagainst);
 
-        var dieaerzte = new Artist
+        var dieaerzte = new ArtistViewModel
         {
             Founded = 1982,
             ArtistImageUrl = "DieAerzte",
             Name = "Die Ärzte"
         };
-        Db.Artist.Add(dieaerzte);
+    ArtistWorkflow.CreateArtist(dieaerzte);
 
-        var metallica = new Artist
+        var metallica = new ArtistViewModel
         {
             Founded = 1981,
             ArtistImageUrl = "Metallica",
             Name = "Metallica"
         };
-        Db.Artist.Add(metallica);
+    ArtistWorkflow.CreateArtist(metallica);
 
-        var song1 = new Song
+        var song1 = new SongViewModel
         {
             Artist = animalsasleaders,
             Album = album1,
@@ -118,9 +121,9 @@ Welcome to your new app.
             LinkYT = "0jpOBd949O4",
             Name = "Physical Education"
         };
-        Db.Song.Add(song1);
+    SongWorkflow.CreateSong(song1, album1.AlbumId, animalsasleaders.ArtistId);
 
-        var song2 = new Song
+        var song2 = new SongViewModel
         {
             Artist = animalsasleaders,
             Album = album1,
@@ -128,9 +131,9 @@ Welcome to your new app.
             LinkYT = "lbA3jxab4A0",
             Name = "Kascade"
         };
-        Db.Song.Add(song2);
+    SongWorkflow.CreateSong(song2, album1.AlbumId, animalsasleaders.ArtistId);
 
-        var song3 = new Song
+        var song3 = new SongViewModel
         {
             Artist = animalsasleaders,
             Album = album1,
@@ -138,10 +141,9 @@ Welcome to your new app.
             LinkYT = "g68hQ4zJ3t0",
             Name = "The Woven Web"
         };
+    SongWorkflow.CreateSong(song3, album1.AlbumId, animalsasleaders.ArtistId);
 
-        Db.Song.Add(song3);
-
-        var song4 = new Song
+        var song4 = new SongViewModel
         {
             Artist = riseagainst,
             Album = album2,
@@ -149,10 +151,9 @@ Welcome to your new app.
             LinkYT = "NR3xVQy8ccM",
             Name = "Architects"
         };
+    SongWorkflow.CreateSong(song4, album2.AlbumId, riseagainst.ArtistId);
 
-        Db.Song.Add(song4);
-
-        var song5 = new Song
+        var song5 = new SongViewModel
         {
             Artist = riseagainst,
             Album = album2,
@@ -160,9 +161,9 @@ Welcome to your new app.
             LinkYT = "6nQCxwneUwA",
             Name = "Satellite"
         };
-        Db.Song.Add(song5);
+    SongWorkflow.CreateSong(song5, album2.AlbumId, riseagainst.ArtistId);
 
-        var song6 = new Song
+        var song6 = new SongViewModel
         {
             Artist = riseagainst,
             Album = album2,
@@ -170,9 +171,9 @@ Welcome to your new app.
             LinkYT = "eT-QlZjVmgI",
             Name = "Wait For Me"
         };
-        Db.Song.Add(song6);
+    SongWorkflow.CreateSong(song6, album2.AlbumId, riseagainst.ArtistId);
 
-        var song7 = new Song
+        var song7 = new SongViewModel
         {
             Artist = riseagainst,
             Album = album2,
@@ -180,9 +181,9 @@ Welcome to your new app.
             LinkYT = "gi4H5gQDuug",
             Name = "Midnight Hands"
         };
-        Db.Song.Add(song7);
+    SongWorkflow.CreateSong(song7, album2.AlbumId, riseagainst.ArtistId);
 
-        var song8 = new Song
+        var song8 = new SongViewModel
         {
             Artist = riseagainst,
             Album = album2,
@@ -190,9 +191,9 @@ Welcome to your new app.
             LinkYT = "8gX2kDsaYg0",
             Name = "Endgame"
         };
-        Db.Song.Add(song8);
+    SongWorkflow.CreateSong(song8, album2.AlbumId, riseagainst.ArtistId);
 
-        var song10 = new Song
+        var song10 = new SongViewModel
         {
             Artist = dieaerzte,
             Album = album3,
@@ -200,9 +201,9 @@ Welcome to your new app.
             LinkYT = "qhj9yQ3QyRo",
             Name = "Unrockbar"
         };
-        Db.Song.Add(song10);
+    SongWorkflow.CreateSong(song10, album3.AlbumId, dieaerzte.ArtistId);
 
-        var song11 = new Song
+        var song11 = new SongViewModel
         {
             Artist = dieaerzte,
             Album = album3,
@@ -210,9 +211,9 @@ Welcome to your new app.
             LinkYT = "kRrP-bZvD2s",
             Name = "Deine Schuld"
         };
-        Db.Song.Add(song11);
+    SongWorkflow.CreateSong(song11, album3.AlbumId, dieaerzte.ArtistId);
 
-        var song12 = new Song
+        var song12 = new SongViewModel
         {
             Artist = dieaerzte,
             Album = album3,
@@ -220,9 +221,9 @@ Welcome to your new app.
             LinkYT = "8zXuhykupwU",
             Name = "Geisterhaus"
         };
-        Db.Song.Add(song12);
+    SongWorkflow.CreateSong(song12, album3.AlbumId, dieaerzte.ArtistId);
 
-        var song13 = new Song
+        var song13 = new SongViewModel
         {
             Artist = dieaerzte,
             Album = album3,
@@ -230,9 +231,9 @@ Welcome to your new app.
             LinkYT = "hhMbgu8nYEQ",
             Name = "Ruhig angehn"
         };
-        Db.Song.Add(song13);
+    SongWorkflow.CreateSong(song13, album3.AlbumId, dieaerzte.ArtistId);
 
-        var song14 = new Song
+        var song14 = new SongViewModel
         {
             Artist = metallica,
             Album = album4,
@@ -240,9 +241,9 @@ Welcome to your new app.
             LinkYT = "uzlOcupu5UE",
             Name = "Battery"
         };
-        Db.Song.Add(song14);
+    SongWorkflow.CreateSong(song14, album4.AlbumId, metallica.ArtistId);
 
-        var song15 = new Song
+        var song15 = new SongViewModel
         {
             Artist = metallica,
             Album = album4,
@@ -250,9 +251,9 @@ Welcome to your new app.
             LinkYT = "z7bUJPj_8v0",
             Name = "Orion"
         };
-        Db.Song.Add(song15);
+    SongWorkflow.CreateSong(song15, album4.AlbumId, metallica.ArtistId);
 
-        var person = new Person
+        var person = new PersonViewModel
         {
             Artist = animalsasleaders,
             From = 2007,
@@ -261,9 +262,9 @@ Welcome to your new app.
             Born = new DateTime(1989, 04, 27),
             ImageUrl = "MattGarstka",
         };
-        Db.Person.Add(person);
+    PersonWorkflow.CreatePerson(person, animalsasleaders.ArtistId);
 
-        var person1 = new Person
+        var person1 = new PersonViewModel
         {
             Artist = animalsasleaders,
             From = 2007,
@@ -271,9 +272,9 @@ Welcome to your new app.
             LastName = "Reyes",
             ImageUrl = "JavierReyes",
         };
-        Db.Person.Add(person1);
+    PersonWorkflow.CreatePerson(person1, animalsasleaders.ArtistId);
 
-        var person3 = new Person
+        var person3 = new PersonViewModel
         {
             Artist = animalsasleaders,
             From = 2007,
@@ -282,9 +283,9 @@ Welcome to your new app.
             Born = new DateTime(1983, 01, 07),
             ImageUrl = "TosinAbasi",
         };
-        Db.Person.Add(person3);
+    PersonWorkflow.CreatePerson(person3, animalsasleaders.ArtistId);
 
-        var person4 = new Person
+        var person4 = new PersonViewModel
         {
             Artist = riseagainst,
             From = 2007,
@@ -293,9 +294,9 @@ Welcome to your new app.
             Born = new DateTime(1974, 12, 26),
             ImageUrl = "ZachBlair",
         };
-        Db.Person.Add(person4);
+    PersonWorkflow.CreatePerson(person4, riseagainst.ArtistId);
 
-        var person5 = new Person
+        var person5 = new PersonViewModel
         {
             Artist = riseagainst,
             From = 2000,
@@ -304,9 +305,9 @@ Welcome to your new app.
             Born = new DateTime(1974, 12, 26),
             ImageUrl = "BrandonBarnes",
         };
-        Db.Person.Add(person5);
+    PersonWorkflow.CreatePerson(person5, riseagainst.ArtistId);
 
-        var person6 = new Person
+        var person6 = new PersonViewModel
         {
             Artist = riseagainst,
             From = 2003,
@@ -315,10 +316,10 @@ Welcome to your new app.
             LastName = "Chasse",
             ImageUrl = "Unknown",
         };
-        Db.Person.Add(person6);
+    PersonWorkflow.CreatePerson(person6, riseagainst.ArtistId);
 
 
-        var person8 = new Person
+        var person8 = new PersonViewModel
         {
             Artist = dieaerzte,
             From = 1993,
@@ -327,9 +328,9 @@ Welcome to your new app.
             ImageUrl = "RodGonzalez",
             Born = new DateTime(1968, 05, 19)
         };
-        Db.Person.Add(person8);
+    PersonWorkflow.CreatePerson(person8, dieaerzte.ArtistId);
 
-        var person9 = new Person
+        var person9 = new PersonViewModel
         {
             Artist = dieaerzte,
             From = 1982,
@@ -338,9 +339,9 @@ Welcome to your new app.
             ImageUrl = "BelaB",
             Born = new DateTime(1962, 12, 14)
         };
-        Db.Person.Add(person9);
+    PersonWorkflow.CreatePerson(person9, dieaerzte.ArtistId);
 
-        var person10 = new Person
+        var person10 = new PersonViewModel
         {
             Artist = dieaerzte,
             From = 1982,
@@ -349,9 +350,9 @@ Welcome to your new app.
             ImageUrl = "FarinUrlaub",
             Born = new DateTime(1963, 10, 27)
         };
-        Db.Person.Add(person10);
+    PersonWorkflow.CreatePerson(person10, dieaerzte.ArtistId);
 
-        var person11 = new Person
+        var person11 = new PersonViewModel
         {
             Artist = metallica,
             From = 1982,
@@ -362,9 +363,9 @@ Welcome to your new app.
             Born = new DateTime(1962, 02, 10),
             Died = new DateTime(1968, 09, 27)
         };
-        Db.Person.Add(person11);
+    PersonWorkflow.CreatePerson(person11, metallica.ArtistId);
 
-        var person12 = new Person
+        var person12 = new PersonViewModel
         {
             Artist = metallica,
             From = 1983,
@@ -373,9 +374,9 @@ Welcome to your new app.
             ImageUrl = "KirkHammett",
             Born = new DateTime(1962, 11, 18),
         };
-        Db.Person.Add(person12);
+    PersonWorkflow.CreatePerson(person12, metallica.ArtistId);
 
-        var person13 = new Person
+        var person13 = new PersonViewModel
         {
             Artist = metallica,
             From = 1981,
@@ -384,15 +385,6 @@ Welcome to your new app.
             ImageUrl = "LarsUlrich",
             Born = new DateTime(1963, 12, 26),
         };
-        Db.Person.Add(person13);
-
-        var useradm = new User
-        {
-            UserName = "adm",
-            Password = "adm123"
-        };
-        Db.User.Add(useradm);
-
-        Db.SaveChanges();
-        }
+    PersonWorkflow.CreatePerson(person13, metallica.ArtistId);
     }
+}

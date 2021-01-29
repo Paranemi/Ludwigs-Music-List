@@ -17,11 +17,17 @@
         <div class="sign-form">
             <ValidationInput placeholder="Song Name" ValueChangedCallback="SongNameValueChanged" Value="@SongName"></ValidationInput>
             <ValidationInput placeholder="Album Name" ValueChangedCallback="AlbumNameValueChanged" Value="@AlbumName"></ValidationInput>
-            <ImageFileInput ></ImageFileInput>
+            <ImageFileInput></ImageFileInput>
             <ValidationInput placeholder="YYYY.MM.DD (Release Date)" ValueChangedCallback="ReleaseDateValueChanged" Value="@ReleaseDate"></ValidationInput>
-            <ValidationInput placeholder="Artist Name" ValueChangedCallback="ArtistNameValueChanged" Value="@ArtistName"></ValidationInput>
             <ValidationInput placeholder="Youtube Link" ValueChangedCallback="LinkYTValueChanged" Value="@LinkYT"></ValidationInput>
             <ValidationInput placeholder="Spotify Link" ValueChangedCallback="LinkSPValueChanged" Value="@LinkSP"></ValidationInput>
+            <ValidationInput placeholder="Artist Name" ValueChangedCallback="ArtistNameValueChanged" Value="@ArtistName"></ValidationInput>
+            <TelerikCheckBox ValueChanged="@((bool CheckBoxValue) => CheckBoxChangeHandler(CheckBoxValue))">Add Artist Details</TelerikCheckBox>
+            @if (addArtistDetails)
+            {
+                <ArtistDataInput ArtistName="@ArtistName"></ArtistDataInput>
+                addArtistDetails = false;
+            }
             <button class="sign-button" type="submit" @onclick="AddSong">Confirm</button>
         </div>
     </WindowContent>

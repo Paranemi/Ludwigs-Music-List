@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DomainModels\DomainModels.csproj" />
+    <ProjectReference Include="..\EntityFrameworkRepository\EntityFrameworkRepository.csproj" />
+    <ProjectReference Include="..\MusicListWorkflow.Contracts\MusicListWorkflow.Contracts.csproj" />
+    <ProjectReference Include="..\ViewModels.Contracts\ViewModels.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

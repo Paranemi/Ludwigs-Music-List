@@ -1,11 +1,10 @@
-﻿using DBConnection1.Data;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using MusicListWorkflow.Contracts;
 using System;
 using System.ComponentModel.DataAnnotations;
-using DBConnection1.Models;
 using System.Linq;
 
-namespace DBConnection1.Pages
+namespace BlazorServerSide.Pages
 {
     public class SignInBase : ComponentBase
     {
@@ -14,24 +13,27 @@ namespace DBConnection1.Pages
         [Required(ErrorMessage = "user name is required")]
         protected string Username { get; set; }
         [Required(ErrorMessage = "password is required")]
-        protected string Password{ get; set; }
+        protected string Password { get; set; }
         protected string Hallo { get; set; }
 
-        [Inject]
-        public AppDataContext Db { get; set; }
         [Inject]
         public GlobalVariables GlobalVariables { get; set; }
         [Inject]
         public NavigationManager UriHelper { get; set; }
+        [Inject]
+        public IUserWorkflow UserWorkflow { get; set; }
 
         protected void Test()
         {
-            var user = Db.User.Where(b => b.UserName.Contains(Username)).ToList();
-            var pw = Db.User.Where(b => b.Password.Contains(Password)).ToList();
-            if (user.Count > 0)
+      //      var user = Db.User.Where(b => b.UserName.Contains(Username));
+        //    var pw = Db.User.Where(b => b.Password.Contains(Password));
+
+            var user = UserWorkflow.GetUserByName(Username);
+
+            if (user != null)
             {
                 Hallo = "User existiert";
-                if (pw.Count > 0)
+                if (user.Password == Password)
                 {
                     Hallo = "User existiert und PW ist richtig";
                     GlobalVariables.ActiveUser = Username;

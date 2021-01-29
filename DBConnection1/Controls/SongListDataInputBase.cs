@@ -1,12 +1,10 @@
-﻿using DBConnection1.Data;
-using DBConnection1.Models;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using MusicListWorkflow.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ViewModels;
+using ViewModels.Contracts;
 
-namespace DBConnection1.Controls
+namespace BlazorServerSide.Controls
 {
     public class SongListDataInputBase : ComponentBase
     {
@@ -17,46 +15,67 @@ namespace DBConnection1.Controls
         protected string LinkYT { get; set; }
         protected string LinkSP { get; set; }
         protected string Cover { get; set; }
-
-        [Inject]
-        public AppDataContext Db { get; set; }
+        protected bool addArtistDetails { get; set; } = false;
 
         [Parameter]
         public bool Visible { get; set; } = false;
+
+        [Inject]
+        public IArtistWorkflow ArtistWorkflow { get; set; }
+        [Inject]
+        public IAlbumWorkflow AlbumWorkflow { get; set; }
+        [Inject]
+        public ISongWorkflow SongWorkflow { get; set; }
 
         public void HideWindow()
         {
             Visible = false;
         }
 
+        
+        protected void CheckBoxChangeHandler(bool checkBoxValue)
+        {
+            if (checkBoxValue)
+            {
+                addArtistDetails = true;
+            }
+        }
+
+
         public void AddSong()
         {
+
             Visible = false;
-            var album = new Album
+
+
+            var album = new AlbumViewModel()
             {
                 Name = AlbumName,
                 ImageUrl = Cover,
                 ReleaseDate = DateTime.Parse(ReleaseDate),
             };
-            Db.Album.Add(album);
+            AlbumWorkflow.CreateAlbum(album);
 
-            var artist = new Artist
+            var artist = new ArtistViewModel()
             {
                 Name = ArtistName,
-                    
-            };
-            Db.Artist.Add(artist);
 
-            var song = new Song
+            };
+
+            if (!addArtistDetails)
+            {
+                ArtistWorkflow.CreateArtist(artist);
+            }
+
+            var song = new SongViewModel()
             {
                 Name = SongName,
                 LinkYT = LinkYT,
                 LinkSptfy = LinkSP,
-                Album = album,
-                Artist = artist
+                Album = AlbumWorkflow.GetAlbumByName(AlbumName),
+                Artist = ArtistWorkflow.GetArtistByName(ArtistName)
             };
-            Db.Song.Add(song);
-            Db.SaveChanges();
+            SongWorkflow.CreateSong(song, album.AlbumId, artist.ArtistId);
         }
 
 

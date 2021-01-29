@@ -1,22 +1,19 @@
-﻿using DBConnection1.Data;
-using DBConnection1.Models;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using ViewModels.Contracts;
 
-namespace DBConnection1.Pages
+namespace BlazorServerSide.Pages
 {
     public class LikedSongsBase : ComponentBase
     {
         public Guid UserId { get; set; }
-        [Inject]
-        protected AppDataContext Db { get; set; }
+
         [Inject]
         protected GlobalVariables GlobalVariables { get; set; }
-        protected List<LikedSong> usersongs;
-        protected List<User> usr;
+
+        protected List<ILikedSongViewModel> usersongs;
 
         [Parameter]
         public string ActiveUser { get; set; }
@@ -24,16 +21,8 @@ namespace DBConnection1.Pages
         protected override void OnInitialized()
         {
             ActiveUser = GlobalVariables.ActiveUser;
-            usr = Db.User.Where(e => e.UserName.Contains(ActiveUser)).ToList();
-            foreach(var userdetails in usr)
-            {
-                UserId = userdetails.UserId;
-            }
-            usersongs = Db.LikedSong.Where(a => a.UserId == UserId).ToList();
-
+   //         usersongs = Db.LikedSong.Where(a => a.UserId == UserId).ToList();
         }
 
-    
-    
     }
 }

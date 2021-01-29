@@ -1,24 +1,55 @@
-﻿using DBConnection1.Data;
-using DBConnection1.Models;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using MusicListWorkflow.Contracts;
 using System.Collections.Generic;
 using System.Linq;
-using Telerik.Blazor.Components;
+using ViewModels;
+using ViewModels.Contracts;
 
-namespace DBConnection1.Pages
+namespace BlazorServerSide.Pages
 {
     public class SonglistBase : ComponentBase
     {
         protected bool SongListInput { get; set; } = false;
+
+        protected List<ISongViewModel> songlist;
+
         [Inject]
-        public AppDataContext Db { get; set; }
-        protected List<Song> songlist;
+        public GlobalVariables globalVariables { get; set; }
+        [Inject]
+        public ISongWorkflow SongWorkflow { get; set; }
+        [Inject]
+        public ILikedSongWorkflow LikedSongWorkflow { get; set; }
+        [Inject]
+        public IUserWorkflow UserWorkflow { get; set; }
 
         protected override void OnInitialized()
         {
-            songlist = Db.Song.ToList();
+            songlist = SongWorkflow.GetAllSongs();
         }
 
+        protected string bindingvalue;
+        protected void ChangeHandler(bool value, string songName)
+        {
+            if (value)
+            {
+                var user = UserWorkflow.GetUserByName(globalVariables.ActiveUser);
+                var song = SongWorkflow.GetSongByName(songName);
+
+                var likedSong = new LikedSongViewModel()
+                {
+                    UserId = user.UserId,
+                    SongId = song.SongId    
+                };
+                LikedSongWorkflow.CreateLikedSong(likedSong);
+
+                bindingvalue = songName;
+            }
+            else
+            {
+                bindingvalue = "";
+            }
+
+        }
     }
 }
 

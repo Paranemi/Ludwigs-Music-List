@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace DBConnection1
+namespace BlazorServerSide
 {
     public class Program
     {

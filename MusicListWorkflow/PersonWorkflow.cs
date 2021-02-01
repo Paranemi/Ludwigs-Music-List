@@ -24,10 +24,15 @@ namespace MusicListWorkflow
             _personRepository.CreatePerson(domainModel, artistId);
         }
 
-        public IPersonViewModel GetPersonByArtistId(Guid artistId)
+        public List<IPersonViewModel> GetPersonByArtistId(Guid artistId)
         {
+            List<IPersonViewModel> personViewModelList = new List<IPersonViewModel>();
             var domainModel = _personRepository.GetPersonByArtistId(artistId);
-            return _personLogicMapper.ToViewModel(domainModel);
+            foreach (var item in domainModel)
+            {
+                personViewModelList.Add(_personLogicMapper.ToViewModel(item));
+            }
+            return personViewModelList;
         }
 
         public void UpdatePersonById(Guid personId)

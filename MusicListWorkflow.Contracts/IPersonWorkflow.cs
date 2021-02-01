@@ -10,7 +10,7 @@ namespace MusicListWorkflow.Contracts
     {
         void CreatePerson(IPersonViewModel personViewModel, Guid artistId);
 
-        IPersonViewModel GetPersonByArtistId(Guid artistId);
+        List<IPersonViewModel> GetPersonByArtistId(Guid artistId);
 
         void UpdatePersonById(Guid personId);
 

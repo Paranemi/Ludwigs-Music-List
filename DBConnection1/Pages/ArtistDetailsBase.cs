@@ -45,12 +45,12 @@ namespace BlazorServerSide.Pages
             Founded = artist.Founded;
             ArtistImageUrl = artist.ArtistImageUrl;
 
-            var person = PersonWorkflow.GetPersonByArtistId(artist.ArtistId);
-            PersonImageUrl = person.ImageUrl;
-            FirstName = person.FirstName;
-            LastName = person.LastName;
-            From = person.From;
-            To = person.To;
+            persons = PersonWorkflow.GetPersonByArtistId(artist.ArtistId);
+            //PersonImageUrl = person.ImageUrl;
+            //FirstName = person.FirstName;
+            //LastName = person.LastName;
+            //From = person.From;
+            //To = person.To;
 
         }
 

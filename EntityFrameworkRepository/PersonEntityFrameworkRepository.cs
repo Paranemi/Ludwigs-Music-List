@@ -41,9 +41,15 @@ namespace EntityFrameworkRepository
             _context.SaveChanges();
         }
 
-        public IPersonDomainModel GetPersonByArtistId(Guid artistId)
+        public List<IPersonDomainModel> GetPersonByArtistId(Guid artistId)
         {
-            return _personDataMapper.ToDomainModel(_context.Person.Single(b => b.ArtistId == artistId));
+            List<IPersonDomainModel> personDomainModelList = new List<IPersonDomainModel>();
+            var personEntityModel = _context.Person.Where(b => b.ArtistId == artistId);
+            foreach (var item in personEntityModel)
+            {
+                personDomainModelList.Add(_personDataMapper.ToDomainModel(item));
+            }
+            return personDomainModelList;
         }
 
         public void UpdatePersonById(Guid personId)

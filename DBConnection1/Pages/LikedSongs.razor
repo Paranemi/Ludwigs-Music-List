@@ -1,6 +1,7 @@
 ﻿@page "/likedsongs"
 @using Telerik.Blazor.Components
 @using BlazorServerSide.Controls
+@using ViewModels.Contracts
 @inherits LikedSongsBase
 
 <h3 class="welcome-text">Here are your favorite songs @GlobalVariables.ActiveUser</h3>
@@ -15,30 +16,26 @@
         <GridColumn Field="" Title="Song Name">
             <Template>
                 @{
-                    foreach (var song in usersongs)
-                    {
-                        <a href="/songdetails/@song.Song.Album.Name/@song.Song.Name">@song.Song.Name</a>
-                    }
+                    var song = context as ILikedSongViewModel;
+                    <TelerikCheckBox ValueChanged="@((bool value) => ChangeHandler(value, song.Song.Name))"></TelerikCheckBox>
+                    <a href="/songdetails/@song.Song.Album.Name/@song.Song.Name">@song.Song.Name</a>
+
                 }
             </Template>
         </GridColumn>
         <GridColumn Field="" Title="Album Name">
             <Template>
                 @{
-                    foreach (var album in usersongs)
-                    {
-                        <span>@album.Song.Album.Name</span>
-                    }
+                    var album = context as ILikedSongViewModel;
+                    <span>@album.Song.Album.Name</span>
                 }
             </Template>
         </GridColumn>
         <GridColumn Field="" Title="Artist Name">
             <Template>
                 @{
-                    foreach (var artist in usersongs)
-                    {
+                    var artist = context as ILikedSongViewModel;
                         <a href="/artistdetails/@artist.Song.Artist.Name">@artist.Song.Artist.Name</a>
-                    }
                 }
             </Template>
         </GridColumn>

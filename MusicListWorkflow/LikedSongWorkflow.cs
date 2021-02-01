@@ -28,5 +28,18 @@ namespace MusicListWorkflow
         {
             _likedSongRepository.DeleteLikedSongById(likedSongId);
         }
+
+        public List<ILikedSongViewModel> GetLikedSongsByUserId(Guid userId)
+        {
+            List<ILikedSongViewModel> listViewModel = new List<ILikedSongViewModel>();
+            var allElementsDomainModel = _likedSongRepository.GetLikedSongsByUserId(userId);
+
+            foreach (var item in allElementsDomainModel)
+            {
+                listViewModel.Add(_likedSongLogicMapper.ToViewModel(item));
+            }
+
+            return listViewModel;
+        }
     }
 }

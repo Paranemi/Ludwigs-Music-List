@@ -48,6 +48,19 @@ namespace EntityFrameworkRepository
             _context.SaveChanges();
         }
 
+        public List<ILikedSongDomainModel> GetLikedSongsByUserId(Guid userId)
+        {
 
+            List<ILikedSongDomainModel> listDomainModel = new List<ILikedSongDomainModel>();
+            List<LikedSongEntityModel> allElementsEntityModel;
+            allElementsEntityModel = _context.LikedSong.Where(l => l.UserId == userId).ToList();
+
+            foreach (var item in allElementsEntityModel)
+            {
+                listDomainModel.Add(_likedSongDataMapper.ToDomainModel(item));
+            }
+
+            return listDomainModel;
+        }
     }
 }

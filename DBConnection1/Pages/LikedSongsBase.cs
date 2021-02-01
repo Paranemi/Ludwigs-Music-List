@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MusicListWorkflow.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,12 @@ namespace BlazorServerSide.Pages
         [Inject]
         protected GlobalVariables GlobalVariables { get; set; }
 
+        [Inject]
+        public ILikedSongWorkflow LikedSongWorkflow { get; set; }
+
+        [Inject]
+        public IUserWorkflow UserWorkflow { get; set; }
+
         protected List<ILikedSongViewModel> usersongs;
 
         [Parameter]
@@ -21,8 +28,16 @@ namespace BlazorServerSide.Pages
         protected override void OnInitialized()
         {
             ActiveUser = GlobalVariables.ActiveUser;
-            usersongs = Db.LikedSong.Where(a => a.UserId == UserId).ToList();
+            // usersongs = Db.LikedSong.Where(a => a.UserId == UserId).ToList();
+            
+            var user = UserWorkflow.GetUserByName(ActiveUser);
+            UserId = user.UserId;
+            usersongs = LikedSongWorkflow.GetLikedSongsByUserId(UserId);
         }
 
+        protected void ChangeHandler(bool value, string songName)
+        {
+
+        }
     }
 }

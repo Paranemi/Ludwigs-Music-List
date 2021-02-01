@@ -10,5 +10,7 @@ namespace MusicListWorkflow.Contracts
         void CreateLikedSong(ILikedSongDomainModel likedSongDomainModel);
 
         void DeleteLikedSongById(Guid likedSongId);
+
+        List<ILikedSongDomainModel> GetLikedSongsByUserId(Guid userId);
     }
 }

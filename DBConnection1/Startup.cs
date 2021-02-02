@@ -29,12 +29,14 @@ namespace BlazorServerSide
             services.RegisterDataMapperServices();
             services.RegisterWorkflowServices();
             services.RegisterWorkflowMapperServices();
-
+            
             var repositoryOptions = Configuration.GetSection("Repository").Get<RepositoryOptions>();
             services.AddDbContext<AppDataContext>(ob => ob.UseLazyLoadingProxies().UseSqlServer(repositoryOptions.ConnectionString));
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddTelerikBlazor();
+
+            services.AddHttpClient();
 
             //obacht
             services.AddSingleton<GlobalVariables>();

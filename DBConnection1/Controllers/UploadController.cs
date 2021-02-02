@@ -10,11 +10,11 @@ namespace BlazorServerSide.Controllers
     [Route("api/[controller]/[action]")]
     public class UploadController : Controller
     {
-        public IWebHostEnvironment HostingEnvironment { get; set; }
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         public UploadController(IWebHostEnvironment hostingEnvironment)
         {
-            HostingEnvironment = hostingEnvironment;
+            _webHostEnvironment = hostingEnvironment;
         }
 
         [HttpPost]
@@ -29,13 +29,13 @@ namespace BlazorServerSide.Controllers
                     // Some browsers send file names with full path.
                     // We are only interested in the file name.
                     var fileName = Path.GetFileName(fileContent.FileName.ToString().Trim('"'));
-                    var physicalPath = Path.Combine("C:\\Users\\ludwi\\source\\repos\\Paranemi\\DBConnection1\\DBConnection1\\wwwroot\\Images", fileName);
+                    string path = @$"{_webHostEnvironment.WebRootPath}\Images\{file.FileName}";
 
                     // Implement security mechanisms here - prevent path traversals,
                     // check for allowed extensions, types, size, content, viruses, etc.
                     // This sample always saves the file to the root and is not sufficient for a real application.
 
-                    using (var fileStream = new FileStream(physicalPath, FileMode.Create))
+                    using (var fileStream = new FileStream(path, FileMode.Create))
                     {
                         await file.CopyToAsync(fileStream);
                     }
@@ -52,5 +52,37 @@ namespace BlazorServerSide.Controllers
             // Return an empty string message in this case
             return new EmptyResult();
         }
+
+        [HttpPost]
+        public ActionResult Remove(string fileToRemove) // must match RemoveField which defaults to "files"
+        {
+            if (fileToRemove != null)
+            {
+                try
+                {
+                    var fileName = Path.GetFileName(fileToRemove);
+                    var physicalPath = Path.Combine(_webHostEnvironment.WebRootPath, fileName);
+
+                    if (System.IO.File.Exists(physicalPath))
+                    {
+                        // Implement security mechanisms here - prevent path traversals,
+                        // check for allowed extensions, types, permissions, etc.
+                        // this sample always deletes the file from the root and is not sufficient for a real application.
+
+                        System.IO.File.Delete(physicalPath);
+                    }
+                }
+                catch
+                {
+                    // Implement error handling here, this example merely indicates an upload failure.
+                    Response.StatusCode = 500;
+                    Response.WriteAsync("some error message"); // custom error message
+                }
+            }
+
+            // Return an empty string message in this case
+            return new EmptyResult();
+        }
     }
+
 }

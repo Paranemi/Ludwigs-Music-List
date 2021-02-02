@@ -10,7 +10,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Include="wwwroot\css\KendoUi\variables.scss" />
     <None Include="wwwroot\Images\endgame.jpg" />
     <None Include="wwwroot\Images\grsch.jpg" />
     <None Include="wwwroot\Images\jom.jpg" />

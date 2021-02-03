@@ -25,6 +25,31 @@ html, body {
     /*flex:1 1 auto;*/
 }
 
+.upload-Button {
+    font-size:small;
+    width: 100px;
+    height: 30px;
+    color: whitesmoke;
+    border-radius: 15px;
+    border: none;
+    background-color: rgb(255,165,0);
+}
+
+    .upload-button:hover {
+        background-color: #ffb123;
+        color: whitesmoke;
+        font-weight: bold;
+        transform: scale(1.05);
+    }
+
+    .upload-button:active {
+        background-color: #ffb123;
+        box-shadow: 0 5px #666;
+        transform: translateY(1px);
+        border: none;
+        outline: none;
+    }
+
 .val-tooltip {
     position: relative;
     display: flex;

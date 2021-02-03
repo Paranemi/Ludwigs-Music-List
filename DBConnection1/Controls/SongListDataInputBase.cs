@@ -30,9 +30,16 @@ namespace BlazorServerSide.Controls
         public void HideWindow()
         {
             Visible = false;
+
+            SongName = string.Empty;
+            AlbumName = string.Empty;
+            ArtistName = string.Empty;
+            ReleaseDate = string.Empty;
+            LinkYT = string.Empty;
+            LinkSP = string.Empty;
+            Cover = string.Empty;
         }
 
-        
         protected void CheckBoxChangeHandler(bool checkBoxValue)
         {
             if (checkBoxValue)
@@ -41,31 +48,30 @@ namespace BlazorServerSide.Controls
             }
         }
 
-
         public void AddSong()
         {
 
             Visible = false;
 
 
-            var album = new AlbumViewModel()
-            {
-                Name = AlbumName,
-                ImageUrl = Cover,
-                ReleaseDate = DateTime.Parse(ReleaseDate),
-            };
-            AlbumWorkflow.CreateAlbum(album);
+            //var album = new AlbumViewModel()
+            //{
+            //    Name = AlbumName,
+            //    ImageUrl = Cover,
+            //    ReleaseDate = DateTime.Parse(ReleaseDate),
+            //};
+            //AlbumWorkflow.CreateAlbum(album);
 
-            var artist = new ArtistViewModel()
-            {
-                Name = ArtistName,
+            //var artist = new ArtistViewModel()
+            //{
+            //    Name = ArtistName,
 
-            };
+            //};
 
-            if (!AddArtistDetails)
-            {
-                ArtistWorkflow.CreateArtist(artist);
-            }
+            //if (!AddArtistDetails)
+            //{
+            //    ArtistWorkflow.CreateArtist(artist);
+            //}
 
             //var song = new SongViewModel()
             //{
@@ -77,7 +83,6 @@ namespace BlazorServerSide.Controls
             //};
             //SongWorkflow.CreateSong(song, album, artist);
         }
-
 
         protected void SongNameValueChanged(string Value)
         {
@@ -99,7 +104,7 @@ namespace BlazorServerSide.Controls
         {
             LinkSP = Value.Substring(Value.IndexOf("track/") + 6);
         }
-        protected void CoverValueChanged(string Value)
+        protected void ClickHandler(string Value)
         {
             Cover = Value;
         }

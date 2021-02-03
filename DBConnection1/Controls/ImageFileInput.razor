@@ -1,73 +1,65 @@
 ﻿@using System.IO
 @inject NavigationManager NavigationManager
-@*@inject HttpClient Http*@
+@inject HttpClient Http
 
+<div class="validation-container">
+    <div>
+        <InputFile class="validation-input" OnChange="LoadImage" />
+        @if (buttonVisible)
+        {
+            <button class="upload-Button" @onclick="@(() => OnClick.InvokeAsync(Value))">Use Image</button>
+        }
+        
+    </div>
+    
+    @if (string.IsNullOrEmpty(Value))
+    {
+        <div class="val-tooltip">
+            <p><strong>!</strong></p>
+            <span class="val-tooltiptext">@Value</span>
+        </div>
+    }
+</div>
 
-
-<TelerikUpload SaveUrl="@SaveUrl" RemoveUrl="@RemoveUrl"
-               SaveField="file" RemoveField="fileToRemove"
-               AllowedExtensions="@( new List<string>() { ".jpg", ".png", ".jpeg" } )"
-               MaxFileSize="2048000000" MinFileSize="1024">
-</TelerikUpload>
 
 @code {
-    // One way to define relative paths is to put the desired URL here.
-    // This can be a full URL such as https://mydomain/myendpoint/save
-    public string SaveUrl => ToAbsoluteUrl("api/upload/save");
-    public string RemoveUrl => ToAbsoluteUrl("api/upload/remove");
+
+    [Parameter]
+    public EventCallback<string> OnClick { get; set; }
+    [Parameter]
+    public string Value { get; set; }
+    public bool buttonVisible { get; set; } = false;
+    public string imageUri { get; set; }
+    long maxFileSize = 1024 * 1024 * 15;
+    async Task LoadImage(InputFileChangeEventArgs e)
+    {
+        //client side
+        Value = e.File.Name;
+        var imageFile = await e.File.RequestImageFileAsync("image/jpg", 1920, 1080);
+        using Stream fileStream = imageFile.OpenReadStream(maxFileSize);
+        using MemoryStream ms = new();
+
+        await fileStream.CopyToAsync(ms);
+
+        //standard data uri
+        imageUri = $"data:image/jpg;base64,{Convert.ToBase64String(ms.ToArray())}";
+        //server
+        var content = new MultipartFormDataContent
+    {
+            {
+                //file muss bei controller auch file heißen
+                new ByteArrayContent(ms.ToArray()),
+                            "\"file\"",
+                            e.File.Name
+            }
+        };
+
+        var response = Http.PostAsync(ToAbsoluteUrl("api/upload/save"), content);
+        buttonVisible = true;
+    }
 
     public string ToAbsoluteUrl(string url)
     {
         return $"{NavigationManager.BaseUri}{url}";
     }
 }
-
-
-
-
-
-
-
-
-@*<p>
-        <InputFile OnChange="LoadImage" />
-        @Value
-    </p>
-
-    <img src="@imageUri" />
-
-    @code {
-        public string Value { get; set; }
-        public string imageUri { get; set; }
-        long maxFileSize = 1024 * 1024 * 15;
-        async Task LoadImage(InputFileChangeEventArgs e)
-        {
-            //client side
-            Value = e.File.Name;
-            var imageFile = await e.File.RequestImageFileAsync("image/jpg", 1920, 1080);
-            using Stream fileStream = imageFile.OpenReadStream(maxFileSize);
-            using MemoryStream ms = new();
-
-            await fileStream.CopyToAsync(ms);
-
-            //standard data uri
-            imageUri = $"data:image/jpg;base64,{Convert.ToBase64String(ms.ToArray())}";
-
-            //server
-            var content = new MultipartFormDataContent
-            {
-                {
-                    //file muss bei controller auch file heißen
-                    new ByteArrayContent(ms.ToArray()),
-                                "\"file\"",
-                                e.File.Name
-                }
-            };
-
-            var response = Http.PostAsync("/FileSave", content);
-
-
-
-
-        }
-    }*@

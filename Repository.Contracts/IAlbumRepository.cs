@@ -13,6 +13,8 @@ namespace MusicListWorkflow.Contracts
 
         IAlbumDomainModel GetAlbumByName(string albumName);
 
+        List<IAlbumDomainModel> GetAllAlbums();
+
         Guid GetAlbumIdByName(string albumName);
 
         void UpdateAlbumById(Guid albumId);

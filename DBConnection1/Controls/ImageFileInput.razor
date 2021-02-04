@@ -3,22 +3,20 @@
 @inject HttpClient Http
 
 <div class="validation-container">
-    <div>
-        <InputFile class="validation-input" OnChange="LoadImage" />
-        @if (buttonVisible)
-        {
-            <button class="upload-Button" @onclick="@(() => OnClick.InvokeAsync(Value))">Use Image</button>
-        }
-        
-    </div>
-    
     @if (string.IsNullOrEmpty(Value))
     {
         <div class="val-tooltip">
             <p><strong>!</strong></p>
-            <span class="val-tooltiptext">@Value</span>
         </div>
     }
+    <div>
+        <InputFile class="upload-input" OnChange="LoadImage" />
+        @if (buttonVisible)
+        {
+            <button class="upload-Button" @onclick="@(() => OnClick.InvokeAsync(Value))">Use Image</button>
+        }
+
+    </div>
 </div>
 
 

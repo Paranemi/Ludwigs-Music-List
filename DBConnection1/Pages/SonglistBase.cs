@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MusicListWorkflow.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ViewModels;
@@ -14,6 +15,8 @@ namespace BlazorServerSide.Pages
         protected List<ISongViewModel> songlist;
 
         [Inject]
+        public NavigationManager UriHelper { get; set; }
+        [Inject]
         public GlobalVariables globalVariables { get; set; }
         [Inject]
         public ISongWorkflow SongWorkflow { get; set; }
@@ -27,7 +30,6 @@ namespace BlazorServerSide.Pages
             songlist = SongWorkflow.GetAllSongs();
         }
 
-        protected string bindingvalue;
         protected void ChangeHandler(bool value, string songName)
         {
             if (value)
@@ -39,14 +41,7 @@ namespace BlazorServerSide.Pages
                     Song = SongWorkflow.GetSongByName(songName)
                 };
                 LikedSongWorkflow.CreateLikedSong(likedSong);
-
-                bindingvalue = songName;
             }
-            else
-            {
-                bindingvalue = "";
-            }
-
         }
     }
 }

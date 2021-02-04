@@ -29,6 +29,19 @@ namespace MusicListWorkflow
             _artistRepository.DeleteArtistById(artistId);
         }
 
+        public List<IArtistViewModel> GetAllArtists()
+        {
+            List<IArtistViewModel> listViewModel = new List<IArtistViewModel>();
+            var allElementsDomainModel = _artistRepository.GetAllArtists();
+
+            foreach (var item in allElementsDomainModel)
+            {
+                listViewModel.Add(_artistLogicMapper.ToViewModel(item));
+            }
+
+            return listViewModel;
+        }
+
         public IArtistViewModel GetArtistById(Guid artistId)
         {
             var domainModel = _artistRepository.GetArtistById(artistId);

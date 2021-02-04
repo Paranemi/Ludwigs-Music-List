@@ -1,12 +1,10 @@
 ﻿@page "/songlist"
 @using Telerik.Blazor.Components
-@using BlazorServerSide.Controls
 @using ViewModels.Contracts
 @inherits SonglistBase
 
 <TelerikGrid Resizable="true"
              Data="@songlist"
-             Reorderable="true"
              Sortable="true"
              SortMode="@SortMode.Multiple"
              FilterMode="Telerik.Blazor.GridFilterMode.FilterMenu">
@@ -36,7 +34,26 @@
                 }
             </Template>
         </GridColumn>
+        <GridColumn>
+            <Template>
+                @{
+                    var song = context as ISongViewModel;
+                    <button @onclick="(() => DeleteSong(song.SongId))">Delete</button>
+                    <button>Update</button>
+                }
+            </Template>
+        </GridColumn>
     </GridColumns>
 </TelerikGrid>
 <SongListDataInput></SongListDataInput>
-<p class="welcome-text">@bindingvalue</p>
+@{
+
+//delegate methode übergben
+//confirmation zurückgeben if else verzweigung
+    void DeleteSong(Guid SongId)
+    {
+        <NotificationWindow Visible="true"></NotificationWindow>
+        SongWorkflow.DeleteSongById(SongId);
+        UriHelper.NavigateTo("/songlist", true);
+    }
+}

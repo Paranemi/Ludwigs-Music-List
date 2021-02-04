@@ -42,11 +42,9 @@ namespace EntityFrameworkRepository
 
         public void DeleteSongById(Guid songId)
         {
-            var song = new SongEntityModel
-            {
-                SongId = songId
-            };
-            _context.Song.Remove(song);
+            var existingSongEntityModel = _context.Song.Single(s => s.SongId == songId);
+
+            _context.Song.Remove(existingSongEntityModel);
             _context.SaveChanges();
         }
 

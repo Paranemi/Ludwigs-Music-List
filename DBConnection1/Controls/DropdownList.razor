@@ -1,0 +1,36 @@
+﻿<div class="validation-container">
+    <button class="dropbtn" @onclick="()=>DropdownVisibility = !DropdownVisibility">^</button>
+    @if (DropdownVisibility)
+    {
+        <form class="dropdown-list">
+            <select @onchange="SetDropDownSelectedValue" class="dropdown-list" size="5">
+                @foreach (var model in modelList)
+                {
+                    <option @onclick="()=>DropdownVisibility = false">@model</option>
+                }
+            </select>
+        </form>
+    }
+</div>
+    @code {
+        protected bool DropdownVisibility { get; set; } = false;
+
+        List<string> modelList;
+
+        [Parameter]
+        public string Value { get; set; }
+
+        protected override void OnInitialized()
+        {
+            modelList = new List<string>();
+            for (int i = 0; i < 9; i++)
+            {
+                modelList.Add(i+"");
+            }
+        }
+
+        protected void SetDropDownSelectedValue(ChangeEventArgs eventArgs)
+        {
+            Value = eventArgs.Value.ToString();
+        }
+    }

@@ -1,6 +1,7 @@
 ﻿using MusicListWorkflow.Contracts;
 using MusicListWorkflow.Contracts.Mapper;
 using System;
+using System.Collections.Generic;
 using ViewModels.Contracts;
 
 namespace MusicListWorkflow
@@ -42,6 +43,19 @@ namespace MusicListWorkflow
         public Guid GetAlbumIdByName(string albumName)
         {
             return _albumRepository.GetAlbumIdByName(albumName);
+        }
+
+        public List<IAlbumViewModel> GetAllAlbums()
+        {
+            List<IAlbumViewModel> listViewModel = new List<IAlbumViewModel>();
+            var allElementsDomainModel = _albumRepository.GetAllAlbums();
+
+            foreach (var item in allElementsDomainModel)
+            {
+                listViewModel.Add(_albumLogicMapper.ToViewModel(item));
+            }
+
+            return listViewModel;
         }
 
         public void UpdateAlbumById(Guid albumId)

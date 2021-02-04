@@ -62,6 +62,20 @@ namespace EntityFrameworkRepository
             return SelectedAlbumAlbumId;
         }
 
+        public List<IAlbumDomainModel> GetAllAlbums()
+        {
+            List<IAlbumDomainModel> listDomainModel = new List<IAlbumDomainModel>();
+            List<AlbumEntityModel> allElementsEntityModel;
+            allElementsEntityModel = _context.Album.ToList();
+
+            foreach (var item in allElementsEntityModel)
+            {
+                listDomainModel.Add(_albumDataMapper.ToDomainModel(item));
+            }
+
+            return listDomainModel;
+        }
+
         public void UpdateAlbumById(Guid albumId)
         {
             throw new NotImplementedException();

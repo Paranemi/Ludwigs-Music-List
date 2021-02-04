@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using MusicListWorkflow.Contracts;
 using System;
+using System.Collections.Generic;
 using ViewModels;
 using ViewModels.Contracts;
 
@@ -20,6 +21,13 @@ namespace BlazorServerSide.Controls
         [Parameter]
         public bool Visible { get; set; } = false;
 
+        protected bool DropdownVisibility { get; set; } = false;
+
+        protected List<IAlbumViewModel> albumList;
+        protected List<IArtistViewModel> artistList;
+
+        [Inject]
+        public NavigationManager UriHelper { get; set; }
         [Inject]
         public IArtistWorkflow ArtistWorkflow { get; set; }
         [Inject]
@@ -40,6 +48,21 @@ namespace BlazorServerSide.Controls
             Cover = string.Empty;
         }
 
+        protected void SetAlbumDropDownSelectedValue(ChangeEventArgs eventArgs)
+        {
+            AlbumName = eventArgs.Value.ToString();
+        }
+        protected void SetArtistDropDownSelectedValue(ChangeEventArgs eventArgs)
+        {
+            ArtistName = eventArgs.Value.ToString();
+        }
+
+        protected override void OnInitialized()
+        {
+            albumList = AlbumWorkflow.GetAllAlbums();
+            artistList = ArtistWorkflow.GetAllArtists();
+        }
+
         protected void CheckBoxChangeHandler(bool checkBoxValue)
         {
             if (checkBoxValue)
@@ -53,35 +76,32 @@ namespace BlazorServerSide.Controls
 
             Visible = false;
 
+            var album = new AlbumViewModel
+            {
+                Name = AlbumName,
+                ImageUrl = Cover,
+                ReleaseDate = DateTime.Parse(ReleaseDate)
+            };
+            AlbumWorkflow.CreateAlbum(album);
 
-            //var album = new AlbumViewModel()
-            //{
-            //    Name = AlbumName,
-            //    ImageUrl = Cover,
-            //    ReleaseDate = DateTime.Parse(ReleaseDate),
-            //};
-            //AlbumWorkflow.CreateAlbum(album);
+            var artist = new ArtistViewModel()
+            {
+                Name = ArtistName,
+            };
 
-            //var artist = new ArtistViewModel()
-            //{
-            //    Name = ArtistName,
+            ArtistWorkflow.CreateArtist(artist);
 
-            //};
+            var song = new SongViewModel()
+            {
+                Name = SongName,
+                LinkYT = LinkYT,
+                LinkSptfy = LinkSP,
+                Album = AlbumWorkflow.GetAlbumByName(AlbumName),
+                Artist = ArtistWorkflow.GetArtistByName(ArtistName)
+            };
+            SongWorkflow.CreateSong(song, AlbumWorkflow.GetAlbumIdByName(AlbumName), ArtistWorkflow.GetArtistIdByName(ArtistName));
 
-            //if (!AddArtistDetails)
-            //{
-            //    ArtistWorkflow.CreateArtist(artist);
-            //}
-
-            //var song = new SongViewModel()
-            //{
-            //    Name = SongName,
-            //    LinkYT = LinkYT,
-            //    LinkSptfy = LinkSP,
-            //    Album = AlbumWorkflow.GetAlbumByName(AlbumName),
-            //    Artist = ArtistWorkflow.GetArtistByName(ArtistName)
-            //};
-            //SongWorkflow.CreateSong(song, album, artist);
+            UriHelper.NavigateTo("/songlist", true);
         }
 
         protected void SongNameValueChanged(string Value)

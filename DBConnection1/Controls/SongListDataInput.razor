@@ -17,18 +17,46 @@
     <WindowContent>
         <div class="sign-form">
             <ValidationInput placeholder="Song Name" ValueChangedCallback="SongNameValueChanged" Value="@SongName"></ValidationInput>
-            <ValidationInput placeholder="Album Name" ValueChangedCallback="AlbumNameValueChanged" Value="@AlbumName"></ValidationInput>
+            <div class="validation-container">
+                <ValidationInput placeholder="Album Name" ValueChangedCallback="AlbumNameValueChanged" Value="@AlbumName"></ValidationInput>
+                <button class="dropbtn" @onclick="()=>DropdownVisibility = !DropdownVisibility">^</button>
+                @if (DropdownVisibility)
+                {
+                    <form class="dropdown-list">
+                        <select @onchange="SetAlbumDropDownSelectedValue" class="dropdown-list" size="5">
+                            @foreach (var album in albumList)
+                            {
+                                <option @onclick="()=>DropdownVisibility = false">@album.Name</option>
+                            }
+                        </select>
+                    </form>
+                }
+            </div>
             <ImageFileInput OnClick="ClickHandler"></ImageFileInput>
             <ValidationInput placeholder="YYYY.MM.DD (Release Date)" ValueChangedCallback="ReleaseDateValueChanged" Value="@ReleaseDate"></ValidationInput>
             <ValidationInput placeholder="Youtube Link" ValueChangedCallback="LinkYTValueChanged" Value="@LinkYT"></ValidationInput>
             <ValidationInput placeholder="Spotify Link" ValueChangedCallback="LinkSPValueChanged" Value="@LinkSP"></ValidationInput>
-            <ValidationInput placeholder="Artist Name" ValueChangedCallback="ArtistNameValueChanged" Value="@ArtistName"></ValidationInput>
+            <div class="validation-container">
+                <ValidationInput placeholder="Artist Name" ValueChangedCallback="ArtistNameValueChanged" Value="@ArtistName"></ValidationInput>
+                <button class="dropbtn" @onclick="()=>DropdownVisibility = !DropdownVisibility">^</button>
+                @if (DropdownVisibility)
+                {
+                    <form class="dropdown-list">
+                        <select @onchange="SetArtistDropDownSelectedValue" class="dropdown-list" size="5">
+                            @foreach (var artist in artistList)
+                            {
+                                <option @onclick="()=>DropdownVisibility = false">@artist.Name</option>
+                            }
+                        </select>
+                    </form>
+                }
+            </div>
             @*<TelerikCheckBox ValueChanged="@((bool CheckBoxValue) => CheckBoxChangeHandler(CheckBoxValue))">Add Artist Details</TelerikCheckBox>
-            @if (AddArtistDetails)
-            {
-                <ArtistDataInput ArtistName="@ArtistName"></ArtistDataInput>
-                AddArtistDetails = false;
-            }*@
+        @if (AddArtistDetails)
+        {
+            <ArtistDataInput ArtistName="@ArtistName"></ArtistDataInput>
+            AddArtistDetails = false;
+        }*@
             <button class="sign-button" type="submit" @onclick="AddSong">Confirm</button>
         </div>
     </WindowContent>

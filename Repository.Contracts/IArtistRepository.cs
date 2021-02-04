@@ -13,6 +13,8 @@ namespace MusicListWorkflow.Contracts
 
         IArtistDomainModel GetArtistByName(string artistName);
 
+        List<IArtistDomainModel> GetAllArtists();
+
         void UpdateArtist(IArtistDomainModel artistDomainModel);
 
         Guid GetArtistIdByName(string artistName);

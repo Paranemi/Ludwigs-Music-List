@@ -56,6 +56,20 @@ namespace EntityFrameworkRepository
             return _artistDataMapper.ToDomainModel(_context.Artist.Single(b => b.Name.Contains(artistName)));
         }
 
+        public List<IArtistDomainModel> GetAllArtists()
+        {
+            List<IArtistDomainModel> listDomainModel = new List<IArtistDomainModel>();
+            List<ArtistEntityModel> allElementsEntityModel;
+            allElementsEntityModel = _context.Artist.ToList();
+
+            foreach (var item in allElementsEntityModel)
+            {
+                listDomainModel.Add(_artistDataMapper.ToDomainModel(item));
+            }
+
+            return listDomainModel;
+        }
+
         public Guid GetArtistIdByName(string artistName)
         {
             var artist = _context.Artist.Single(b => b.Name.Contains(artistName));

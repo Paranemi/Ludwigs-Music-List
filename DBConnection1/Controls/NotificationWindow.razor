@@ -1,0 +1,26 @@
+﻿<TelerikWindow Class="PopUpWindow"
+               Width="1000x"
+               Height="500px"
+               Top="20%"
+               Left="45%"
+               Visible="Visible">
+    <WindowTitle>
+        <strong>Warning!</strong>
+    </WindowTitle>
+    <WindowContent>
+        <div class="sign-form">
+            <button class="sign-button" @onclick="CloseWindow">Confirm</button>
+            <button class="sign-button" @onclick="CloseWindow">Cancel</button>
+        </div>             
+    </WindowContent>
+</TelerikWindow>
+
+@code {
+    [Parameter]
+    public bool Visible { get; set; }
+
+    void CloseWindow()
+    {
+        Visible = false;
+    }
+}

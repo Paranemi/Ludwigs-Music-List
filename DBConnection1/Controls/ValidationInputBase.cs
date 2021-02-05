@@ -6,6 +6,10 @@ namespace BlazorServerSide.Controls
 {
     public class ValidationInputBase : ComponentBase
     {
+
+        [Parameter]
+        public RenderFragment ChildContent { get; set; }
+
         [Parameter]
         public EventCallback<string> ValueChangedCallback { get; set; }
 

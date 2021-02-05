@@ -25,9 +25,6 @@ namespace BlazorServerSide.Pages
 
         protected void Test()
         {
-      //      var user = Db.User.Where(b => b.UserName.Contains(Username));
-        //    var pw = Db.User.Where(b => b.Password.Contains(Password));
-
             var user = UserWorkflow.GetUserByName(Username);
 
             if (user != null)

@@ -21,8 +21,6 @@ namespace BlazorServerSide.Controls
         [Parameter]
         public bool Visible { get; set; } = false;
 
-        protected bool DropdownVisibility { get; set; } = false;
-
         protected List<IAlbumViewModel> albumList;
         protected List<IArtistViewModel> artistList;
 
@@ -46,16 +44,7 @@ namespace BlazorServerSide.Controls
             LinkYT = string.Empty;
             LinkSP = string.Empty;
             Cover = string.Empty;
-        }
-
-        protected void SetAlbumDropDownSelectedValue(ChangeEventArgs eventArgs)
-        {
-            AlbumName = eventArgs.Value.ToString();
-        }
-        protected void SetArtistDropDownSelectedValue(ChangeEventArgs eventArgs)
-        {
-            ArtistName = eventArgs.Value.ToString();
-        }
+        }     
 
         protected override void OnInitialized()
         {

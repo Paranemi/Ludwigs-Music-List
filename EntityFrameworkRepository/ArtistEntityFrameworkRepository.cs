@@ -53,7 +53,15 @@ namespace EntityFrameworkRepository
 
         public IArtistDomainModel GetArtistByName(string artistName)
         {
-            return _artistDataMapper.ToDomainModel(_context.Artist.Single(b => b.Name.Contains(artistName)));
+            try
+            {
+                return _artistDataMapper.ToDomainModel(_context.Artist.Single(b => b.Name.Contains(artistName)));
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         public List<IArtistDomainModel> GetAllArtists()
@@ -80,8 +88,15 @@ namespace EntityFrameworkRepository
         public void UpdateArtist(IArtistDomainModel artistDomainModel)
         {
             var artistEntityModel = _artistDataMapper.ToEntityModel(artistDomainModel);
-            _context.Update(artistEntityModel);
+
+            var existingArtistEntityModel = _context.Artist.Single(a => a.ArtistId == artistEntityModel.ArtistId);
+
+            existingArtistEntityModel.Founded = artistEntityModel.Founded;
+            existingArtistEntityModel.ArtistImageUrl = artistEntityModel.ArtistImageUrl;
+
+            _context.Update(existingArtistEntityModel);
             _context.SaveChanges();
+
         }
     }
 }

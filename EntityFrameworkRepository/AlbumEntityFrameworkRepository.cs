@@ -52,7 +52,14 @@ namespace EntityFrameworkRepository
 
         public IAlbumDomainModel GetAlbumByName(string albumName)
         {
-            return _albumDataMapper.ToDomainModel(_context.Album.Single(b => b.Name.Contains(albumName)));
+            try
+            {
+                return _albumDataMapper.ToDomainModel(_context.Album.Single(b => b.Name.Contains(albumName)));
+            }
+            catch(Exception)
+            {
+                return null;
+            }
         }
 
         public Guid GetAlbumIdByName(string albumName)

@@ -41,7 +41,7 @@ namespace BlazorServerSide.Controls
         {
             ArtistName = Value;
         }
-        protected void CoverValueChanged(string Value)
+        protected void ClickHandler(string Value)
         {
             Cover = Value;
         }

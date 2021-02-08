@@ -50,8 +50,16 @@ namespace MusicListWorkflow
 
         public IArtistViewModel GetArtistByName(string artistName)
         {
-            var domainModel = _artistRepository.GetArtistByName(artistName);
-            return _artistLogicMapper.ToViewModel(domainModel);
+            try
+            {
+                var domainModel = _artistRepository.GetArtistByName(artistName);
+                return _artistLogicMapper.ToViewModel(domainModel);
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         public Guid GetArtistIdByName(string artistName)

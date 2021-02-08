@@ -60,25 +60,46 @@ namespace BlazorServerSide.Controls
             }
         }
 
+        protected void AlbumDropdownOnChangeHandler(object theUserInput)
+        {
+            try
+            {
+                var existingAlbum = AlbumWorkflow.GetAlbumByName(theUserInput as string);
+                Cover = existingAlbum.ImageUrl;
+                ReleaseDate = existingAlbum.ReleaseDate.ToString();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
         public void AddSong()
         {
 
             Visible = false;
-
-            var album = new AlbumViewModel
+            var albumExist = AlbumWorkflow.GetAlbumByName(AlbumName);
+            if (albumExist == null)
             {
-                Name = AlbumName,
-                ImageUrl = Cover,
-                ReleaseDate = DateTime.Parse(ReleaseDate)
-            };
-            AlbumWorkflow.CreateAlbum(album);
+                var album = new AlbumViewModel
+                {
+                    Name = AlbumName,
+                    ImageUrl = Cover,
+                    ReleaseDate = DateTime.Parse(ReleaseDate)
+                };
+                AlbumWorkflow.CreateAlbum(album);
+            }
 
-            var artist = new ArtistViewModel()
+
+            var artistExist = ArtistWorkflow.GetArtistByName(ArtistName);
+            if (artistExist == null)
             {
-                Name = ArtistName,
-            };
-
-            ArtistWorkflow.CreateArtist(artist);
+                var artist = new ArtistViewModel()
+                {
+                    Name = ArtistName,
+                }; 
+                ArtistWorkflow.CreateArtist(artist);
+            }
 
             var song = new SongViewModel()
             {
@@ -107,7 +128,7 @@ namespace BlazorServerSide.Controls
         }
         protected void LinkYTValueChanged(string Value)
         {
-            LinkYT = Value.Substring(Value.IndexOf('=') + 1);
+            LinkYT = Value.Substring(Value.IndexOf("www.youtube.com/watch?v=") + 24);
         }
         protected void LinkSPValueChanged(string Value)
         {

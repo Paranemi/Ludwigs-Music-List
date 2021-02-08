@@ -25,6 +25,7 @@ namespace BlazorServerSide.Pages
 
         protected void Test()
         {
+
             var user = UserWorkflow.GetUserByName(Username);
 
             if (user != null)

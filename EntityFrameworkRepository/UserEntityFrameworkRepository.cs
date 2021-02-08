@@ -34,7 +34,14 @@ namespace EntityFrameworkRepository
         
         public IUserDomainModel GetUserByName(string userName)
         {
-            return _userDataMapper.ToDomainModel(_context.User.Single(b => b.UserName.Contains(userName)));
+            try
+            {
+                return _userDataMapper.ToDomainModel(_context.User.Single(b => b.UserName.Contains(userName)));
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
         }
     }
 }

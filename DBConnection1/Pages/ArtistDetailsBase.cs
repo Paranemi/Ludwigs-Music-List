@@ -35,33 +35,16 @@ namespace BlazorServerSide.Pages
         protected bool ArtistInput { get; set; } = false;
         protected bool PersonInput { get; set; } = false;
 
-     //   protected List<IArtistViewModel> artist;
         protected List<IPersonViewModel> persons;
 
         protected override void OnInitialized()
         {
-            //  artist.Add(ArtistWorkflow.GetArtistByName(ArtistName));
             var artist = ArtistWorkflow.GetArtistByName(ArtistName);
             Founded = artist.Founded;
             ArtistImageUrl = artist.ArtistImageUrl;
 
             persons = PersonWorkflow.GetPersonByArtistId(artist.ArtistId);
-            //PersonImageUrl = person.ImageUrl;
-            //FirstName = person.FirstName;
-            //LastName = person.LastName;
-            //From = person.From;
-            //To = person.To;
 
-        }
-
-        private void SetElements()
-        {
-
-            //foreach (var artistDetails in artist)
-            //{
-            //    Founded = artistDetails.Founded;
-            //    ArtistImageUrl = artistDetails.ArtistImageUrl;
-            //}
         }
     }
 }

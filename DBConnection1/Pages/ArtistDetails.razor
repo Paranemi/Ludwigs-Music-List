@@ -3,14 +3,14 @@
 @inherits ArtistDetailsBase
 
 <div class="alist-form">
-    <img class="artist-img" src="./Images/@(string.IsNullOrEmpty(ArtistImageUrl) ? "ArtistUnknown" : ArtistImageUrl).jpg" />
+    <img class="artist-img" src="./Images/@(string.IsNullOrEmpty(ArtistImageUrl) ? "ArtistUnknown.jpg" : ArtistImageUrl)" />
     @if (Founded == 0)
     {
         <p><strong>@ArtistName</strong></p>
     }
     else
     {
-        <p><strong style="font-size:large">@ArtistName</strong> was founded in @(Founded).</p>
+        <p><strong style="font-size:large">@ArtistName was founded in @(Founded).</strong></p>
     }
 
     @if (string.IsNullOrEmpty(ArtistImageUrl))
@@ -38,7 +38,7 @@
     {
         foreach (var item in persons)
         {
-            <img src="./Images/@(PersonImageUrl=item.ImageUrl).jpg" />
+            <img src="./Images/@(PersonImageUrl=item.ImageUrl)" />
             if (item.To == 0)
             {
                 <p>@(FirstName = item.FirstName) @(LastName = item.LastName) since @(From = item.From).</p>

@@ -36,8 +36,16 @@ namespace MusicListWorkflow
 
         public IAlbumViewModel GetAlbumByName(string albumName)
         {
-            var domainModel = _albumRepository.GetAlbumByName(albumName);
-            return _albumLogicMapper.ToViewModel(domainModel);
+            try
+            {
+                var domainModel = _albumRepository.GetAlbumByName(albumName);
+                return _albumLogicMapper.ToViewModel(domainModel);
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
 
         public Guid GetAlbumIdByName(string albumName)

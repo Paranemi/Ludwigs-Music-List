@@ -7,7 +7,9 @@
              Data="@songlist"
              Sortable="true"
              SortMode="@SortMode.Multiple"
-             FilterMode="Telerik.Blazor.GridFilterMode.FilterMenu">
+             FilterMode="Telerik.Blazor.GridFilterMode.FilterMenu"
+             OnDelete="@DeleteSongHandler"
+             EditMode="GridEditMode.Popup">
     <GridColumns>
         <GridColumn Field="@nameof(ISongViewModel.Name)" Title="Song Name" Editable="true">
             <Template>
@@ -34,28 +36,24 @@
                 }
             </Template>
         </GridColumn>
-        <GridColumn>
-            <Template>
-                @{
-                    var song = context as ISongViewModel;
-                    <button @onclick="(() => DeleteSong(song.SongId))">Delete</button>
-                    <button>Update</button>
-                }
-            </Template>
-        </GridColumn>
+        <GridCommandColumn>
+            <GridCommandButton Command="Edit" Icon="delete">Edit</GridCommandButton>
+            <GridCommandButton Command="Delete" Icon="delete">Delete</GridCommandButton>        
+        </GridCommandColumn>
     </GridColumns>
 </TelerikGrid>
 <SongListDataInput></SongListDataInput>
 
 
 @{
-
     //delegate methode übergben
     //confirmation zurückgeben if else verzweigung
-    void DeleteSong(Guid SongId)
+    void DeleteSongHandler(GridCommandEventArgs args)
     {
+        var songViewModel = (ISongViewModel)args.Item;
+        
         <NotificationWindow Visible="true"></NotificationWindow>
-        SongWorkflow.DeleteSongById(SongId);
+        SongWorkflow.DeleteSongById(songViewModel.SongId);
         UriHelper.NavigateTo("/songlist", true);
     }
 }

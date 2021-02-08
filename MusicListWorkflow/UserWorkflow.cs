@@ -26,8 +26,15 @@ namespace MusicListWorkflow
 
         public IUserViewModel GetUserByName(string userName)
         {
-            var domainModel = _userRepository.GetUserByName(userName);
-            return _userLogicMapper.ToViewModel(domainModel);
+            try
+            {
+                var domainModel = _userRepository.GetUserByName(userName);
+                return _userLogicMapper.ToViewModel(domainModel);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

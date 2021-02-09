@@ -5,15 +5,27 @@
 <div class="sign-form">
     <p class="welcome-text">Create a new account</p>
 
-    <ValidationInput placeholder="Username" ValueChangedCallback="UserNameValueChanged" Value="@NewUser"></ValidationInput>
-    <ValidationInput placeholder="Password" ValueChangedCallback="PasswordValueChanged" type="password" Value="@Password"></ValidationInput>
-    <ValidationInput placeholder="Confirm Password" ValueChangedCallback="ConfirmValueChanged" type="password" Value="@Confirm"></ValidationInput>
-    <ValidationInput placeholder="SecurityAnswer" ValueChangedCallback="SecurityAnswerValueChanged" Value="@SecurityAnswer"></ValidationInput>
-    <p class="welcome-text">What was the color of your first car?</p>
 
-    <button class="sign-button" type="submit" @onclick="CreateNewUser">Confirm</button>
+    <EditForm Model="@User">
 
-    <p style="color:whitesmoke">@Test</p>
+        <DataAnnotationsValidator />
+
+        <ValidationInput placeholder="Username" ValueChangedCallback="UserNameValueChanged" Value="@User.UserName"></ValidationInput>
+        <ValidationMessage For="@(()=> User.UserName)"></ValidationMessage>
+        <ValidationInput placeholder="Password" ValueChangedCallback="PasswordValueChanged" type="password" Value="@User.Password"></ValidationInput>
+        <ValidationMessage For="@(()=> User.Password)"></ValidationMessage>
+        <ValidationInput placeholder="Confirm Password" ValueChangedCallback="ConfirmValueChanged" type="password" Value="@Confirm"></ValidationInput>
+        <ValidationInput placeholder="SecurityAnswer" ValueChangedCallback="SecurityAnswerValueChanged" Value="@User.SecurityAnswer"></ValidationInput>
+        <ValidationMessage For="@(()=> User.SecurityAnswer)"></ValidationMessage>
+        <br />
+        <br />
+        <p class="welcome-text">What was the color of your first car?</p>
+
+        <button class="sign-button" type="submit" @onclick="CreateNewUser">Confirm</button>
+
+    </EditForm>
+
+        <p style="color:whitesmoke">@Test</p>
 
 
 </div>

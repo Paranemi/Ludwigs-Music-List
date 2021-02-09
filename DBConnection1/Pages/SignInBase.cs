@@ -1,4 +1,5 @@
-﻿using EntityFrameworkRepository.EFModels;
+﻿using BlazorServerSide.Shared;
+using EntityFrameworkRepository.EFModels;
 using Microsoft.AspNetCore.Components;
 using MusicListWorkflow.Contracts;
 using System;
@@ -11,11 +12,9 @@ namespace BlazorServerSide.Pages
     public class SignInBase : ComponentBase
     {
         protected string Day { get; set; } = DateTime.Now.DayOfWeek.ToString();
-        protected string Username { get; set; }
-        protected string Password { get; set; }
         protected string Hallo { get; set; }
 
-        protected UserViewModel User { get; set; } = new UserViewModel();
+        protected Validation User { get; set; } = new Validation();
 
         [Inject]
         public GlobalVariables GlobalVariables { get; set; }
@@ -27,39 +26,33 @@ namespace BlazorServerSide.Pages
         protected void Test()
         {
 
-            var user = UserWorkflow.GetUserByName(Username);
+            var user = UserWorkflow.GetUserByName(User.UserName);
 
             if (user != null)
             {
-                Hallo = "User existiert";
-                if (user.Password == Password)
+                if (user.Password == User.Password)
                 {
-                    Hallo = "User existiert und PW ist richtig";
-                    GlobalVariables.ActiveUser = Username;
+                    GlobalVariables.ActiveUser = User.UserName;
                     UriHelper.NavigateTo("/", true);
                 }
                 else
                 {
-                    Hallo = "User existiert aber PW ist falsch";
+                    Hallo = "password is wrong";
                 }
-            }
-            else
-            {
-                Hallo = "User existiert nicht";
             }
         }
         protected void UserNameChange(ChangeEventArgs eventArgs)
         {
-            Username = eventArgs.Value.ToString();
+            User.UserName = eventArgs.Value.ToString();
         }
 
         protected void UserNameValueChanged(string Value)
         {
-            Username = Value;
+            User.UserName = Value;
         }
         protected void PasswordValueChanged(string Value)
         {
-            Password = Value;
+            User.Password = Value;
         }
 
     }

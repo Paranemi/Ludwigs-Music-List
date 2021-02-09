@@ -9,9 +9,7 @@ namespace ViewModels
     public class UserViewModel : IUserViewModel
     {
         public Guid UserId { get; set; }
-        [Required(ErrorMessage = "user name is required")]
         public string UserName { get; set; }
-        [Required(ErrorMessage = "password is required")]
         public string Password { get; set; }
         public string SecurityAnswer { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorServerSide.Shared;
+using Microsoft.AspNetCore.Components;
 using MusicListWorkflow.Contracts;
 using ViewModels;
 
@@ -6,12 +7,14 @@ namespace BlazorServerSide.Pages
 {
     public class SignUpBase : ComponentBase
     {
-        protected string NewUser { get; set; }
-        protected string Password { get; set; }
+        //protected string NewUser { get; set; }
+        //protected string Password { get; set; }
         protected string Confirm { get; set; }
-        protected string SecurityAnswer { get; set; }
+        //protected string SecurityAnswer { get; set; }
         protected string Test { get; set; }
         protected string Output { get; set; }
+
+        protected Validation User { get; set; } = new Validation();
 
         [Inject]
         public IUserWorkflow UserWorkflow { get; set; }
@@ -24,9 +27,9 @@ namespace BlazorServerSide.Pages
 
                 var user = new UserViewModel()
                 {
-                    UserName = NewUser,
-                    Password = Password,
-                    SecurityAnswer = SecurityAnswer
+                    UserName = User.UserName,
+                    Password = User.Password,
+                    SecurityAnswer = User.SecurityAnswer
                 };
                 UserWorkflow.CreateUser(user);
                 Test = "user wurde angelegt";
@@ -39,7 +42,8 @@ namespace BlazorServerSide.Pages
 
         protected bool Check()
         {
-            if (Password == Confirm)
+
+            if (User.Password == Confirm && !string.IsNullOrEmpty(User.UserName) && !string.IsNullOrEmpty(User.Password) && !string.IsNullOrEmpty(User.SecurityAnswer))
             {
                 return true;
             }
@@ -51,11 +55,11 @@ namespace BlazorServerSide.Pages
 
         protected void UserNameValueChanged(string Value)
         {
-            NewUser = Value;
+            User.UserName = Value;
         }
         protected void PasswordValueChanged(string Value)
         {
-            Password = Value;
+            User.Password = Value;
         }
         protected void ConfirmValueChanged(string Value)
         {
@@ -63,7 +67,7 @@ namespace BlazorServerSide.Pages
         }
         protected void SecurityAnswerValueChanged(string Value)
         {
-            SecurityAnswer = Value;
+            User.SecurityAnswer = Value;
         }
     }
 }

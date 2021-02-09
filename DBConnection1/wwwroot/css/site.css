@@ -133,6 +133,11 @@ html, body {
     height:600px;
 }
 
+.person-img {
+    width: 250px;
+    height: 220px;
+}
+
 .sign-form {
     width: 100%;
     max-width: 330px;
@@ -345,6 +350,7 @@ a, .btn-link {
 
 .validation-message {
     color: red;
+    position:absolute;
 }
 
 #blazor-error-ui {

@@ -1,20 +1,21 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using EntityFrameworkRepository.EFModels;
+using Microsoft.AspNetCore.Components;
 using MusicListWorkflow.Contracts;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using ViewModels;
 
 namespace BlazorServerSide.Pages
 {
     public class SignInBase : ComponentBase
     {
         protected string Day { get; set; } = DateTime.Now.DayOfWeek.ToString();
-
-        [Required(ErrorMessage = "user name is required")]
         protected string Username { get; set; }
-        [Required(ErrorMessage = "password is required")]
         protected string Password { get; set; }
         protected string Hallo { get; set; }
+
+        protected UserViewModel User { get; set; } = new UserViewModel();
 
         [Inject]
         public GlobalVariables GlobalVariables { get; set; }

@@ -16,7 +16,7 @@
                 @{
                     var song = context as ISongViewModel;
                     <TelerikCheckBox ValueChanged="@((bool value) => ChangeHandler(value, song.Name))"></TelerikCheckBox>
-                    <a href="/songdetails/@song.Album.Name/@song.Name">@song.Name</a>
+                    <a href="/songdetails/@song.Album.Name/@song.SongId">@song.Name</a>
                 }
             </Template>
         </GridColumn>
@@ -32,12 +32,12 @@
             <Template>
                 @{
                     var artist = context as ISongViewModel;
-                    <a href="/artistdetails/@artist.Artist.Name">@artist.Artist.Name</a>
+                    <a href="/artistdetails/@artist.Artist.ArtistId">@artist.Artist.Name</a>
                 }
             </Template>
         </GridColumn>
         <GridCommandColumn>
-            <GridCommandButton Command="Edit" Icon="delete">Edit</GridCommandButton>
+            <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
             <GridCommandButton Command="Delete" Icon="delete">Delete</GridCommandButton>        
         </GridCommandColumn>
     </GridColumns>

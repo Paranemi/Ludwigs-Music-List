@@ -1,4 +1,4 @@
-﻿@page "/artistdetails/{ArtistName}"
+﻿@page "/artistdetails/{ArtistId}"
 @using BlazorServerSide.Controls
 @inherits ArtistDetailsBase
 
@@ -13,7 +13,7 @@
         <p><strong style="font-size:large">@ArtistName was founded in @(Founded).</strong></p>
     }
 
-    @if (string.IsNullOrEmpty(ArtistImageUrl))
+    @if (string.IsNullOrEmpty(ArtistImageUrl) && Founded == 0)
     {
 
         <ArtistDataInput ArtistName="@ArtistName"></ArtistDataInput>
@@ -25,9 +25,10 @@
 
     @if (persons.Count == 0)
     {
+        <PersonDataInput ArtistName="@ArtistName"></PersonDataInput>
         <img src="./Images/Unknown.jpg" />
 
-
+        
 
         if (PersonInput)
         {
@@ -38,7 +39,7 @@
     {
         foreach (var item in persons)
         {
-            <img src="./Images/@(PersonImageUrl=item.ImageUrl)" />
+            <img class="person-img" src="./Images/@(PersonImageUrl=item.ImageUrl)" />
             if (item.To == 0)
             {
                 <p>@(FirstName = item.FirstName) @(LastName = item.LastName) since @(From = item.From).</p>
@@ -48,5 +49,6 @@
                 <p>@(FirstName = item.FirstName) @(LastName = item.LastName) from @(From = item.From) to @(To = item.To).</p>
             }
         }
+        <PersonDataInput ArtistName="@ArtistName"></PersonDataInput>
     }
 </div>

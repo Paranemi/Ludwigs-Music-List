@@ -12,6 +12,8 @@ namespace BlazorServerSide.Pages
     public class ArtistDetailsBase : ComponentBase
     {
         [Parameter]
+        public string ArtistId { get; set; }
+        [Parameter]
         public string ArtistName { get; set; }
         [Parameter]
         public int Founded { get; set; }
@@ -39,11 +41,11 @@ namespace BlazorServerSide.Pages
 
         protected override void OnInitialized()
         {
-            var artist = ArtistWorkflow.GetArtistByName(ArtistName);
+            var artist = ArtistWorkflow.GetArtistById(Guid.Parse(ArtistId));
             Founded = artist.Founded;
             ArtistImageUrl = artist.ArtistImageUrl;
 
-            persons = PersonWorkflow.GetPersonByArtistId(artist.ArtistId);
+            persons = PersonWorkflow.GetPersonByArtistId(Guid.Parse(ArtistId));
 
         }
     }

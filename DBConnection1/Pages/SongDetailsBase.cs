@@ -9,16 +9,14 @@ namespace BlazorServerSide.Pages
     public class SongDetailsBase : ComponentBase
     {
         [Parameter]
+        public string SongId { get; set; }
         public string SongName { get; set; }
         [Parameter]
         public string AlbumName { get; set; }
-        [Parameter]
+        public Guid ArtistId { get; set; }
         public string ArtistName { get; set; }
-        [Parameter]
         public string LinkYT { get; set; }
-        [Parameter]
         public string LinkSP { get; set; }
-        [Parameter]
         public string Cover { get; set; }
         [Inject]
         public ISongWorkflow SongWorkflow { get; set; }
@@ -30,11 +28,12 @@ namespace BlazorServerSide.Pages
 
         protected override void OnInitialized()
         {
-            var song = SongWorkflow.GetSongByName(SongName); 
+            var song = SongWorkflow.GetSongById(Guid.Parse(SongId)); 
     //        var album = AlbumWorkflow.GetAlbumByName(AlbumName);
 
             SongName = song.Name;
             AlbumName = song.Album.Name;
+            ArtistId = song.Artist.ArtistId;
             ArtistName = song.Artist.Name;
             LinkYT = song.LinkYT;
             LinkSP = song.LinkSptfy;

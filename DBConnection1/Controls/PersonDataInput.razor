@@ -1,0 +1,37 @@
+﻿@inherits PersonDataInputBase
+
+<TelerikWindow Class="PopUpWindow"
+               Width="1000x"
+               Height="500px"
+               Top="20%"
+               Left="45%"
+               Visible="@Visible">
+    <WindowTitle>
+        <strong>New Person</strong>
+    </WindowTitle>
+    <WindowActions>
+        <WindowAction Name="Minimize"></WindowAction>
+        <WindowAction Name="Maximize"></WindowAction>
+        <WindowAction @onclick="HideWindow" Name="Close"></WindowAction>
+    </WindowActions>
+    <WindowContent>
+        <div class="sign-form">
+            <ValidationInput placeholder="First Name" ValueChangedCallback="FirstNameValueChanged" Value="@FirstName"></ValidationInput>
+            <ValidationInput placeholder="Last Name" ValueChangedCallback="LastNameValueChanged" Value="@LastName"></ValidationInput>
+            <ImageFileInput OnClick="ClickHandler"></ImageFileInput>
+            <ValidationInput placeholder="YYYY.MM.DD (Born)" ValueChangedCallback="BornValueChanged" Value="@Born"></ValidationInput>
+            <ValidationInput placeholder="YYYY.MM.DD (Died / Optional)" ValueChangedCallback="DiedValueChanged" Value="@Died"></ValidationInput>
+            <br />
+            <br />
+            <p class="welcome-text">Member of @ArtistName</p>
+            <ValidationInput placeholder="From" ValueChangedCallback="FromValueChanged" Value="@From"></ValidationInput>
+            <ValidationInput placeholder="To (Optional)" ValueChangedCallback="ToValueChanged" Value="@To"></ValidationInput>
+            <button class="sign-button" type="submit" @onclick="AddPerson">Confirm</button>
+        </div>
+    </WindowContent>
+</TelerikWindow>
+
+<div style="width:200px">
+    <button @onclick="(() => Visible = true)" class="sign-button">Add Person</button>
+</div>
+

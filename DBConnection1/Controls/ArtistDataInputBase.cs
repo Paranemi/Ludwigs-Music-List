@@ -15,6 +15,8 @@ namespace BlazorServerSide.Controls
         public bool Visible { get; set; } = false;
 
         [Inject]
+        public NavigationManager UriHelper { get; set; }
+        [Inject]
         public IArtistWorkflow ArtistWorkflow { get; set; }
 
         public void HideWindow()
@@ -34,7 +36,7 @@ namespace BlazorServerSide.Controls
 
             ArtistWorkflow.UpdateArtist(artist);
 
-           
+            UriHelper.NavigateTo(UriHelper.Uri, forceLoad: true);
         }
 
         protected void ArtistNameValueChanged(string Value)

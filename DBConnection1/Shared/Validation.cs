@@ -36,27 +36,30 @@ namespace BlazorServerSide.Shared
         [Required(ErrorMessage = "last name is required")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "born date is required")]
-        public DateTime Born { get; set; }
+        [Required(ErrorMessage = "birth date is required")]
+        public string Born { get; set; }
+
+        [Required(ErrorMessage = "field is required")]
+        public string From { get; set; }
 
         //Artist
         [Required(ErrorMessage = "artist name is required")]
         public string ArtistName { get; set; }
 
-        [Required(ErrorMessage = "artist image is required")]
+        [Required(ErrorMessage = "artist image is empty")]
         public string ArtistImageUrl { get; set; }
 
-        [Required(ErrorMessage = "founding is required")]
-        public int Founded { get; set; }
+        [Required(ErrorMessage = "field founding date is empty")]
+        public string Founded { get; set; }
 
         //Album
         [Required(ErrorMessage = "album name is required")]
         public string AlbumName { get; set; }
 
         [Required(ErrorMessage = "album image is required")]
-        public string ImageUrl { get; set; }
+        public string AlbumImageUrl { get; set; }
 
         [Required(ErrorMessage = "realease date is required")]
-        public DateTime ReleaseDate { get; set; }
+        public string ReleaseDate { get; set; }
     }
 }

@@ -10,19 +10,22 @@
         <strong>@ArtistName</strong>
     </WindowTitle>
     <WindowActions>
-        <WindowAction Name="Minimize"></WindowAction>
-        <WindowAction Name="Maximize"></WindowAction>
         <WindowAction @onclick="HideWindow" Name="Close"></WindowAction>
     </WindowActions>
     <WindowContent>
         <div class="sign-form">
-            <ImageFileInput OnClick="ClickHandler"></ImageFileInput>
-            <ValidationInput placeholder="YYYY (Founded)" ValueChangedCallback="ReleaseDateValueChanged" Value="@Founded"></ValidationInput>
-            <button class="sign-button" type="submit" @onclick="AddArtist">Confirm</button>
+            <EditForm Model="@Artist">
+                <DataAnnotationsValidator />
+                <ImageFileInput OnClick="ClickHandler"></ImageFileInput>
+                <ValidationMessage For="@(()=> Artist.ArtistImageUrl)"></ValidationMessage>
+                <ValidationInput placeholder="YYYY (Founded)" ValueChangedCallback="ReleaseDateValueChanged" Value="@Artist.Founded"></ValidationInput>
+                <ValidationMessage For="@(()=> Artist.Founded)"></ValidationMessage>
+                <button class="sign-button" type="submit" @onclick="AddArtist">Confirm</button>
+            </EditForm>
         </div>
     </WindowContent>
 </TelerikWindow>
 
 <div style="width:200px">
-    <button @onclick="(() => Visible = true)" class="sign-button">Add Artist Details</button>
+    <button @onclick="(() => Visible = true)" class="sign-button"><span class="oi oi-plus" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;Add Artist Details</button>
 </div>

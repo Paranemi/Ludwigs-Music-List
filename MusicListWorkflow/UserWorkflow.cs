@@ -29,7 +29,15 @@ namespace MusicListWorkflow
             try
             {
                 var domainModel = _userRepository.GetUserByName(userName);
-                return _userLogicMapper.ToViewModel(domainModel);
+                if (domainModel == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return _userLogicMapper.ToViewModel(domainModel);
+                }
+                
             }
             catch (Exception)
             {

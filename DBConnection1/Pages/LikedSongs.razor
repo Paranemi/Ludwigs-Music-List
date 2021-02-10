@@ -7,6 +7,7 @@
 <h3 class="welcome-text">Here are your favorite songs @GlobalVariables.ActiveUser</h3>
 
 <TelerikGrid Resizable="true"
+             Class="no-scroll"
              Data="@usersongs"
              Reorderable="true"
              Sortable="true"
@@ -18,7 +19,7 @@
                 @{
                     var song = context as ILikedSongViewModel;
                     <TelerikCheckBox ValueChanged="@((bool value) => ChangeHandler(value, song.Song.Name))"></TelerikCheckBox>
-                    <a href="/songdetails/@song.Song.Album.Name/@song.Song.Name">@song.Song.Name</a>
+                    <a href="/songdetails/@song.Song.Album.Name/@song.Song.SongId">@song.Song.Name</a>
 
                 }
             </Template>
@@ -35,11 +36,9 @@
             <Template>
                 @{
                     var artist = context as ILikedSongViewModel;
-                        <a href="/artistdetails/@artist.Song.Artist.Name">@artist.Song.Artist.Name</a>
+                        <a href="/artistdetails/@artist.Song.Artist.ArtistId">@artist.Song.Artist.Name</a>
                 }
             </Template>
         </GridColumn>
-        <GridCheckboxColumn Title="add to favorites">
-        </GridCheckboxColumn>
     </GridColumns>
 </TelerikGrid>

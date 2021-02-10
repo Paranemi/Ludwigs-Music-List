@@ -12,7 +12,7 @@ namespace BlazorServerSide.Pages
     public class SignInBase : ComponentBase
     {
         protected string Day { get; set; } = DateTime.Now.DayOfWeek.ToString();
-        protected string Hallo { get; set; }
+        protected string Error { get; set; }
 
         protected Validation User { get; set; } = new Validation();
 
@@ -26,18 +26,34 @@ namespace BlazorServerSide.Pages
         protected void Test()
         {
 
-            var user = UserWorkflow.GetUserByName(User.UserName);
+            
 
-            if (user != null)
+            if (User.UserName != null)
             {
-                if (user.Password == User.Password)
+                try
                 {
-                    GlobalVariables.ActiveUser = User.UserName;
-                    UriHelper.NavigateTo("/", true);
+                    var user = UserWorkflow.GetUserByName(User.UserName);
+
+                    if(user == null)
+                    {
+                        Error = "user name unknown";
+                    }
+                    else
+                    {
+                        if (user.Password == User.Password)
+                        {
+                            GlobalVariables.ActiveUser = User.UserName;
+                            UriHelper.NavigateTo("/songlist", true);
+                        }
+                        else
+                        {
+                            Error = "wrong password";
+                        }
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    Hallo = "password is wrong";
+                    Error = "wrong user name";
                 }
             }
         }

@@ -23,13 +23,13 @@ namespace BlazorServerSide.Pages
         [Inject]
         public IAlbumWorkflow AlbumWorkflow { get; set; }
 
-        //   protected List<Song> songlist;
+        [Inject]
+        public NavigationManager UriHelper { get; set; }
 
 
         protected override void OnInitialized()
         {
             var song = SongWorkflow.GetSongById(Guid.Parse(SongId)); 
-    //        var album = AlbumWorkflow.GetAlbumByName(AlbumName);
 
             SongName = song.Name;
             AlbumName = song.Album.Name;
@@ -38,19 +38,13 @@ namespace BlazorServerSide.Pages
             LinkYT = song.LinkYT;
             LinkSP = song.LinkSptfy;
             Cover = song.Album.ImageUrl;
-
-           // SetElements();
         }
 
-        //protected void SetElements()
-        //{
-        //    foreach (var songDetails in songlist)
-        //    {
-        //        ArtistName = songDetails.Artist.Name;
-        //        LinkYT = songDetails.LinkYT;
-        //        LinkSP = songDetails.LinkSptfy;
-        //        Cover = songDetails.Album.ImageUrl;
-        //    }
-        //}
+        protected void NavBackHandler()
+        {
+            UriHelper.NavigateTo("/songlist", true);
+        }
+
+
     }
 }

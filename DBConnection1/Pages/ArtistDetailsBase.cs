@@ -31,8 +31,11 @@ namespace BlazorServerSide.Pages
         public int To { get; set; }
 
         [Inject]
+        public NavigationManager UriHelper { get; set; }
+        [Inject]
         public IArtistWorkflow ArtistWorkflow { get; set; }
         [Inject]
+
         public IPersonWorkflow PersonWorkflow { get; set; }
         protected bool ArtistInput { get; set; } = false;
         protected bool PersonInput { get; set; } = false;
@@ -42,11 +45,17 @@ namespace BlazorServerSide.Pages
         protected override void OnInitialized()
         {
             var artist = ArtistWorkflow.GetArtistById(Guid.Parse(ArtistId));
+            ArtistName = artist.Name;
             Founded = artist.Founded;
             ArtistImageUrl = artist.ArtistImageUrl;
 
             persons = PersonWorkflow.GetPersonByArtistId(Guid.Parse(ArtistId));
 
+        }
+
+        protected void NavBackHandler()
+        {
+            UriHelper.NavigateTo("/songlist", true);
         }
     }
 }

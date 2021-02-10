@@ -10,28 +10,37 @@
         <strong>New Person</strong>
     </WindowTitle>
     <WindowActions>
-        <WindowAction Name="Minimize"></WindowAction>
-        <WindowAction Name="Maximize"></WindowAction>
         <WindowAction @onclick="HideWindow" Name="Close"></WindowAction>
     </WindowActions>
     <WindowContent>
+
         <div class="sign-form">
-            <ValidationInput placeholder="First Name" ValueChangedCallback="FirstNameValueChanged" Value="@FirstName"></ValidationInput>
-            <ValidationInput placeholder="Last Name" ValueChangedCallback="LastNameValueChanged" Value="@LastName"></ValidationInput>
-            <ImageFileInput OnClick="ClickHandler"></ImageFileInput>
-            <ValidationInput placeholder="YYYY.MM.DD (Born)" ValueChangedCallback="BornValueChanged" Value="@Born"></ValidationInput>
-            <ValidationInput placeholder="YYYY.MM.DD (Died / Optional)" ValueChangedCallback="DiedValueChanged" Value="@Died"></ValidationInput>
-            <br />
-            <br />
-            <p class="welcome-text">Member of @ArtistName</p>
-            <ValidationInput placeholder="From" ValueChangedCallback="FromValueChanged" Value="@From"></ValidationInput>
-            <ValidationInput placeholder="To (Optional)" ValueChangedCallback="ToValueChanged" Value="@To"></ValidationInput>
-            <button class="sign-button" type="submit" @onclick="AddPerson">Confirm</button>
+            <EditForm Model="@Person">
+
+                <DataAnnotationsValidator />
+
+                <ValidationInput placeholder="First Name" ValueChangedCallback="FirstNameValueChanged" Value="@Person.FirstName"></ValidationInput>
+                <ValidationMessage For="@(()=> Person.FirstName)"></ValidationMessage>
+                <ValidationInput placeholder="Last Name" ValueChangedCallback="LastNameValueChanged" Value="@Person.LastName"></ValidationInput>
+                <ValidationMessage For="@(()=> Person.LastName)"></ValidationMessage>
+                <ImageFileInput OnClick="ClickHandler"></ImageFileInput>
+                <ValidationInput placeholder="YYYY.MM.DD (Born)" ValueChangedCallback="BornValueChanged" Value="@Person.Born"></ValidationInput>
+                <ValidationMessage For="@(()=> Person.Born)"></ValidationMessage>
+                <ValidationInput placeholder="YYYY.MM.DD (Died / Optional)" ValueChangedCallback="DiedValueChanged" Value="@Died"></ValidationInput>
+                <br />
+                <br />
+                <p class="welcome-text">Member of @ArtistName</p>
+                <ValidationInput placeholder="From" ValueChangedCallback="FromValueChanged" Value="@Person.From"></ValidationInput>
+                <ValidationMessage For="@(()=> Person.From)"></ValidationMessage>
+                <ValidationInput placeholder="To (Optional)" ValueChangedCallback="ToValueChanged" Value="@To"></ValidationInput>
+                <button class="sign-button" type="submit" @onclick="AddPerson">Confirm</button>
+
+            </EditForm>
         </div>
     </WindowContent>
 </TelerikWindow>
 
 <div style="width:200px">
-    <button @onclick="(() => Visible = true)" class="sign-button">Add Person</button>
+    <button @onclick="(() => Visible = true)" class="sign-button"><span class="oi oi-plus" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;Add Person</button>
 </div>
 

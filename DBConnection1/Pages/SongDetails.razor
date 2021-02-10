@@ -16,7 +16,11 @@
 </div>
 
 <div class="mlist-form">
-    <h2>@SongName</h2>
+    <div class="form-horizontal">
+        <h2>@SongName</h2>
+        <button @onclick="NavBackHandler" class="backbutton"><span class="oi oi-arrow-left" aria-hidden="true"></span></button>
+    </div>
+
     <h5>@AlbumName</h5>
     <iframe src="https://www.youtube.com/embed/@LinkYT" allowfullscreen="allowfullscreen" allowtransparency="true" width="500" height="300" frameborder="0"></iframe>
     <iframe src="https://open.spotify.com/embed/track/@LinkSP" width="500" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>

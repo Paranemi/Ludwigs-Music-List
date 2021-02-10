@@ -27,9 +27,8 @@
                 </NavLink>
             </li>
             <li class="nav-item px-3">
-                <button class="nav-button" @onclick="unsetUser">
-                    <p>@GlobalVariables.ActiveUser</p>
-                    <span class="oi oi-account-logout" aria-hidden="true"></span> Sign Out
+                <button class="sign-button" @onclick="unsetUser">
+                    @GlobalVariables.ActiveUser <span class="oi oi-account-logout" aria-hidden="true"></span> Sign Out
                 </button>
             </li>
 

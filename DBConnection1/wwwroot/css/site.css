@@ -8,6 +8,14 @@ html, body {
     position: relative;
 }
 
+.no-scroll .k-grid-content {
+    overflow-y: hidden;
+}
+
+.no-scroll .k-grid-header {
+    padding-right: 0 !important;
+}
+
 .dropdown-list {
     z-index: 100;
 }
@@ -22,10 +30,33 @@ html, body {
     margin-top: 32px;
 }
 
-.validation-input{
-    flex-grow:1;
-    flex-shrink:1;
-    flex-basis:auto;
+.backbutton {
+    background-color: transparent;
+    color: rgb(255,165,0);
+    border: none;
+    width: 50px;
+    height: 50px;
+    font-size: 33px;
+    font-weight: 900;
+}
+
+    .backbutton:focus {
+        outline: none;
+    }
+
+.form-horizontal {
+    position: relative;
+}
+    .form-horizontal .backbutton {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+.validation-input {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
     /*flex:1 1 auto;*/
 }
 
@@ -148,20 +179,14 @@ html, body {
 a:link, a:visited{
     color:orange;
 }
-/*.sign-input{
-    background-color:grey;
-    color:white;
-    border:none;
+
+.error-message {
+    color: red;
 }
 
-.sign-input:focus{
-    background-color:grey;
-    outline:none;
+.album-text {
+    color: white;
 }
-
-::-webkit-input-placeholder{
-    color:whitesmoke;
-}*/
 
 .welcome-text{
     color:white;
@@ -172,25 +197,30 @@ a:link, a:visited{
     width: 100%;
     height: 40px;
     margin-top: 50px;
-    color: whitesmoke;
+    color: black;
+    font-weight: bold;
     border-radius: 15px;
     border: none;
     background-color: rgb(255,165,0);
+    outline: none;
 }
-.sign-button:hover {
-    background-color: #ffb123;
-    color: whitesmoke;
-    font-weight: bold;
-    transform:scale(1.05);
-}
+    .sign-button:hover {
+        background-color: #ffb123;
+        transform: scale(1.05);
+        outline: none;
+    }
 
-.sign-button:active {
-    background-color: #ffb123;
-    box-shadow: 0 5px #666;
-    transform: translateY(1px);
-    border:none;
-    outline:none;
-}
+    .sign-button:active {
+        background-color: #ffb123;
+        box-shadow: 0 5px #666;
+        transform: translateY(1px);
+        border:none;
+        outline:none;
+    }
+
+    .sign-button:focus{
+        outline: none; 
+    }
 
 .signup{
     text-align:center;
@@ -293,17 +323,17 @@ a, .btn-link {
 
             .sidebar .nav-item a.active {
                 background-color: orange;
-                color: whitesmoke;
+                color: black;
             }
 
             .sidebar .nav-item a:hover {
                 background-color: #ffb123;
-                color: whitesmoke;
+                color: black;
                 font-weight: bold;
             }
 
         .sidebar .nav-item button {
-            color: whitesmoke;
+            color: black;
             background-color: orange;
             border-radius: 4px;
             height: 3rem;
@@ -325,7 +355,7 @@ a, .btn-link {
 
             .sidebar .nav-item button:hover {
                 background-color: #ffb123;
-                color: whitesmoke;
+                color: black;
                 font-weight: bold;
                 transform: scale(1.05);
                 border: none;

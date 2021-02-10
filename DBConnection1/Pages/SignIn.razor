@@ -15,12 +15,15 @@
         <ValidationInput placeholder="Password" ValueChangedCallback="PasswordValueChanged" type="password" Value="@User.Password"></ValidationInput>
         <ValidationMessage For="@(()=> User.Password)"></ValidationMessage>
 
+        
+
         <button class="sign-button" type="submit" @onclick="Test">Sign in</button>
+        <p class="error-message">@Error</p>
+
 
     </EditForm>
     
     
-    <p style="color:white">@Hallo</p>
 
     <div class="sign-form">
         <a href="/signup">Sign up</a>

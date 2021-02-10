@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorServerSide.Shared;
+using Microsoft.AspNetCore.Components;
 using MusicListWorkflow.Contracts;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,13 @@ namespace BlazorServerSide.Controls
 {
     public class SongListDataInputBase : ComponentBase
     {
-        protected string SongName { get; set; }
-        protected string AlbumName { get; set; }
-        protected string ArtistName { get; set; }
-        protected string ReleaseDate { get; set; }
-        protected string LinkYT { get; set; }
-        protected string LinkSP { get; set; }
-        protected string Cover { get; set; }
+        //protected string SongName { get; set; }
+        //protected string AlbumName { get; set; }
+        //protected string ArtistName { get; set; }
+        //protected string ReleaseDate { get; set; }
+        //protected string LinkYT { get; set; }
+        //protected string LinkSP { get; set; }
+        //protected string Cover { get; set; }
         protected bool AddArtistDetails { get; set; } = false;
 
         [Parameter]
@@ -23,6 +24,8 @@ namespace BlazorServerSide.Controls
 
         protected List<IAlbumViewModel> albumList;
         protected List<IArtistViewModel> artistList;
+
+        protected Validation Song { get; set; } = new Validation();
 
         [Inject]
         public NavigationManager UriHelper { get; set; }
@@ -37,13 +40,13 @@ namespace BlazorServerSide.Controls
         {
             Visible = false;
 
-            SongName = string.Empty;
-            AlbumName = string.Empty;
-            ArtistName = string.Empty;
-            ReleaseDate = string.Empty;
-            LinkYT = string.Empty;
-            LinkSP = string.Empty;
-            Cover = string.Empty;
+            Song.SongName = string.Empty;
+            Song.AlbumName = string.Empty;
+            Song.ArtistName = string.Empty;
+            Song.ReleaseDate = string.Empty;
+            Song.LinkYT = string.Empty;
+            Song.LinkSptfy = string.Empty;
+            Song.AlbumImageUrl = string.Empty;
         }     
 
         protected override void OnInitialized()
@@ -65,8 +68,12 @@ namespace BlazorServerSide.Controls
             try
             {
                 var existingAlbum = AlbumWorkflow.GetAlbumByName(theUserInput as string);
-                Cover = existingAlbum.ImageUrl;
-                ReleaseDate = existingAlbum.ReleaseDate.ToString();
+                if(existingAlbum != null)
+                {
+                    Song.AlbumImageUrl = existingAlbum.ImageUrl;
+                    Song.ReleaseDate = existingAlbum.ReleaseDate.ToString();
+                }
+                
             }
             catch (Exception)
             {
@@ -76,71 +83,77 @@ namespace BlazorServerSide.Controls
 
         public void AddSong()
         {
-
-            Visible = false;
-            var albumExist = AlbumWorkflow.GetAlbumByName(AlbumName);
-            if (albumExist == null)
+            if (!string.IsNullOrEmpty(Song.SongName) && !string.IsNullOrEmpty(Song.AlbumName) && !string.IsNullOrEmpty(Song.ArtistName) 
+                && !string.IsNullOrEmpty(Song.AlbumImageUrl) && !string.IsNullOrEmpty(Song.ReleaseDate) && !string.IsNullOrEmpty(Song.LinkYT)
+                 && !string.IsNullOrEmpty(Song.LinkSptfy))
             {
-                var album = new AlbumViewModel
+                Visible = false;
+                var albumExist = AlbumWorkflow.GetAlbumByName(Song.AlbumName);
+                if (albumExist == null)
                 {
-                    Name = AlbumName,
-                    ImageUrl = Cover,
-                    ReleaseDate = DateTime.Parse(ReleaseDate)
+                    var album = new AlbumViewModel
+                    {
+                        Name = Song.AlbumName,
+                        ImageUrl = Song.AlbumImageUrl,
+                        ReleaseDate = DateTime.Parse(Song.ReleaseDate)
+                    };
+                    AlbumWorkflow.CreateAlbum(album);
+                }
+
+
+                var artistExist = ArtistWorkflow.GetArtistByName(Song.ArtistName);
+                if (artistExist == null)
+                {
+                    var artist = new ArtistViewModel()
+                    {
+                        Name = Song.ArtistName,
+                    }; 
+                    ArtistWorkflow.CreateArtist(artist);
+                }
+
+                var song = new SongViewModel()
+                {
+                    Name = Song.SongName,
+                    LinkYT = Song.LinkYT.Substring(Song.LinkYT.IndexOf("www.youtube.com/watch?v=") + 24),
+                    LinkSptfy = Song.LinkSptfy.Substring(Song.LinkSptfy.IndexOf("track/") + 6),
+                    Album = AlbumWorkflow.GetAlbumByName(Song.AlbumName),
+                    Artist = ArtistWorkflow.GetArtistByName(Song.ArtistName)
                 };
-                AlbumWorkflow.CreateAlbum(album);
+                SongWorkflow.CreateSong(song, AlbumWorkflow.GetAlbumIdByName(Song.AlbumName), ArtistWorkflow.GetArtistIdByName(Song.ArtistName));
+
+                UriHelper.NavigateTo("/songlist", true);
             }
 
-
-            var artistExist = ArtistWorkflow.GetArtistByName(ArtistName);
-            if (artistExist == null)
-            {
-                var artist = new ArtistViewModel()
-                {
-                    Name = ArtistName,
-                }; 
-                ArtistWorkflow.CreateArtist(artist);
-            }
-
-            var song = new SongViewModel()
-            {
-                Name = SongName,
-                LinkYT = LinkYT,
-                LinkSptfy = LinkSP,
-                Album = AlbumWorkflow.GetAlbumByName(AlbumName),
-                Artist = ArtistWorkflow.GetArtistByName(ArtistName)
-            };
-            SongWorkflow.CreateSong(song, AlbumWorkflow.GetAlbumIdByName(AlbumName), ArtistWorkflow.GetArtistIdByName(ArtistName));
-
-            UriHelper.NavigateTo("/songlist", true);
+            
         }
 
         protected void SongNameValueChanged(string Value)
         {
-            SongName = Value;
+            Song.SongName = Value;
         }
         protected void AlbumNameValueChanged(string Value)
         {
-            AlbumName = Value;
+            Song.AlbumName = Value;
         }
         protected void ArtistNameValueChanged(string Value)
         {
-            ArtistName = Value;
+            Song.ArtistName = Value;
         }
         protected void LinkYTValueChanged(string Value)
         {
-            LinkYT = Value.Substring(Value.IndexOf("www.youtube.com/watch?v=") + 24);
+            Song.LinkYT = Value;
         }
         protected void LinkSPValueChanged(string Value)
         {
-            LinkSP = Value.Substring(Value.IndexOf("track/") + 6);
+            Song.LinkSptfy = Value;
         }
         protected void ClickHandler(string Value)
         {
-            Cover = Value;
+            Song.AlbumImageUrl = Value;
         }
         protected void ReleaseDateValueChanged(string Value)
         {
-            ReleaseDate = Value;
+            Song.ReleaseDate = Value;
         }
     }
 }

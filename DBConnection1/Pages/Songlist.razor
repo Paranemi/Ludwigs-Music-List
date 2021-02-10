@@ -2,10 +2,13 @@
 @using Telerik.Blazor.Components
 @using ViewModels.Contracts
 @inherits SonglistBase
-
+<br />
 <TelerikGrid Resizable="true"
+             Class="no-scroll"
              Data="@songlist"
              Sortable="true"
+             Pageable="true"
+             PageSize="16"
              SortMode="@SortMode.Multiple"
              FilterMode="Telerik.Blazor.GridFilterMode.FilterMenu"
              OnDelete="@DeleteSongHandler"
@@ -24,7 +27,7 @@
             <Template>
                 @{
                     var album = context as ISongViewModel;
-                    <span>@album.Album.Name</span>
+                    <span class="album-text">@album.Album.Name</span>
                 }
             </Template>
         </GridColumn>

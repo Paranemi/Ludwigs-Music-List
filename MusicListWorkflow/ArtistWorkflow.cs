@@ -53,7 +53,15 @@ namespace MusicListWorkflow
             try
             {
                 var domainModel = _artistRepository.GetArtistByName(artistName);
-                return _artistLogicMapper.ToViewModel(domainModel);
+                if (domainModel == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return _artistLogicMapper.ToViewModel(domainModel);
+                }
+                
             }
             catch (Exception)
             {

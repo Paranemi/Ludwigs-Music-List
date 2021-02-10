@@ -2,7 +2,11 @@
 @using BlazorServerSide.Controls
 @inherits ArtistDetailsBase
 
+
 <div class="alist-form">
+    <div class="form-horizontal">
+        <button @onclick="NavBackHandler" class="backbutton"><span class="oi oi-arrow-left" aria-hidden="true"></span></button>
+    </div>
     <img class="artist-img" src="./Images/@(string.IsNullOrEmpty(ArtistImageUrl) ? "ArtistUnknown.jpg" : ArtistImageUrl)" />
     @if (Founded == 0)
     {
@@ -13,7 +17,7 @@
         <p><strong style="font-size:large">@ArtistName was founded in @(Founded).</strong></p>
     }
 
-    @if (string.IsNullOrEmpty(ArtistImageUrl) && Founded == 0)
+    @if (string.IsNullOrEmpty(ArtistImageUrl) && Founded != 0)
     {
 
         <ArtistDataInput ArtistName="@ArtistName"></ArtistDataInput>
@@ -28,7 +32,7 @@
         <PersonDataInput ArtistName="@ArtistName"></PersonDataInput>
         <img src="./Images/Unknown.jpg" />
 
-        
+
 
         if (PersonInput)
         {

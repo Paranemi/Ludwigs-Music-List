@@ -39,7 +39,14 @@ namespace MusicListWorkflow
             try
             {
                 var domainModel = _albumRepository.GetAlbumByName(albumName);
-                return _albumLogicMapper.ToViewModel(domainModel);
+                if (domainModel == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return _albumLogicMapper.ToViewModel(domainModel);
+                }
             }
             catch (Exception)
             {

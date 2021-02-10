@@ -17,6 +17,8 @@ namespace BlazorServerSide.Pages
         protected Validation User { get; set; } = new Validation();
 
         [Inject]
+        public NavigationManager UriHelper { get; set; }
+        [Inject]
         public IUserWorkflow UserWorkflow { get; set; }
 
         protected void CreateNewUser()
@@ -33,6 +35,7 @@ namespace BlazorServerSide.Pages
                 };
                 UserWorkflow.CreateUser(user);
                 Test = "user wurde angelegt";
+                UriHelper.NavigateTo("/signin", true);
             }
             else
             {

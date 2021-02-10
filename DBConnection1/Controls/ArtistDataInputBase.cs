@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorServerSide.Shared;
+using Microsoft.AspNetCore.Components;
 using MusicListWorkflow.Contracts;
 using System.Linq;
 
@@ -8,8 +9,10 @@ namespace BlazorServerSide.Controls
     {
         [Parameter]
         public string ArtistName { get; set; }
-        protected string Founded { get; set; }
-        protected string Cover { get; set; }
+        //protected string Founded { get; set; }
+        //protected string Cover { get; set; }
+
+        protected Validation Artist { get; set; } = new Validation();
 
         [Parameter]
         public bool Visible { get; set; } = false;
@@ -25,31 +28,31 @@ namespace BlazorServerSide.Controls
         }
 
 
-        //exception und rückmeldung dass erfolgreich!!
         public void AddArtist()
         {
-            Visible = false;
+            if(!string.IsNullOrEmpty(Artist.Founded) && !string.IsNullOrEmpty(Artist.ArtistImageUrl))
+            {
+                Visible = false;
 
-            var artist = ArtistWorkflow.GetArtistByName(ArtistName);
-            artist.ArtistImageUrl = Cover;
-            artist.Founded = int.Parse(Founded);
+                var artist = ArtistWorkflow.GetArtistByName(ArtistName);
 
-            ArtistWorkflow.UpdateArtist(artist);
+                artist.ArtistImageUrl = Artist.ArtistImageUrl;
+                artist.Founded = int.Parse(Artist.Founded);
 
-            UriHelper.NavigateTo(UriHelper.Uri, forceLoad: true);
+                ArtistWorkflow.UpdateArtist(artist);
+
+                UriHelper.NavigateTo(UriHelper.Uri, forceLoad: true);
+            }
+
         }
 
-        protected void ArtistNameValueChanged(string Value)
-        {
-            ArtistName = Value;
-        }
         protected void ClickHandler(string Value)
         {
-            Cover = Value;
+            Artist.ArtistImageUrl = Value;
         }
         protected void ReleaseDateValueChanged(string Value)
         {
-            Founded = Value;
+            Artist.Founded = Value;
         }
     }
 }

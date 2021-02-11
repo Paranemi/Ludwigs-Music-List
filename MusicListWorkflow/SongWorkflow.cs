@@ -18,9 +18,9 @@ namespace MusicListWorkflow
             _songRepository = songRepository;
         }
 
-        public void CreateSong(ISongViewModel songDomainModel, Guid albumId, Guid artistId)
+        public void CreateSong(ISongViewModel songViewModel, Guid albumId, Guid artistId)
         {
-            var domainModel = _songLogicMapper.ToDomainModel(songDomainModel);
+            var domainModel = _songLogicMapper.ToDomainModel(songViewModel);
             _songRepository.CreateSong(domainModel, albumId, artistId);
         }
 
@@ -54,9 +54,11 @@ namespace MusicListWorkflow
             return listViewModel;
         }
 
-        public void UpdateSongById(Guid songId)
+        public void UpdateSong(ISongViewModel songViewModel)
         {
-            throw new NotImplementedException();
+            var domainModel = _songLogicMapper.ToDomainModel(songViewModel);
+            _songRepository.UpdateSong(domainModel);
         }
+
     }
 }

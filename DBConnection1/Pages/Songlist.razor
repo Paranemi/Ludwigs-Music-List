@@ -2,6 +2,61 @@
 @using Telerik.Blazor.Components
 @using ViewModels.Contracts
 @inherits SonglistBase
+
+<TelerikCheckBox Value="true" Class="heart-icon">
+</TelerikCheckBox>
+<TelerikCheckBox Value="false" Class="heart-icon">
+</TelerikCheckBox>
+<TelerikCheckBox Value="false" Indeterminate="true" Class="heart-icon">
+</TelerikCheckBox>
+
+<style>
+    /* remove some built-in styles */
+    .heart-icon.k-checkbox,
+    .heart-icon.k-checkbox:focus,
+    .heart-icon.k-checkbox:checked,
+    .heart-icon.k-checkbox:checked:focus {
+        border: none;
+        background: none;
+        box-shadow: none;
+    }
+
+        .heart-icon.k-checkbox::before,
+        .heart-icon.k-checkbox:checked::before,
+        .heart-icon.k-checkbox:indeterminate::before {
+            transform: none;
+            top: 0;
+            left: 0;
+            width: auto;
+            height: auto;
+            font-size: 25px; /* used for dimensions, see the next section */
+        }
+
+    /* set desired dimensions */
+    .heart-icon.k-checkbox {
+        width: 30px;
+        height: 30px;
+    }
+
+        /* change the font icon glyph to a different one - in this case - a heart icon from the Telerik font
+        we also change the colors here to denote states, you can alter this further - like using your own fonts or colors
+        */
+        .heart-icon.k-checkbox:checked::before {
+            content: "\e301";
+            color: #ff6358;
+        }
+
+        .heart-icon.k-checkbox:indeterminate::before {
+            content: "\e300";
+            color: #ff6358;
+            background: none;
+        }
+
+        .heart-icon.k-checkbox::before {
+            content: "\e300";
+            color: #656565;
+        }
+</style>
 <br />
 <TelerikGrid Resizable="true"
              Class="no-scroll"
@@ -10,15 +65,13 @@
              Pageable="true"
              PageSize="16"
              SortMode="@SortMode.Multiple"
-             FilterMode="Telerik.Blazor.GridFilterMode.FilterMenu"
-             OnDelete="@DeleteSongHandler"
-             EditMode="GridEditMode.Popup">
+             FilterMode="Telerik.Blazor.GridFilterMode.FilterMenu">
     <GridColumns>
         <GridColumn Field="@nameof(ISongViewModel.Name)" Title="Song Name" Editable="true">
             <Template>
                 @{
                     var song = context as ISongViewModel;
-                    <TelerikCheckBox ValueChanged="@((bool value) => ChangeHandler(value, song.Name))"></TelerikCheckBox>
+                    <TelerikCheckBox Class="heart-icon k-checkbox" ValueChanged="@((bool value) => ChangeHandler(value, song.Name))"></TelerikCheckBox>
                     <a href="/songdetails/@song.Album.Name/@song.SongId">@song.Name</a>
                 }
             </Template>
@@ -39,24 +92,35 @@
                 }
             </Template>
         </GridColumn>
-        <GridCommandColumn>
-            <GridCommandButton Command="Edit" Icon="edit">Edit</GridCommandButton>
-            <GridCommandButton Command="Delete" Icon="delete">Delete</GridCommandButton>        
-        </GridCommandColumn>
+        <GridColumn>
+            <Template>
+                @{
+                    var song = context as ISongViewModel;
+                    <button @onclick="@(e => EditSongHandler(song.SongId))">Edit</button>
+                    <button @onclick="@(e => DeleteSongHandler(song.SongId))">Delete</button>
+                }
+            </Template>
+        </GridColumn>
     </GridColumns>
 </TelerikGrid>
 <SongListDataInput></SongListDataInput>
 
 
 @{
-    //delegate methode übergben
-    //confirmation zurückgeben if else verzweigung
-    void DeleteSongHandler(GridCommandEventArgs args)
+    void DeleteSongHandler(Guid SongId)
     {
-        var songViewModel = (ISongViewModel)args.Item;
-        
-        <NotificationWindow Visible="true"></NotificationWindow>
-        SongWorkflow.DeleteSongById(songViewModel.SongId);
+        SongIdToEdit = SongId;
+        SongWorkflow.DeleteSongById(SongIdToEdit);
         UriHelper.NavigateTo("/songlist", true);
     }
+
+    void EditSongHandler(Guid SongId)
+    {
+        edit = true;
+        SongIdToEdit = SongId;
+    }
+}
+@if (edit)
+{
+    <SongListDataInput Visible="true" SongId="SongIdToEdit"></SongListDataInput>
 }

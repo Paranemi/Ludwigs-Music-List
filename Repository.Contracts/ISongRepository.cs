@@ -16,7 +16,7 @@ namespace MusicListWorkflow.Contracts
 
         List<ISongDomainModel> GetAllSongs();
 
-        void UpdateSongById(Guid songId);
+        void UpdateSong(ISongDomainModel songDomainModel);
 
         void DeleteSongById(Guid songId);
     }

@@ -12,9 +12,9 @@ namespace EntityFrameworkRepository.EFModels
         public int From { get; set; }
         public int To { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(20)]
         public string FirstName { get; set; }
-        [MaxLength(50)]
+        [MaxLength(20)]
         public string LastName { get; set; }
         public string ImageUrl { get; set; }
         public DateTime Born { get; set; }

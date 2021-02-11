@@ -10,7 +10,8 @@ namespace BlazorServerSide.Controls
 {
     public class SongListDataInputBase : ComponentBase
     {
-        //protected string SongName { get; set; }
+        [Parameter]
+        public Guid SongId { get; set; }
         //protected string AlbumName { get; set; }
         //protected string ArtistName { get; set; }
         //protected string ReleaseDate { get; set; }
@@ -53,6 +54,20 @@ namespace BlazorServerSide.Controls
         {
             albumList = AlbumWorkflow.GetAllAlbums();
             artistList = ArtistWorkflow.GetAllArtists();
+
+            if(SongId != Guid.Empty)
+            {
+                var songToEdit = SongWorkflow.GetSongById(SongId);
+
+                Song.SongName = songToEdit.Name;
+                Song.AlbumName = songToEdit.Album.Name;
+                Song.ArtistName = songToEdit.Artist.Name;
+                Song.ReleaseDate = songToEdit.Album.ReleaseDate.ToShortDateString();
+                Song.LinkYT = songToEdit.LinkYT;
+                Song.LinkSptfy = songToEdit.LinkSptfy;
+                Song.AlbumImageUrl = songToEdit.Album.ImageUrl;
+            }
+            
         }
 
         protected void CheckBoxChangeHandler(bool checkBoxValue)
@@ -71,7 +86,8 @@ namespace BlazorServerSide.Controls
                 if(existingAlbum != null)
                 {
                     Song.AlbumImageUrl = existingAlbum.ImageUrl;
-                    Song.ReleaseDate = existingAlbum.ReleaseDate.ToString();
+                    Song.ReleaseDate = existingAlbum.ReleaseDate.ToShortDateString();
+                    
                 }
                 
             }
@@ -81,7 +97,7 @@ namespace BlazorServerSide.Controls
             }
         }
 
-        public void AddSong()
+        protected void AddSong()
         {
             if (!string.IsNullOrEmpty(Song.SongName) && !string.IsNullOrEmpty(Song.AlbumName) && !string.IsNullOrEmpty(Song.ArtistName) 
                 && !string.IsNullOrEmpty(Song.AlbumImageUrl) && !string.IsNullOrEmpty(Song.ReleaseDate) && !string.IsNullOrEmpty(Song.LinkYT)
@@ -122,9 +138,55 @@ namespace BlazorServerSide.Controls
                 SongWorkflow.CreateSong(song, AlbumWorkflow.GetAlbumIdByName(Song.AlbumName), ArtistWorkflow.GetArtistIdByName(Song.ArtistName));
 
                 UriHelper.NavigateTo("/songlist", true);
-            }
+            }      
+        }
 
-            
+        protected void UpdateSong()
+        {
+            if (!string.IsNullOrEmpty(Song.SongName) && !string.IsNullOrEmpty(Song.AlbumName) && !string.IsNullOrEmpty(Song.ArtistName)
+                && !string.IsNullOrEmpty(Song.AlbumImageUrl) && !string.IsNullOrEmpty(Song.ReleaseDate) && !string.IsNullOrEmpty(Song.LinkYT)
+                 && !string.IsNullOrEmpty(Song.LinkSptfy))
+            {
+                Visible = false;
+                var albumExist = AlbumWorkflow.GetAlbumByName(Song.AlbumName);
+                if (albumExist == null)
+                {
+                    var album = new AlbumViewModel
+                    {
+                        Name = Song.AlbumName,
+                        ImageUrl = Song.AlbumImageUrl,
+                        ReleaseDate = DateTime.Parse(Song.ReleaseDate)
+                    };
+                    AlbumWorkflow.CreateAlbum(album);
+                }
+
+
+                var artistExist = ArtistWorkflow.GetArtistByName(Song.ArtistName);
+                if (artistExist == null)
+                {
+                    var artist = new ArtistViewModel()
+                    {
+                        Name = Song.ArtistName,
+                    };
+                    ArtistWorkflow.CreateArtist(artist);
+                }
+
+                var song = new SongViewModel()
+                {
+                    SongId = SongId,
+                    Name = Song.SongName,
+                    LinkYT = Song.LinkYT,
+                    LinkSptfy = Song.LinkSptfy,
+                    Album = AlbumWorkflow.GetAlbumByName(Song.AlbumName),
+                    AlbumId = AlbumWorkflow.GetAlbumIdByName(Song.AlbumName),
+                    Artist = ArtistWorkflow.GetArtistByName(Song.ArtistName),
+                    ArtistId = ArtistWorkflow.GetArtistIdByName(Song.ArtistName)
+                    
+                };
+                SongWorkflow.UpdateSong(song);
+
+                UriHelper.NavigateTo("/songlist", true);
+            }
         }
 
         protected void SongNameValueChanged(string Value)

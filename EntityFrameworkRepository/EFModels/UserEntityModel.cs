@@ -12,11 +12,9 @@ namespace EntityFrameworkRepository.EFModels
         public Guid UserId { get; set; }
 
         [MaxLength(15)]
-        [Required(ErrorMessage = "user name is required")]
         public string UserName { get; set; }
 
         [MaxLength(40)]
-        [Required(ErrorMessage = "password is required")]
         public string Password { get; set; }
 
         [MaxLength(40)]

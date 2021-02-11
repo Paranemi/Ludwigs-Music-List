@@ -10,7 +10,7 @@ namespace EntityFrameworkRepository.EFModels
     {
         [Key]
         public Guid SongId { get; set; }
-        [MaxLength(50)]
+        [MaxLength(30)]
         public string Name { get; set; }
         [MaxLength(100)]
         public string LinkSptfy { get; set; }

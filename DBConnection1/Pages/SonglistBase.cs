@@ -10,7 +10,8 @@ namespace BlazorServerSide.Pages
 {
     public class SonglistBase : ComponentBase
     {
-        protected bool SongListInput { get; set; } = false;
+        protected bool edit { get; set; } = false;
+        public Guid SongIdToEdit { get; set; }
 
         protected List<ISongViewModel> songlist;
 

@@ -41,18 +41,35 @@
     }
     else
     {
-        foreach (var item in persons)
+    <div class="row">
+        @foreach (var item in persons)
         {
-            <img class="person-img" src="./Images/@(PersonImageUrl=item.ImageUrl)" />
-            if (item.To == 0)
-            {
-                <p>@(FirstName = item.FirstName) @(LastName = item.LastName) since @(From = item.From).</p>
-            }
-            else
-            {
-                <p>@(FirstName = item.FirstName) @(LastName = item.LastName) from @(From = item.From) to @(To = item.To).</p>
-            }
+            <div class="col">
+                <img class="person-img" src="./Images/@(PersonImageUrl=item.ImageUrl)" />
+                @if (item.To == 0)
+                {
+                <p>@(FirstName = item.FirstName) @(LastName = item.LastName) since @(From = item.From)</p>
+                }
+                else
+                {
+                <p>@(FirstName = item.FirstName) @(LastName = item.LastName) from @(From = item.From) to @(To = item.To)</p>
+                }
+
+                <p>
+                    @if (item.Born != DateTime.MinValue)
+                    {
+
+                        <span>was born @item.Born.ToShortDateString()</span>
+
+                    }
+                    @if (item.Died != DateTime.MinValue)
+                    {
+                        <p> and died @item.Died.ToShortDateString()</p>
+                    }
+                </p>
+            </div>
         }
+    </div>
         <PersonDataInput ArtistName="@ArtistName"></PersonDataInput>
     }
 </div>

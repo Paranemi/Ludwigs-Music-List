@@ -9,7 +9,7 @@ namespace MusicListWorkflow.Contracts
     public interface ISongWorkflow
     {
 
-        void CreateSong(ISongViewModel songDomainModel, Guid albumId, Guid artistId);
+        void CreateSong(ISongViewModel songViewModel, Guid albumId, Guid artistId);
 
         ISongViewModel GetSongById(Guid songId);
 
@@ -17,7 +17,7 @@ namespace MusicListWorkflow.Contracts
 
         List<ISongViewModel> GetAllSongs();
 
-        void UpdateSongById(Guid songId);
+        void UpdateSong(ISongViewModel songViewModel);
 
         void DeleteSongById(Guid songId);
     }

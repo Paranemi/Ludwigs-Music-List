@@ -35,9 +35,22 @@ namespace EntityFrameworkRepository
             _context.SaveChanges();
         }
 
-        public void UpdateSongById(Guid songId)
+        public void UpdateSong(ISongDomainModel songDomainModel)
         {
-            throw new NotImplementedException();
+            var songEntityModel = _songDataMapper.ToEntityModel(songDomainModel);
+
+            var existingSongEntityModel = _context.Song.Single(a => a.SongId == songEntityModel.SongId);
+            var existingArtistEntityModel = _context.Artist.Single(a => a.ArtistId == songEntityModel.ArtistId);
+            var existingAlbumEntityModel = _context.Album.Single(a => a.AlbumId == songEntityModel.AlbumId);
+
+            existingSongEntityModel.Name = songEntityModel.Name;
+            existingSongEntityModel.LinkYT = songEntityModel.LinkYT;
+            existingSongEntityModel.LinkSptfy = songEntityModel.LinkSptfy;
+            existingSongEntityModel.Album = existingAlbumEntityModel;
+            existingSongEntityModel.Artist = existingArtistEntityModel;
+
+            _context.Update(existingSongEntityModel);
+            _context.SaveChanges();
         }
 
         public void DeleteSongById(Guid songId)

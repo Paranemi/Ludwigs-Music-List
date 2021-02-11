@@ -2,14 +2,21 @@
 @inherits SongListDataInputBase
 
 <TelerikWindow Class="PopUpWindow"
-               
                Width="1000x"
                Height="500px"
                Top="20%"
                Left="45%"
                Visible="@Visible">
     <WindowTitle>
-        <strong>New Song</strong>
+        @if (SongId == Guid.Empty)
+        {
+            <strong>New Song</strong>
+        }
+        else
+        {
+            <strong>Update Song</strong>
+        }
+
     </WindowTitle>
     <WindowActions>
         <WindowAction Name="Close" OnClick="HideWindow"></WindowAction>
@@ -22,18 +29,6 @@
 
                 <ValidationInput placeholder="Song Name" ValueChangedCallback="SongNameValueChanged" Value="@Song.SongName"></ValidationInput>
                 <ValidationMessage For="@(()=> Song.SongName)"></ValidationMessage>
-                <ValidationInput placeholder="Artist Name" ValueChangedCallback="ArtistNameValueChanged" Value="@Song.ArtistName">
-                    <TelerikDropDownList Context="artist" Class="dropdown-list" @bind-Value="Song.ArtistName" Data="@artistList" Width="100%"
-                                         ValueField="Name" TextField="Name" Id="product">
-                        <ValueTemplate>
-                            <strong>@((artist as IArtistViewModel).Name)</strong>
-                        </ValueTemplate>
-                        <ItemTemplate>
-                            @((artist as IArtistViewModel).Name)
-                        </ItemTemplate>
-                    </TelerikDropDownList>
-                </ValidationInput>
-                <ValidationMessage For="@(()=> Song.ArtistName)"></ValidationMessage>
                 <ValidationInput placeholder="Album Name" ValueChangedCallback="AlbumNameValueChanged" Value="@Song.AlbumName">
                     <TelerikDropDownList Context="album" @bind-Value="Song.AlbumName" OnChange="@AlbumDropdownOnChangeHandler" Data="@albumList" Width="100%"
                                          ValueField="Name" TextField="Name" Id="product">
@@ -46,6 +41,18 @@
                     </TelerikDropDownList>
                 </ValidationInput>
                 <ValidationMessage For="@(()=> Song.AlbumName)"></ValidationMessage>
+                <ValidationInput placeholder="Artist Name" ValueChangedCallback="ArtistNameValueChanged" Value="@Song.ArtistName">
+                    <TelerikDropDownList Enabled="true" Context="artist" Class="dropdown-list" @bind-Value="Song.ArtistName" Data="@artistList" Width="100%"
+                                         ValueField="Name" TextField="Name" Id="product">
+                        <ValueTemplate>
+                            <strong>@((artist as IArtistViewModel).Name)</strong>
+                        </ValueTemplate>
+                        <ItemTemplate>
+                            @((artist as IArtistViewModel).Name)
+                        </ItemTemplate>
+                    </TelerikDropDownList>
+                </ValidationInput>
+                <ValidationMessage For="@(()=> Song.ArtistName)"></ValidationMessage>
                 <ImageFileInput OnClick="ClickHandler"></ImageFileInput>
                 <ValidationMessage For="@(()=> Song.AlbumImageUrl)"></ValidationMessage>
                 <ValidationInput placeholder="YYYY.MM.DD (Release Date)" ValueChangedCallback="ReleaseDateValueChanged" Value="@Song.ReleaseDate"></ValidationInput>
@@ -54,7 +61,14 @@
                 <ValidationMessage For="@(()=> Song.LinkYT)"></ValidationMessage>
                 <ValidationInput placeholder="Spotify Link" ValueChangedCallback="LinkSPValueChanged" Value="@Song.LinkSptfy"></ValidationInput>
                 <ValidationMessage For="@(()=> Song.LinkSptfy)"></ValidationMessage>
-                <button class="sign-button" type="submit" @onclick="AddSong">Confirm</button>
+                @if (SongId == Guid.Empty)
+                {
+                    <button class="sign-button" type="submit" @onclick="AddSong">Confirm</button>
+                }
+                else
+                {
+                    <button class="sign-button" type="submit" @onclick="UpdateSong">Update</button>
+                }
 
             </EditForm>
         </div>
@@ -62,7 +76,10 @@
 
 </TelerikWindow>
 
-<div style="width:200px">
-    <button @onclick="(() => Visible = true)" class="sign-button"><span class="oi oi-plus" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;Add New Song</button>
-</div>
+@if (SongId == Guid.Empty)
+{
+    <div style="width:200px">
+        <button @onclick="(() => Visible = true)" class="sign-button"><span class="oi oi-plus" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;Add New Song</button>
+    </div>
+}
 

@@ -8,7 +8,7 @@
 
 <TelerikGrid Resizable="true"
              Class="no-scroll"
-             Data="@usersongs"
+             Data="@userSongs"
              Reorderable="true"
              Sortable="true"
              SortMode="@SortMode.Multiple"
@@ -18,9 +18,9 @@
             <Template>
                 @{
                     var song = context as ILikedSongViewModel;
-                    <TelerikCheckBox ValueChanged="@((bool value) => ChangeHandler(value, song.Song.Name))"></TelerikCheckBox>
+                    //      if (likedSongs.Contains(song.SongId)) isLikedbyUser = true;
+                    <TelerikCheckBox Class="heart-icon k-checkbox" Value="IsLikedbyUser" ValueChanged="@((bool value) => ChangeHandler(value, song.SongId))"></TelerikCheckBox>
                     <a href="/songdetails/@song.Song.Album.Name/@song.Song.SongId">@song.Song.Name</a>
-
                 }
             </Template>
         </GridColumn>

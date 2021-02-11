@@ -24,9 +24,9 @@ namespace MusicListWorkflow
             _likedSongRepository.CreateLikedSong(domainModel);
         }
 
-        public void DeleteLikedSongById(Guid likedSongId)
+        public void DeleteLikedSongBySongId(Guid songId)
         {
-            _likedSongRepository.DeleteLikedSongById(likedSongId);
+            _likedSongRepository.DeleteLikedSongBySongId(songId);
         }
 
         public List<ILikedSongViewModel> GetLikedSongsByUserId(Guid userId)

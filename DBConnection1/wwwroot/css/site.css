@@ -8,6 +8,49 @@ html, body {
     position: relative;
 }
 
+/* remove some built-in styles */
+.heart-icon.k-checkbox,
+.heart-icon.k-checkbox:focus,
+.heart-icon.k-checkbox:checked,
+.heart-icon.k-checkbox:checked:focus {
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+
+    .heart-icon.k-checkbox::before,
+    .heart-icon.k-checkbox:checked::before,
+    .heart-icon.k-checkbox:indeterminate::before {
+        transform: none;
+        top: 0;
+        left: 0;
+        width: auto;
+        height: auto;
+        font-size: 25px; /* used for dimensions, see the next section */
+    }
+
+/* set desired dimensions */
+.heart-icon.k-checkbox {
+    width: 30px;
+    height: 30px;
+}
+
+    .heart-icon.k-checkbox:checked::before {
+        content: "\e301";
+        color: #ffb123;
+    }
+
+    .heart-icon.k-checkbox:indeterminate::before {
+        content: "\e300";
+        color: #ffb123;
+        background: none;
+    }
+
+    .heart-icon.k-checkbox::before {
+        content: "\e300";
+        color: #ffb123;
+    }
+
 .no-scroll .k-grid-content {
     overflow-y: hidden;
 }

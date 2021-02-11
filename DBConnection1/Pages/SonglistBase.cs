@@ -13,7 +13,10 @@ namespace BlazorServerSide.Pages
         protected bool edit { get; set; } = false;
         public Guid SongIdToEdit { get; set; }
 
+        protected bool IsLikedbyUser { get; set; }
+
         protected List<ISongViewModel> songlist;
+        protected List<ILikedSongViewModel> userSongs;
 
         [Inject]
         public NavigationManager UriHelper { get; set; }
@@ -29,9 +32,11 @@ namespace BlazorServerSide.Pages
         protected override void OnInitialized()
         {
             songlist = SongWorkflow.GetAllSongs();
+            var user = UserWorkflow.GetUserByName(globalVariables.ActiveUser);
+            userSongs = LikedSongWorkflow.GetLikedSongsByUserId(user.UserId);
         }
 
-        protected void ChangeHandler(bool value, string songName)
+        protected void ChangeHandler(bool value, Guid songId)
         {
             if (value)
             {          
@@ -39,9 +44,10 @@ namespace BlazorServerSide.Pages
                 var likedSong = new LikedSongViewModel()
                 {
                     User = UserWorkflow.GetUserByName(globalVariables.ActiveUser),
-                    Song = SongWorkflow.GetSongByName(songName)
+                    Song = SongWorkflow.GetSongById(songId)
                 };
                 LikedSongWorkflow.CreateLikedSong(likedSong);
+                UriHelper.NavigateTo(UriHelper.Uri, true);
             }
         }
     }

@@ -37,21 +37,10 @@ namespace BlazorServerSide.Controls
         [Inject]
         public ISongWorkflow SongWorkflow { get; set; }
 
-        public void HideWindow()
-        {
-            Visible = false;
-
-            Song.SongName = string.Empty;
-            Song.AlbumName = string.Empty;
-            Song.ArtistName = string.Empty;
-            Song.ReleaseDate = string.Empty;
-            Song.LinkYT = string.Empty;
-            Song.LinkSptfy = string.Empty;
-            Song.AlbumImageUrl = string.Empty;
-        }     
 
         protected override void OnInitialized()
         {
+
             albumList = AlbumWorkflow.GetAllAlbums();
             artistList = ArtistWorkflow.GetAllArtists();
 
@@ -68,6 +57,19 @@ namespace BlazorServerSide.Controls
                 Song.AlbumImageUrl = songToEdit.Album.ImageUrl;
             }
             
+        }
+
+        public void HideWindow()
+        {
+            Visible = false;
+
+            Song.SongName = string.Empty;
+            Song.AlbumName = string.Empty;
+            Song.ArtistName = string.Empty;
+            Song.ReleaseDate = string.Empty;
+            Song.LinkYT = string.Empty;
+            Song.LinkSptfy = string.Empty;
+            Song.AlbumImageUrl = string.Empty;
         }
 
         protected void CheckBoxChangeHandler(bool checkBoxValue)

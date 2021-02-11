@@ -38,13 +38,11 @@ namespace EntityFrameworkRepository
             _context.SaveChanges();
         }
 
-        public void DeleteLikedSongById(Guid likedSongId)
+        public void DeleteLikedSongBySongId(Guid songId)
         {
-            var likedSong = new LikedSongEntityModel
-            {
-                LikedSongId = likedSongId
-            };
-            _context.Remove(likedSong);
+            var existingLikedSong = _context.LikedSong.Single(a => a.SongId == songId);
+
+            _context.Remove(existingLikedSong);
             _context.SaveChanges();
         }
 

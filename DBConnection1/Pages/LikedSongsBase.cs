@@ -11,16 +11,18 @@ namespace BlazorServerSide.Pages
     {
         public Guid UserId { get; set; }
 
+        protected bool IsLikedbyUser { get; set; } = true;
+
+        [Inject]
+        public NavigationManager UriHelper { get; set; }
         [Inject]
         protected GlobalVariables GlobalVariables { get; set; }
-
         [Inject]
         public ILikedSongWorkflow LikedSongWorkflow { get; set; }
-
         [Inject]
         public IUserWorkflow UserWorkflow { get; set; }
 
-        protected List<ILikedSongViewModel> usersongs;
+        protected List<ILikedSongViewModel> userSongs;
 
         [Parameter]
         public string ActiveUser { get; set; }
@@ -32,12 +34,16 @@ namespace BlazorServerSide.Pages
             
             var user = UserWorkflow.GetUserByName(ActiveUser);
             UserId = user.UserId;
-            usersongs = LikedSongWorkflow.GetLikedSongsByUserId(UserId);
+            userSongs = LikedSongWorkflow.GetLikedSongsByUserId(UserId);
         }
 
-        protected void ChangeHandler(bool value, string songName)
+        protected void ChangeHandler(bool value, Guid songId)
         {
-
+            if (!value)
+            {
+                LikedSongWorkflow.DeleteLikedSongBySongId(songId);
+                UriHelper.NavigateTo(UriHelper.Uri, true);
+            }
         }
     }
 }

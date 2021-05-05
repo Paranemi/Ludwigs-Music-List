@@ -76,6 +76,7 @@ namespace BlazorServerSide.Shared
         [Required(ErrorMessage = "realease date is required")]
         [Range(typeof(DateTime), "1/1/1760", "1/1/2020",
         ErrorMessage = "value must be between 01.01.1760 and 01.01.2022")]
+        
         public string ReleaseDate { get; set; }
     }
 }

@@ -3,30 +3,32 @@
 @using ViewModels.Contracts
 @inherits SonglistBase
 
-<br />
 <TelerikGrid Resizable="true"
              Class="no-scroll"
              Data="@songlist"
+             Navigable="true"
+             OnCreate="@CreateHandler"
              Sortable="true"
              Pageable="true"
              PageSize="20"
-             SortMode="@SortMode.Multiple"
+             SortMode="@SortMode.Single"
              FilterMode="Telerik.Blazor.GridFilterMode.FilterMenu">
     <GridColumns>
         <GridColumn Field="@nameof(ISongViewModel.Name)" Title="Song Name" Editable="true">
             <Template>
                 @{
-                    IsLikedbyUser = false;
+                    bool IsLikedbyUser = false;
                     var song = context as ISongViewModel;
                     foreach (var item in userSongs)
                     {
                         if (item.SongId == song.SongId)
                         {
                             IsLikedbyUser = true;
+                            break;
                         }
                     }
-                    //      if (likedSongs.Contains(song.SongId)) isLikedbyUser = true;
                     <TelerikCheckBox Class="heart-icon k-checkbox" Value="IsLikedbyUser" ValueChanged="@((bool value) => ChangeHandler(value, song.SongId))"></TelerikCheckBox>
+                    //  <TelerikCheckBox Class = "heart-icon k-checkbox" Value="IsLikedbyUser" ValueChanged="@((bool value) => ChangeHandler(value, song.SongId))"></TelerikCheckBox >
                     <a href="/songdetails/@song.Album.Name/@song.SongId">@song.Name</a>
                 }
             </Template>
@@ -51,17 +53,18 @@
             <Template>
                 @{
                     var song = context as ISongViewModel;
-                    <button @onclick="@(e => EditSongHandler(song.SongId))">Edit</button>
-                    <button @onclick="@(e => DeleteSongHandler(song.SongId))">Delete</button>
+                    <button class="small-sign-button" @onclick="@(e => EditSongHandler(song.SongId))"><span class="oi oi-pencil" aria-hidden="true"></span>Edit</button>
+                    <button style="background-color:black;color:white;" class="small-sign-button" @onclick="@(e => DeleteSongHandler(song.SongId))"><span class="oi oi-trash" aria-hidden="true"></span>Delete</button>
                 }
             </Template>
         </GridColumn>
     </GridColumns>
 </TelerikGrid>
 <SongListDataInput></SongListDataInput>
-
+<p class="welcome-text">@test</p>
 
 @{
+
     void DeleteSongHandler(Guid SongId)
     {
         SongIdToEdit = SongId;
@@ -71,11 +74,18 @@
 
     void EditSongHandler(Guid SongId)
     {
-        edit = true;
+        Edit = true;
         SongIdToEdit = SongId;
     }
 }
-@if (edit)
+@if (Edit)
 {
     <SongListDataInput Visible="true" SongId="SongIdToEdit"></SongListDataInput>
+}
+
+@code{
+    public void CreateHandler(GridCommandEventArgs args)
+    {
+        test = "add song";
+    }
 }

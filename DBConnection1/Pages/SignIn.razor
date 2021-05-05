@@ -1,4 +1,5 @@
-﻿@page "/signin"
+﻿@page "/"
+@page "/signin"
 @inherits SignInBase
 @inject NavigationManager NavigationManager
 @using BlazorServerSide.Controls
@@ -15,15 +16,15 @@
         <ValidationInput placeholder="Password" ValueChangedCallback="PasswordValueChanged" type="password" Value="@User.Password"></ValidationInput>
         <ValidationMessage For="@(()=> User.Password)"></ValidationMessage>
 
-        
+
 
         <button class="sign-button" type="submit" @onclick="Test">Sign in</button>
         <p class="error-message">@Error</p>
 
 
     </EditForm>
-    
-    
+
+
 
     <div class="sign-form">
         <a href="/signup">Sign up</a>

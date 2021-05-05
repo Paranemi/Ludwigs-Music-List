@@ -42,7 +42,7 @@ namespace BlazorServerSide.Pages
 
         protected void NavBackHandler()
         {
-            UriHelper.NavigateTo("/songlist", true);
+            UriHelper.NavigateTo("/songlist");
         }
 
 

@@ -109,13 +109,21 @@ namespace BlazorServerSide.Controls
                 var albumExist = AlbumWorkflow.GetAlbumByName(Song.AlbumName);
                 if (albumExist == null)
                 {
-                    var album = new AlbumViewModel
+                    try
                     {
-                        Name = Song.AlbumName,
-                        ImageUrl = Song.AlbumImageUrl,
-                        ReleaseDate = DateTime.Parse(Song.ReleaseDate)
-                    };
-                    AlbumWorkflow.CreateAlbum(album);
+                        var album = new AlbumViewModel
+                        {
+                            Name = Song.AlbumName,
+                            ImageUrl = Song.AlbumImageUrl,
+                            ReleaseDate = DateTime.Parse(Song.ReleaseDate)
+                        };
+                        AlbumWorkflow.CreateAlbum(album);
+                    }
+                    catch(FormatException)
+                    {
+                        Song.ReleaseDate = "";
+                    }
+                    
                 }
 
 

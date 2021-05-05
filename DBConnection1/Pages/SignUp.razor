@@ -17,8 +17,7 @@
         <ValidationInput placeholder="Confirm Password" ValueChangedCallback="ConfirmValueChanged" type="password" Value="@Confirm"></ValidationInput>
         <ValidationInput placeholder="SecurityAnswer" ValueChangedCallback="SecurityAnswerValueChanged" Value="@User.SecurityAnswer"></ValidationInput>
         <ValidationMessage For="@(()=> User.SecurityAnswer)"></ValidationMessage>
-        <br />
-        <br />
+
         <p class="welcome-text">What is your favorite color?</p>
 
         <button class="sign-button" type="submit" @onclick="CreateNewUser">Confirm</button>

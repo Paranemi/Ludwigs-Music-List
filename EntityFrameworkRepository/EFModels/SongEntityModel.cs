@@ -22,7 +22,5 @@ namespace EntityFrameworkRepository.EFModels
 
         public virtual Guid ArtistId { get; set; }
         public virtual ArtistEntityModel Artist { get; set; }
-
-
     }
 }

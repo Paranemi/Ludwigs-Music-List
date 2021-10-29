@@ -19,15 +19,27 @@
                 @{
                     bool IsLikedbyUser = false;
                     var song = context as ISongViewModel;
-                    foreach (var item in userSongs)
+                    //foreach (var item in userSongs)
+                    //{
+                    //    if (item.SongId == song.SongId)
+                    //    {
+                    //        IsLikedbyUser = true;
+                    //        break;
+                    //    }
+                    //}
+
+
+                    if (userSongs.Any(x => x.SongId == song.SongId))
                     {
-                        if (item.SongId == song.SongId)
-                        {
-                            IsLikedbyUser = true;
-                            break;
-                        }
+                        <TelerikCheckBox Class="heart-icon k-checkbox" Value="true" ValueChanged="@((bool value) => ChangeHandler(value, song.SongId))"></TelerikCheckBox>
                     }
-                    <TelerikCheckBox Class="heart-icon k-checkbox" Value="IsLikedbyUser" ValueChanged="@((bool value) => ChangeHandler(value, song.SongId))"></TelerikCheckBox>
+                    else
+                    {
+                        <TelerikCheckBox Class="heart-icon k-checkbox" Value="false" ValueChanged="@((bool value) => ChangeHandler(value, song.SongId))"></TelerikCheckBox>
+                    }
+
+
+                    @*<TelerikCheckBox Class="heart-icon k-checkbox" Value="IsLikedbyUser" ValueChanged="@((bool value) => ChangeHandler(value, song.SongId))"></TelerikCheckBox>*@
                     //  <TelerikCheckBox Class = "heart-icon k-checkbox" Value="IsLikedbyUser" ValueChanged="@((bool value) => ChangeHandler(value, song.SongId))"></TelerikCheckBox >
                     <a href="/songdetails/@song.Album.Name/@song.SongId">@song.Name</a>
                 }

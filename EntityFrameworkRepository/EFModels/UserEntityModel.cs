@@ -19,6 +19,5 @@ namespace EntityFrameworkRepository.EFModels
 
         [MaxLength(40)]
         public string SecurityAnswer { get; set; }
-
     }
 }

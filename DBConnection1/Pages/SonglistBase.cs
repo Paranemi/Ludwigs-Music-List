@@ -13,7 +13,8 @@ namespace BlazorServerSide.Pages
         protected bool Edit { get; set; } = false;
         public Guid SongIdToEdit { get; set; }
 
-        //   protected bool IsLikedbyUser { get; set; }
+        protected bool IsLikedbyUser { get; set; }
+
         public string test { get; set; }
 
         protected List<ISongViewModel> songlist;

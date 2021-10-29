@@ -15,6 +15,5 @@ namespace EntityFrameworkRepository.EFModels
         [MaxLength(50)]
         public string ImageUrl { get; set; }
         public DateTime ReleaseDate { get; set; }
-
     }
 }
